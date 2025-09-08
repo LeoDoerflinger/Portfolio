@@ -247,10 +247,10 @@
             Construyo soluciones para la web.
           </h2>
           <p class="mt-6 max-w-xl text-slate-400 text-lg">
-            Soy programador web Full Stack apasionado por crear
-            aplicaciones y experiencias digitales intuitivas, eficientes y
-            atractivas. Me especializo en convertir ideas en soluciones
-            tecnológicas funcionales con gran enfoque en UX/UI.
+            Soy programador web Full Stack apasionado por crear aplicaciones y
+            experiencias digitales intuitivas, eficientes y atractivas. Me
+            especializo en convertir ideas en soluciones tecnológicas
+            funcionales con gran enfoque en UX/UI.
           </p>
           <div
             class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
@@ -298,10 +298,10 @@
               de alta calidad que cumpla con las expectativas del cliente.
             </p>
             <p>
-              Tengo experiencia trabajando tanto en frontend como en 
-              backend, lo que me da una perspectiva completa del ciclo de vida
-              de una aplicación. Me gusta trabajar en equipo y estoy siempre
-              abierto a nuevos desafíos que me permitan crecer profesionalmente.
+              Tengo experiencia trabajando tanto en frontend como en backend, lo
+              que me da una perspectiva completa del ciclo de vida de una
+              aplicación. Me gusta trabajar en equipo y estoy siempre abierto a
+              nuevos desafíos que me permitan crecer profesionalmente.
             </p>
             <p>
               Acá van algunas de las tecnologías con las que he estado
@@ -363,7 +363,52 @@
       <section id="projects" class="py-24">
         <h2 class="section-heading">Proyectos Destacados</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          <!-- Project Card 1 -->
+          <!-- Project Card 1: Noticias -->
+          <div
+            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
+            data-url="https://news-leodoerflinger.vercel.app/"
+            data-title="Panel de Noticias"
+          >
+            <img
+              src="assets/news.png"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Noticias';"
+              alt="Panel de Noticias"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold accent-color">Panel de Noticias</h3>
+              <p class="text-slate-400 mt-2 flex-grow">
+                Dashboard financiero que muestra noticias, cotizaciones y un
+                conversor de divisas en tiempo real, utilizando APIs externas.
+              </p>
+              <div class="mt-4 text-xs text-slate-400 space-x-2">
+                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
+                  >JavaScript</span
+                >
+                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
+                  >API</span
+                >
+                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
+                  >Tailwind CSS</span
+                >
+              </div>
+              <div class="mt-6 flex space-x-4">
+                <a
+                  href="https://news-leodoerflinger.vercel.app/"
+                  target="_blank"
+                  class="text-slate-300 hover:accent-color transition"
+                  >Visitar Sitio</a
+                >
+                <button
+                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
+                >
+                  Previsualizar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 2: Pastillero -->
           <div
             class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
             data-url="https://pastillero10.vercel.app/"
@@ -409,14 +454,59 @@
             </div>
           </div>
 
-          <!-- Project Card 2 -->
+          <!-- Project Card 3: Climax -->
+          <div
+            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
+            data-url="https://climax-leodoer.vercel.app/"
+            data-title="Climax Weather"
+          >
+            <img
+              src="assets/climax.png"
+              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Climax';"
+              alt="App Climax"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6 flex flex-col flex-grow">
+              <h3 class="text-xl font-bold accent-color">Climax Weather</h3>
+              <p class="text-slate-400 mt-2 flex-grow">
+                Aplicación que consulta una API para mostrar el pronóstico del
+                tiempo actual en cualquier ciudad del mundo.
+              </p>
+              <div class="mt-4 text-xs text-slate-400 space-x-2">
+                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
+                  >JavaScript</span
+                >
+                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
+                  >API</span
+                >
+                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
+                  >HTML</span
+                >
+              </div>
+              <div class="mt-6 flex space-x-4">
+                <a
+                  href="https://climax-leodoer.vercel.app/"
+                  target="_blank"
+                  class="text-slate-300 hover:accent-color transition"
+                  >Visitar Sitio</a
+                >
+                <button
+                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
+                >
+                  Previsualizar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Project Card 4: Pixel y Mate -->
           <div
             class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
             data-url="https://pixel-y-mate.vercel.app/"
             data-title="Pixel y Mate"
           >
             <img
-              src="https://image.thum.io/get/width/600/crop/400/https://pixel-y-mate.vercel.app/"
+              src="assets/pym.png"
               onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Pixel+y+Mate';"
               alt="Pixel y Mate"
               class="w-full h-full object-cover"
@@ -424,7 +514,7 @@
             <div class="p-6 flex flex-col flex-grow">
               <h3 class="text-xl font-bold accent-color">Pixel y Mate</h3>
               <p class="text-slate-400 mt-2 flex-grow">
-                Página web profesional para una agencia de servicios, enfocado en
+                Sitio web profesional para una agencia de servicios, enfocado en
                 la presentación de portfolio y captación de clientes.
               </p>
               <div class="mt-4 text-xs text-slate-400 space-x-2">
@@ -454,14 +544,14 @@
             </div>
           </div>
 
-          <!-- Project Card 3 -->
+          <!-- Project Card 5: E-commerce -->
           <div
             class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
             data-url="https://mitienda-one.vercel.app/"
             data-title="E-commerce MiTienda"
           >
             <img
-              src="https://image.thum.io/get/width/600/crop/400/https://mitienda-one.vercel.app/"
+              src="assets/tienda.png"
               onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=MiTienda';"
               alt="E-commerce"
               class="w-full h-48 object-cover"
@@ -499,106 +589,14 @@
             </div>
           </div>
 
-          <!-- Project Card 4 -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://climax-leodoer.vercel.app/"
-            data-title="App del Clima"
-          >
-            <img
-              src="assets/Captura de pantalla 2025-09-07 235035.png"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=App+Clima';"
-              alt="App Clima"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">App del Clima</h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                Aplicación que consulta una API para mostrar el pronóstico del
-                tiempo actual en cualquier ciudad del mundo.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >JavaScript</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >API</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >HTML</span
-                >
-              </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://climax-leodoer.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project Card 5 -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://proyectos-plum.vercel.app/"
-            data-title="Conversor de Divisas"
-          >
-            <img
-              src="https://image.thum.io/get/width/600/crop/400/https://proyectos-plum.vercel.app/"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Conversor';"
-              alt="Conversor de Divisas"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">
-                Conversor de Divisas
-              </h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                Herramienta simple y eficaz para la conversión de monedas
-                utilizando tasas de cambio en tiempo real a través de una API.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >JavaScript</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >API</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >CSS</span
-                >
-              </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://proyectos-plum.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Project Card 6 -->
+          <!-- Project Card 6: Contraseñas -->
           <div
             class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
             data-url="https://proyectos-v2fv.vercel.app/"
             data-title="Generador de Contraseñas"
           >
             <img
-              src="https://image.thum.io/get/width/600/crop/400/https://proyectos-v2fv.vercel.app/"
+              src="assets/pass.png"
               onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Passwords';"
               alt="Generador de Contraseñas"
               class="w-full h-48 object-cover"
@@ -651,8 +649,8 @@
           Ponete en Contacto
         </h3>
         <p class="text-slate-400 mt-6 text-lg text-center">
-          Mi bandeja de entrada está siempre abierta. Si tenés una consulta,
-          una propuesta o simplemente querés saludar, no dudes en escribirme.
+          Mi bandeja de entrada está siempre abierta. Si tenés una consulta, una
+          propuesta o simplemente querés saludar, no dudes en escribirme.
         </p>
 
         <form id="contact-form" class="mt-10 space-y-6">

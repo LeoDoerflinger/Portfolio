@@ -1,974 +1,1317 @@
 <!DOCTYPE html>
 <html lang="es" class="scroll-smooth">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portfolio | Leopoldo Doerflinger</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="shortcut icon" href="assets/icono.png" type="image/x-icon" />
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #0a192f;
-        color: #ccd6f6;
-      }
-      .glass-effect {
-        background: rgba(13, 30, 51, 0.6);
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        border: 1px solid rgba(45, 212, 191, 0.1);
-      }
-      .accent-color {
-        color: #64ffda;
-      }
-      .btn-primary {
-        @apply px-6 py-3 border border-cyan-400 text-cyan-400 rounded-md transition-all duration-300 hover:bg-cyan-400 hover:bg-opacity-10;
-      }
-      .section-heading {
-        @apply text-3xl md:text-4xl font-bold text-slate-200 mb-4 flex items-center;
-      }
-      .section-heading::after {
-        content: "";
-        display: block;
-        position: relative;
-        top: 2px;
-        width: 150px;
-        height: 1px;
-        margin-left: 20px;
-        background-color: #334155;
-      }
-      /* Animaciones */
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-      .fade-in {
-        animation: fadeIn 0.8s ease-out forwards;
-      }
-      /* Estilo para la barra de desplazamiento */
-      ::-webkit-scrollbar {
-        width: 8px;
-      }
-      ::-webkit-scrollbar-track {
-        background: #0a192f;
-      }
-      ::-webkit-scrollbar-thumb {
-        background-color: #1e293b;
-        border-radius: 10px;
-        border: 2px solid #0a192f;
-      }
-      ::-webkit-scrollbar-thumb:hover {
-        background-color: #334155;
-      }
-      /* Estilos para el Modal de Previsualización */
-      #preview-modal {
-        transition: opacity 0.3s ease;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leo Doerflinger — Desarrollador Web Full Stack</title>
 
-      /* Estilos para el Cubo de Tecnologías */
-      .scene {
-        perspective: 1200px;
-      }
+  <!-- Open Graph -->
+  <meta property="og:title" content="Leo Doerflinger — Desarrollador Web Full Stack" />
+  <meta property="og:description" content="Programador Full Stack apasionado por crear aplicaciones y experiencias digitales intuitivas, eficientes y atractivas." />
+  <meta property="og:url" content="https://portfolio-leodoerflinger.vercel.app/" />
+  <meta property="og:type" content="website" />
 
-      .cube {
-        width: 100%;
-        height: 100%;
-        position: relative;
-        transform-style: preserve-3d;
-        animation: rotateCube 25s infinite linear;
-      }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
 
-      @keyframes rotateCube {
-        from {
-          transform: rotateY(0deg) rotateX(0deg);
-        }
-        to {
-          transform: rotateY(360deg) rotateX(360deg);
-        }
-      }
+  <!-- Favicon SVG inline (pequeño, sin peso) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0a0a'/><text x='6' y='23' font-family='serif' font-size='20' fill='%2364ffda'>L</text></svg>" />
 
-      .scene:hover .cube {
-        animation-play-state: paused;
-      }
+  <style>
+    :root {
+      --bg: #080c10;
+      --surface: #0e1419;
+      --surface2: #141c24;
+      --border: rgba(255,255,255,0.06);
+      --border-hover: rgba(100,255,218,0.2);
+      --accent: #64ffda;
+      --accent-dim: rgba(100,255,218,0.08);
+      --text-primary: #e8edf2;
+      --text-secondary: #7a8899;
+      --text-muted: #3d4f61;
+      --heading-font: 'Syne', sans-serif;
+      --body-font: 'DM Sans', sans-serif;
+    }
 
-      .cube__face {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(13, 30, 51, 0.7);
-        border: 1px solid #1e293b;
-        border-radius: 8px;
-        box-shadow: 0 0 20px rgba(100, 255, 218, 0.1);
-      }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-      .cube__face img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        transition: all 0.3s ease;
-      }
-      .cube__face:hover img {
-        transform: scale(1.1);
-        filter: brightness(1.1);
-      }
+    html { font-size: 16px; }
 
-      .cube__face--front {
-        transform: rotateY(0deg) translateZ(var(--translateZ));
-      }
-      .cube__face--back {
-        transform: rotateY(180deg) translateZ(var(--translateZ));
-      }
-      .cube__face--right {
-        transform: rotateY(90deg) translateZ(var(--translateZ));
-      }
-      .cube__face--left {
-        transform: rotateY(-90deg) translateZ(var(--translateZ));
-      }
-      .cube__face--top {
-        transform: rotateX(90deg) translateZ(var(--translateZ));
-      }
-      .cube__face--bottom {
-        transform: rotateX(-90deg) translateZ(var(--translateZ));
-      }
-    </style>
-  </head>
-  <body class="antialiased">
-    <!-- Header / Navbar -->
-    <header
-      id="header"
-      class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect"
-    >
-      <nav
-        class="container mx-auto px-6 py-4 flex justify-between items-center"
-      >
-        <a href="#" class="text-2xl font-bold accent-color">LD</a>
-        <div class="hidden md:flex items-center space-x-8">
-          <a
-            href="#about"
-            class="text-slate-300 hover:accent-color transition-colors"
-            >Sobre mí</a
-          >
-          <a
-            href="#projects"
-            class="text-slate-300 hover:accent-color transition-colors"
-            >Proyectos</a
-          >
-          <a
-            href="#contact"
-            class="text-slate-300 hover:accent-color transition-colors"
-            >Contacto</a
-          >
-          <a
-            href="https://curriculumvitae-leo.vercel.app/"
-            target="_blank"
-            class="btn-primary text-sm"
-            >Ver CV</a
-          >
-        </div>
-        <!-- Mobile Menu Button -->
-        <button
-          id="mobile-menu-btn"
-          class="md:hidden text-slate-300 focus:outline-none"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6h16M4 12h16m-7 6h7"
-            />
+    body {
+      font-family: var(--body-font);
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.4;
+    }
+
+    /* ── Grid lines background ── */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+
+    /* ── Layout ── */
+    .wrapper { position: relative; z-index: 1; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.25rem 0;
+      transition: background 0.4s, border-color 0.4s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(8,12,16,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-color: var(--border);
+    }
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-family: var(--heading-font);
+      font-weight: 800;
+      font-size: 1.4rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-cta {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid var(--border-hover);
+      border-radius: 4px;
+      color: var(--accent) !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent-dim) !important; }
+
+    /* Mobile nav */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.5rem;
+      color: var(--text-secondary);
+    }
+    .nav-toggle svg { display: block; }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 99;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--heading-font);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--accent); }
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 2rem;
+      background: none; border: none;
+      color: var(--text-secondary);
+      cursor: pointer; font-size: 2rem; line-height: 1;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 6rem;
+      position: relative;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero-label::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+    .hero-name {
+      font-family: var(--heading-font);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+    .hero-name span { color: var(--accent); }
+    .hero-role {
+      font-family: var(--heading-font);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 400;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+    .hero-bio {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 440px;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      transition: all 0.2s;
+      padding: 0.75rem 1.75rem;
+      cursor: pointer;
+      font-family: var(--body-font);
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #080c10;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: transparent; color: var(--accent); }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--border-hover); color: var(--accent); }
+
+    /* Hero right - cube */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .scene {
+      width: 260px; height: 260px;
+      perspective: 900px;
+    }
+    .cube {
+      width: 100%; height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      animation: rotateCube 22s infinite linear;
+    }
+    .scene:hover .cube { animation-play-state: paused; }
+    @keyframes rotateCube {
+      from { transform: rotateY(0deg) rotateX(10deg); }
+      to { transform: rotateY(360deg) rotateX(10deg); }
+    }
+    .cube__face {
+      position: absolute;
+      width: 100%; height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(14,20,25,0.7);
+      border: 1px solid rgba(100,255,218,0.12);
+      border-radius: 8px;
+    }
+    .cube__face img { width: 55%; height: 55%; object-fit: contain; filter: brightness(0.9); transition: filter 0.3s; }
+    .cube__face:hover img { filter: brightness(1.15); }
+    .cube__face--front  { transform: rotateY(0deg)    translateZ(var(--tz)); }
+    .cube__face--back   { transform: rotateY(180deg)  translateZ(var(--tz)); }
+    .cube__face--right  { transform: rotateY(90deg)   translateZ(var(--tz)); }
+    .cube__face--left   { transform: rotateY(-90deg)  translateZ(var(--tz)); }
+    .cube__face--top    { transform: rotateX(90deg)   translateZ(var(--tz)); }
+    .cube__face--bottom { transform: rotateX(-90deg)  translateZ(var(--tz)); }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .scroll-line {
+      width: 1px; height: 40px;
+      background: linear-gradient(to bottom, var(--text-muted), transparent);
+      animation: scrollBounce 2s ease-in-out infinite;
+    }
+    @keyframes scrollBounce {
+      0%, 100% { transform: scaleY(1); opacity: 0.5; }
+      50% { transform: scaleY(0.5); opacity: 1; }
+    }
+
+    /* ── Section commons ── */
+    section { padding: 7rem 0; }
+    .section-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+    .section-tag::before {
+      content: '';
+      width: 16px; height: 1px;
+      background: var(--accent);
+    }
+    .section-title {
+      font-family: var(--heading-font);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+    .about-text p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 1.25rem;
+    }
+    .about-text p:last-of-type { margin-bottom: 0; }
+    .tech-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      margin-top: 2rem;
+      list-style: none;
+    }
+    .tech-list li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+    }
+    .tech-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* About stats */
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: border-color 0.3s;
+    }
+    .stat-card:hover { border-color: var(--border-hover); }
+    .stat-number {
+      font-family: var(--heading-font);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+    .stat-number span { color: var(--accent); }
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-top: 0.4rem;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── Projects ── */
+    .projects-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+    .project-count {
+      font-family: var(--heading-font);
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .project-card {
+      background: var(--surface);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      transition: background 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover { background: var(--surface2); }
+    .project-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.75) saturate(0.7);
+      transition: filter 0.4s;
+    }
+    .project-card:hover .project-thumb { filter: brightness(0.9) saturate(0.85); }
+    .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .project-index {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+      font-family: var(--heading-font);
+      margin-bottom: 0.75rem;
+    }
+    .project-title {
+      font-family: var(--heading-font);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    .project-desc {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 1.25rem;
+    }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .tag {
+      font-size: 0.7rem;
+      padding: 0.2rem 0.6rem;
+      background: rgba(100,255,218,0.06);
+      border: 1px solid rgba(100,255,218,0.12);
+      border-radius: 3px;
+      color: var(--accent);
+      letter-spacing: 0.04em;
+      font-weight: 400;
+    }
+    .project-links {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+    }
+    .project-link {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      transition: color 0.2s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--body-font);
+      padding: 0;
+    }
+    .project-link:hover { color: var(--accent); }
+    .project-link svg { width: 12px; height: 12px; }
+
+    /* ── Contact ── */
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3.5rem;
+    }
+    .contact-tagline {
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+      font-weight: 300;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .contact-direct {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+    .contact-item a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item a:hover { color: var(--accent); }
+    .contact-icon {
+      width: 36px; height: 36px;
+      border-radius: 6px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-icon svg { width: 16px; height: 16px; color: var(--accent); }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+    .form-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+    .form-input, .form-textarea {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.75rem 1rem;
+      color: var(--text-primary);
+      font-family: var(--body-font);
+      font-size: 0.9rem;
+      font-weight: 300;
+      transition: border-color 0.2s;
+      outline: none;
+      resize: none;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--border-hover); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
+    .form-textarea { min-height: 120px; }
+    .form-status {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      display: none;
+      margin-top: 0.25rem;
+    }
+    .form-status.visible { display: block; }
+    .form-status.success { color: var(--accent); }
+    .form-status.error { color: #ff6b6b; }
+
+    /* ── Footer ── */
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-copy {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+    .footer-socials {
+      display: flex;
+      gap: 1.25rem;
+    }
+    .social-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      display: flex;
+    }
+    .social-link:hover { color: var(--accent); }
+    .social-link svg { width: 18px; height: 18px; }
+
+    /* ── Modal ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+      backdrop-filter: blur(4px);
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-window {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      width: 100%;
+      max-width: 1100px;
+      height: 85vh;
+      display: flex;
+      flex-direction: column;
+      transform: scale(0.96);
+      transition: transform 0.25s;
+      overflow: hidden;
+    }
+    .modal-overlay.open .modal-window { transform: scale(1); }
+    .modal-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .modal-dots { display: flex; gap: 6px; }
+    .modal-dots span { width: 11px; height: 11px; border-radius: 50%; display: block; }
+    .modal-title-text { font-size: 0.8rem; color: var(--text-secondary); }
+    .modal-close {
+      background: none; border: none;
+      color: var(--text-secondary); cursor: pointer;
+      font-size: 1.2rem; line-height: 1; padding: 0.25rem;
+      transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--text-primary); }
+    .modal-body { flex: 1; position: relative; }
+    .modal-spinner {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .spinner {
+      width: 28px; height: 28px;
+      border: 2px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .modal-iframe {
+      width: 100%; height: 100%; border: none;
+      display: none;
+      background: white;
+    }
+    .modal-blocked {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 1rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 2rem;
+    }
+    .modal-blocked svg { width: 40px; height: 40px; color: var(--text-muted); margin-bottom: 0.5rem; }
+
+    /* ── Reveal animations ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { order: -1; }
+      .scene { width: 180px; height: 180px; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-stats { flex-direction: row; flex-wrap: wrap; }
+      .stat-card { flex: 1; min-width: 140px; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: block; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .hero-name { font-size: 2.8rem; }
+      section { padding: 4.5rem 0; }
+      .about-stats { flex-direction: column; }
+      .projects-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="grid-bg"></div>
+  <div class="wrapper">
+
+    <!-- ── Nav ── -->
+    <nav id="navbar">
+      <div class="container nav-inner">
+        <a href="#" class="logo">LD</a>
+        <ul class="nav-links">
+          <li><a href="#about">Sobre mí</a></li>
+          <li><a href="#projects">Proyectos</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <li><a href="https://curriculumvitae-leo.vercel.app/" target="_blank" class="nav-cta">Ver CV</a></li>
+        </ul>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
           </svg>
         </button>
-      </nav>
-      <!-- Mobile Menu -->
-      <div id="mobile-menu" class="hidden md:hidden">
-        <div
-          class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex flex-col items-center"
-        >
-          <a
-            href="#about"
-            class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:accent-color"
-            >Sobre mí</a
-          >
-          <a
-            href="#projects"
-            class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:accent-color"
-            >Proyectos</a
-          >
-          <a
-            href="#contact"
-            class="block px-3 py-2 rounded-md text-base font-medium text-slate-300 hover:accent-color"
-            >Contacto</a
-          >
-          <a
-            href="https://curriculumvitae-leo.vercel.app/"
-            target="_blank"
-            class="block w-_3/4 text-center mt-2 px-3 py-2 rounded-md text-base font-medium btn-primary"
-            >Ver CV</a
-          >
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobile-menu">
+      <button class="mobile-close" id="mobile-close">×</button>
+      <a href="#about" class="mobile-link">Sobre mí</a>
+      <a href="#projects" class="mobile-link">Proyectos</a>
+      <a href="#contact" class="mobile-link">Contacto</a>
+      <a href="https://curriculumvitae-leo.vercel.app/" target="_blank">Ver CV →</a>
+    </div>
+
+    <!-- ── Hero ── -->
+    <section id="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div>
+            <div class="hero-label">Disponible para proyectos</div>
+            <h1 class="hero-name">Leo<br><span>Doerflinger</span><br>.</h1>
+            <p class="hero-role">Desarrollador Web Full Stack</p>
+            <p class="hero-bio">Apasionado por crear aplicaciones y experiencias digitales intuitivas, eficientes y atractivas. Me especializo en convertir ideas en soluciones tecnológicas funcionales con enfoque en UX/UI.</p>
+            <div class="hero-actions">
+              <a href="#projects" class="btn btn-primary">Ver proyectos</a>
+              <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" class="btn btn-outline">
+                Descargar CV
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="hero-visual">
+            <div class="scene" id="cube-scene">
+              <div class="cube" id="cube">
+                <div class="cube__face cube__face--front"><img src="assets/html.png" alt="HTML5" /></div>
+                <div class="cube__face cube__face--back"><img src="assets/python.png" alt="Python" /></div>
+                <div class="cube__face cube__face--right"><img src="assets/js.png" alt="JavaScript" /></div>
+                <div class="cube__face cube__face--left"><img src="assets/mongodb.png" alt="MongoDB" /></div>
+                <div class="cube__face cube__face--top"><img src="assets/java.png" alt="Java" /></div>
+                <div class="cube__face cube__face--bottom"><img src="assets/node.png" alt="NodeJs" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-indicator">
+          <div class="scroll-line"></div>
+          Scroll
         </div>
       </div>
-    </header>
+    </section>
 
-    <main class="container mx-auto px-6 md:px-12 lg:px-24">
-      <!-- Hero Section -->
-      <section id="hero" class="min-h-screen flex items-center pt-24 md:pt-0">
-        <div class="fade-in">
-          <p class="accent-color text-lg mb-4">Hola! Soy</p>
-          <h1
-            class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-100"
-          >
-            Leo Doerflinger.
-          </h1>
-          <h2
-            class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-slate-400 mt-2"
-          >
-            Construyo soluciones para la web.
-          </h2>
-          <p class="mt-6 max-w-xl text-slate-400 text-lg">
-            Soy programador web Full Stack apasionado por crear aplicaciones y
-            experiencias digitales intuitivas, eficientes y atractivas. Me
-            especializo en convertir ideas en soluciones tecnológicas
-            funcionales con gran enfoque en UX/UI.
-          </p>
-          <div
-            class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
-          >
-            <a href="#projects" class="btn-primary text-center"
-              >Ver mis proyectos</a
-            >
-            <a
-              href="https://curriculumvitae-leo.vercel.app/"
-              target="_blank"
-              class="flex items-center justify-center px-6 py-3 border border-slate-500 text-slate-300 rounded-md transition-all duration-300 hover:bg-slate-500 hover:bg-opacity-10"
-            >
-              Ver y Descargar CV
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="ml-2"
-              >
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                <polyline points="7 10 12 15 17 10" />
-                <line x1="12" x2="12" y1="15" y2="3" />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </section>
+    <div class="divider"></div>
 
-      <!-- About Section -->
-      <section id="about" class="py-24">
-        <h2 class="section-heading">Sobre mí</h2>
-        <div class="grid md:grid-cols-5 gap-10">
-          <div class="md:col-span-3 text-slate-400 space-y-4 text-lg">
-            <p>
-              Desde que descubrí la programación, me dediqué a aprender y
-              aplicar las mejores tecnologías para resolver problemas reales. Mi
-              enfoque se centra en escribir código limpio, escalable y
-              mantenible, siempre con el objetivo de entregar un producto final
-              de alta calidad que cumpla con las expectativas del cliente.
-            </p>
-            <p>
-              Tengo experiencia trabajando tanto en frontend como en backend, lo
-              que me da una perspectiva completa del ciclo de vida de una
-              aplicación. Me gusta trabajar en equipo y estoy siempre abierto a
-              nuevos desafíos que me permitan crecer profesionalmente.
-            </p>
-            <p>
-              Acá van algunas de las tecnologías con las que he estado
-              trabajando últimamentes:
-            </p>
-            <ul
-              class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-4 text-slate-300"
-            >
-              <li class="flex items-center">
-                <span class="accent-color mr-2">▹</span>JavaScript (ES6+)
-              </li>
-              <li class="flex items-center">
-                <span class="accent-color mr-2">▹</span>React.js
-              </li>
-              <li class="flex items-center">
-                <span class="accent-color mr-2">▹</span>Node.js
-              </li>
-              <li class="flex items-center">
-                <span class="accent-color mr-2">▹</span>HTML5 & CSS3
-              </li>
-              <li class="flex items-center">
-                <span class="accent-color mr-2">▹</span>Tailwind CSS
-              </li>
-              <li class="flex items-center">
-                <span class="accent-color mr-2">▹</span>Firebase
-              </li>
+    <!-- ── About ── -->
+    <section id="about">
+      <div class="container">
+        <div class="section-tag">Sobre mí</div>
+        <h2 class="section-title">Código limpio,<br>resultados reales.</h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p>Desde que descubrí la programación, me dediqué a aprender y aplicar las mejores tecnologías para resolver problemas reales. Mi enfoque se centra en escribir código limpio, escalable y mantenible, siempre con el objetivo de entregar un producto final de alta calidad que cumpla con las expectativas del cliente.</p>
+            <p>Tengo experiencia trabajando tanto en frontend como en backend, lo que me da una perspectiva completa del ciclo de vida de una aplicación. Me gusta trabajar en equipo y estoy siempre abierto a nuevos desafíos que me permitan crecer profesionalmente.</p>
+            <p>Tecnologías con las que trabajo actualmente:</p>
+            <ul class="tech-list">
+              <li>JavaScript (ES6+)</li>
+              <li>React.js</li>
+              <li>Node.js</li>
+              <li>HTML5 & CSS3</li>
+              <li>Tailwind CSS</li>
+              <li>Firebase</li>
             </ul>
           </div>
-          <div
-            class="md:col-span-2 flex justify-center items-center min-h-[256px] py-10 md:py-0"
-          >
-            <div class="scene w-52 h-52 md:w-64 md:h-64">
-              <div class="cube">
-                <div class="cube__face cube__face--front">
-                  <img src="/assets/html.png" alt="HTML5" class="p-4" />
-                </div>
-                <div class="cube__face cube__face--back">
-                  <img src="/assets/python.png" alt="Python" class="p-4" />
-                </div>
-                <div class="cube__face cube__face--right">
-                  <img src="/assets/js.png" alt="JavaScript" class="p-4" />
-                </div>
-                <div class="cube__face cube__face--left">
-                  <img src="/assets/mongodb.png" alt="MongoDB" class="p-4" />
-                </div>
-                <div class="cube__face cube__face--top">
-                  <img src="/assets/java.png" alt="Java" class="p-4" />
-                </div>
-                <div class="cube__face cube__face--bottom">
-                  <img src="/assets/node.png" alt="NodeJs" class="p-4" />
-                </div>
-              </div>
+          <div class="about-stats">
+            <div class="stat-card reveal">
+              <div class="stat-number">6<span>+</span></div>
+              <div class="stat-label">Proyectos completados</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-1">
+              <div class="stat-number">Full<span>.</span></div>
+              <div class="stat-label">Stack developer</div>
+            </div>
+            <div class="stat-card reveal reveal-delay-2">
+              <div class="stat-number">UX<span>/</span>UI</div>
+              <div class="stat-label">Enfocado en la experiencia</div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Projects Section -->
-      <section id="projects" class="py-24">
-        <h2 class="section-heading">Proyectos Destacados</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-          <!-- Project Card 1: Noticias -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://news-leodoerflinger.vercel.app/"
-            data-title="Panel de Noticias"
-          >
-            <img
-              src="assets/news.png"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Noticias';"
-              alt="Panel de Noticias"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">Panel de Noticias</h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                Dashboard financiero que muestra noticias, cotizaciones y un
-                conversor de divisas en tiempo real, utilizando APIs externas.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >JavaScript</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >API</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >Tailwind CSS</span
-                >
+    <div class="divider"></div>
+
+    <!-- ── Projects ── -->
+    <section id="projects">
+      <div class="container">
+        <div class="projects-header">
+          <div>
+            <div class="section-tag">Proyectos</div>
+            <h2 class="section-title">Trabajo destacado.</h2>
+          </div>
+          <div class="project-count">06</div>
+        </div>
+
+        <div class="projects-grid">
+
+          <!-- 1: Noticias -->
+          <div class="project-card reveal">
+            <img src="assets/news.png" alt="Panel de Noticias" class="project-thumb"
+              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Noticias';" />
+            <div class="project-body">
+              <div class="project-index">01 — Dashboard</div>
+              <h3 class="project-title">Panel de Noticias</h3>
+              <p class="project-desc">Dashboard financiero con noticias, cotizaciones y conversor de divisas en tiempo real mediante APIs externas.</p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">API REST</span>
+                <span class="tag">Tailwind</span>
               </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://news-leodoerflinger.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
+              <div class="project-links">
+                <a href="https://news-leodoerflinger.vercel.app/" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                  Visitar
+                </a>
+                <button class="project-link preview-btn" data-url="https://news-leodoerflinger.vercel.app/" data-title="Panel de Noticias">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Preview
                 </button>
+                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Project Card 2: Pastillero -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://pastillero10.vercel.app/"
-            data-title="Pastillero App"
-          >
+          <!-- 2: Pastillero -->
+          <div class="project-card reveal reveal-delay-1">
             <img
-              src="https://image.thum.io/get/width/600/crop/400/https://pastillero10.vercel.app/"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Pastillero+App';"
+              src="https://image.thum.io/get/width/600/crop/340/https://pastillero10.vercel.app/"
               alt="Pastillero App"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">Pastillero App</h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                App para notificar la toma y dosificación de medicamentos. Un
-                proyecto para gestionar la salud personal de forma sencilla y
-                eficaz.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >React</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >Firebase</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >PWA</span
-                >
+              class="project-thumb"
+              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Pastillero';" />
+            <div class="project-body">
+              <div class="project-index">02 — App</div>
+              <h3 class="project-title">Pastillero App</h3>
+              <p class="project-desc">App PWA para gestionar y notificar la toma y dosificación de medicamentos de forma sencilla y eficaz.</p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">PWA</span>
               </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://pastillero10.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
+              <div class="project-links">
+                <a href="https://pastillero10.vercel.app/" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                  Visitar
+                </a>
+                <button class="project-link preview-btn" data-url="https://pastillero10.vercel.app/" data-title="Pastillero App">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Preview
                 </button>
+                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Project Card 3: Climax -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://climax-leodoer.vercel.app/"
-            data-title="Climax Weather"
-          >
-            <img
-              src="assets/climax.png"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Climax';"
-              alt="App Climax"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">Climax Weather</h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                Aplicación que consulta una API para mostrar el pronóstico del
-                tiempo actual en cualquier ciudad del mundo.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >JavaScript</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >API</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >HTML</span
-                >
+          <!-- 3: Climax -->
+          <div class="project-card reveal reveal-delay-2">
+            <img src="assets/climax.png" alt="Climax Weather" class="project-thumb"
+              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Climax';" />
+            <div class="project-body">
+              <div class="project-index">03 — Weather</div>
+              <h3 class="project-title">Climax Weather</h3>
+              <p class="project-desc">Aplicación que consulta una API para mostrar el pronóstico del tiempo en cualquier ciudad del mundo.</p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">API REST</span>
+                <span class="tag">HTML</span>
               </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://climax-leodoer.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
+              <div class="project-links">
+                <a href="https://climax-leodoer.vercel.app/" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                  Visitar
+                </a>
+                <button class="project-link preview-btn" data-url="https://climax-leodoer.vercel.app/" data-title="Climax Weather">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Preview
                 </button>
+                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Project Card 4: Pixel y Mate -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://pixel-y-mate.vercel.app/"
-            data-title="Pixel y Mate"
-          >
-            <img
-              src="assets/pym.png"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Pixel+y+Mate';"
-              alt="Pixel y Mate"
-              class="w-full h-full object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">Pixel y Mate</h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                Sitio web profesional para una agencia de servicios, enfocado en
-                la presentación de portfolio y captación de clientes.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >HTML</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >CSS</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >JavaScript</span
-                >
+          <!-- 4: Pixel y Mate -->
+          <div class="project-card reveal">
+            <img src="assets/pym.png" alt="Pixel y Mate" class="project-thumb"
+              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Pixel+y+Mate';" />
+            <div class="project-body">
+              <div class="project-index">04 — Agencia</div>
+              <h3 class="project-title">Pixel y Mate</h3>
+              <p class="project-desc">Sitio web profesional para una agencia de servicios, enfocado en presentación de portfolio y captación de clientes.</p>
+              <div class="project-tags">
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
+                <span class="tag">JavaScript</span>
               </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://pixel-y-mate.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
+              <div class="project-links">
+                <a href="https://pixel-y-mate.vercel.app/" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                  Visitar
+                </a>
+                <button class="project-link preview-btn" data-url="https://pixel-y-mate.vercel.app/" data-title="Pixel y Mate">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Preview
                 </button>
+                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Project Card 5: E-commerce -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://mitienda-one.vercel.app/"
-            data-title="E-commerce MiTienda"
-          >
-            <img
-              src="assets/tienda.png"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=MiTienda';"
-              alt="E-commerce"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">E-commerce</h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                Plataforma de e-commerce completa con catálogo de productos,
-                carrito de compras y simulación de proceso de pago.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >React</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >Context API</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >Firebase</span
-                >
+          <!-- 5: E-commerce -->
+          <div class="project-card reveal reveal-delay-1">
+            <img src="assets/tienda.png" alt="E-commerce" class="project-thumb"
+              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=MiTienda';" />
+            <div class="project-body">
+              <div class="project-index">05 — E-commerce</div>
+              <h3 class="project-title">MiTienda</h3>
+              <p class="project-desc">Plataforma de e-commerce completa con catálogo de productos, carrito de compras y simulación de proceso de pago.</p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">Context API</span>
+                <span class="tag">Firebase</span>
               </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://mitienda-one.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
+              <div class="project-links">
+                <a href="https://mitienda-one.vercel.app/" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                  Visitar
+                </a>
+                <button class="project-link preview-btn" data-url="https://mitienda-one.vercel.app/" data-title="MiTienda E-commerce">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Preview
                 </button>
+                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
 
-          <!-- Project Card 6: Contraseñas -->
-          <div
-            class="project-card glass-effect rounded-lg overflow-hidden shadow-lg transform hover:-translate-y-2 transition-transform duration-300 flex flex-col"
-            data-url="https://proyectos-v2fv.vercel.app/"
-            data-title="Generador de Contraseñas"
-          >
-            <img
-              src="assets/pass.png"
-              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e293b/64ffda?text=Passwords';"
-              alt="Generador de Contraseñas"
-              class="w-full h-48 object-cover"
-            />
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold accent-color">
-                Generador de Contraseñas
-              </h3>
-              <p class="text-slate-400 mt-2 flex-grow">
-                Crea contraseñas seguras y personalizables, ajustando longitud y
-                tipos de caracteres para una máxima seguridad.
-              </p>
-              <div class="mt-4 text-xs text-slate-400 space-x-2">
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >JavaScript</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >HTML</span
-                >
-                <span class="inline-block bg-slate-700 rounded-full px-3 py-1"
-                  >CSS</span
-                >
+          <!-- 6: Contraseñas -->
+          <div class="project-card reveal reveal-delay-2">
+            <img src="assets/pass.png" alt="Generador de Contraseñas" class="project-thumb"
+              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Passwords';" />
+            <div class="project-body">
+              <div class="project-index">06 — Tool</div>
+              <h3 class="project-title">Generador de Contraseñas</h3>
+              <p class="project-desc">Crea contraseñas seguras y personalizables ajustando longitud y tipos de caracteres para máxima seguridad.</p>
+              <div class="project-tags">
+                <span class="tag">JavaScript</span>
+                <span class="tag">HTML</span>
+                <span class="tag">CSS</span>
               </div>
-              <div class="mt-6 flex space-x-4">
-                <a
-                  href="https://proyectos-v2fv.vercel.app/"
-                  target="_blank"
-                  class="text-slate-300 hover:accent-color transition"
-                  >Visitar Sitio</a
-                >
-                <button
-                  class="preview-btn text-slate-300 hover:accent-color transition font-medium"
-                >
-                  Previsualizar
+              <div class="project-links">
+                <a href="https://proyectos-v2fv.vercel.app/" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+                  Visitar
+                </a>
+                <button class="project-link preview-btn" data-url="https://proyectos-v2fv.vercel.app/" data-title="Generador de Contraseñas">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  Preview
                 </button>
+                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                  GitHub
+                </a>
               </div>
             </div>
           </div>
+
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- Contact Section -->
-      <section id="contact" class="py-24 max-w-2xl mx-auto">
-        <h2 class="text-center text-2xl font-semibold accent-color">
-          ¿Qué sigue?
-        </h2>
-        <h3
-          class="text-center text-4xl md:text-5xl font-bold text-slate-100 mt-4"
-        >
-          Ponete en Contacto
-        </h3>
-        <p class="text-slate-400 mt-6 text-lg text-center">
-          Mi bandeja de entrada está siempre abierta. Si tenés una consulta, una
-          propuesta o simplemente querés saludar, no dudes en escribirme.
-        </p>
+    <div class="divider"></div>
 
-        <form id="contact-form" class="mt-10 space-y-6">
+    <!-- ── Contact ── -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-tag">Contacto</div>
+        <h2 class="section-title">Trabajemos juntos.</h2>
+        <div class="contact-inner">
+
           <div>
-            <label for="name" class="block text-sm font-medium text-slate-300"
-              >Nombre</label
-            >
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              class="mt-1 block w-full bg-slate-800 border border-slate-600 rounded-md py-2 px-3 text-slate-300 focus:ring-cyan-500 focus:border-cyan-500"
-            />
+            <p class="contact-tagline">Mi bandeja de entrada está siempre abierta. Si tenés una consulta, una propuesta o simplemente querés saludar, no dudes en escribirme.</p>
+            <div class="contact-direct">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                </div>
+                <a href="https://wa.me/543512619874" target="_blank">WhatsApp — +54 351 261 9874</a>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                </div>
+                <a href="mailto:leodoercba@gmail.com">leodoercba@gmail.com</a>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                </div>
+                <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank">LinkedIn — Leopoldo Doerflinger</a>
+              </div>
+            </div>
           </div>
-          <div>
-            <label
-              for="message"
-              class="block text-sm font-medium text-slate-300"
-              >Consulta</label
-            >
-            <textarea
-              id="message"
-              name="message"
-              rows="4"
-              required
-              class="mt-1 block w-full bg-slate-800 border border-slate-600 rounded-md py-2 px-3 text-slate-300 focus:ring-cyan-500 focus:border-cyan-500"
-            ></textarea>
-          </div>
-          <div class="text-center">
-            <button type="submit" class="btn-primary text-lg w-full sm:w-auto">
-              Enviar Mensaje por Email
-            </button>
-          </div>
-        </form>
-        <div class="text-center mt-6">
-          <p class="text-slate-400 mb-3">
-            O si preferís un contacto más directo:
-          </p>
-          <a
-            href="https://wa.me/543512619874"
-            target="_blank"
-            class="inline-flex items-center bg-green-500 text-white font-bold py-3 px-6 rounded-md hover:bg-green-600 transition-colors"
-          >
-            <svg
-              class="w-5 h-5 mr-2"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M10.02 0C4.48 0 0 4.48 0 10c0 1.63.4 3.18 1.15 4.59L.1 20l5.59-1.45c1.33.68 2.8.95 4.33.95h.01c5.54 0 10-4.48 10-10S15.56 0 10.02 0zM10 18.13c-1.39 0-2.73-.36-3.9-1.02l-.28-.16-2.91.76.77-2.84-.18-.29c-.72-1.18-1.1-2.58-1.1-4.01C2.39 5.6 5.85 2.13 10.01 2.13c4.16 0 7.62 3.47 7.62 7.64s-3.46 7.63-7.63 7.63zm3.63-5.2c-.2-.1-1.17-.58-1.35-.65-.18-.07-.31-.1-.45.1-.13.2-.51.65-.63.78-.12.13-.24.15-.45.05-.2-.1-.85-.31-1.62-.99-.59-.52-1-1.17-1.12-1.37-.12-.2-.02-.3.08-.4.1-.1.22-.26.33-.39.12-.13.16-.21.24-.36.08-.15.04-.28-.02-.38-.07-.1-.45-1.08-.61-1.48-.16-.39-.32-.34-.45-.34H5.97c-.13 0-.28.05-.43.25-.15.2-.58.55-.58 1.35s.6 1.57.68 1.68c.08.13 1.18 1.8 2.85 2.5.39.16.69.26.93.33.3.09.58.07.79-.04.24-.13 1.17-.48 1.33-.94.16-.46.16-.86.11-.94-.05-.08-.18-.13-.38-.23z"
-              ></path>
-            </svg>
-            Contactar por WhatsApp
-          </a>
-        </div>
-      </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="py-8">
-      <div class="flex flex-col items-center justify-center space-y-4">
-        <div class="flex space-x-6">
-          <a
-            href="https://github.com/leodoerflinger"
-            target="_blank"
-            class="text-slate-400 hover:text-cyan-400 transition-colors"
-            aria-label="GitHub"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-              ></path>
-            </svg>
+          <div>
+            <form id="contact-form" class="contact-form" novalidate>
+              <div class="form-group">
+                <label class="form-label" for="contact-name">Nombre</label>
+                <input type="text" id="contact-name" name="name" class="form-input" placeholder="Tu nombre" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="email" class="form-input" placeholder="tu@email.com" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="contact-message">Mensaje</label>
+                <textarea id="contact-message" name="message" class="form-textarea" placeholder="Contame de tu proyecto..." required></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-primary" id="submit-btn">Enviar mensaje</button>
+                <div class="form-status" id="form-status"></div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Footer ── -->
+    <footer>
+      <div class="container footer-inner">
+        <p class="footer-copy">© 2025 — Diseñado y construido por Leopoldo Doerflinger</p>
+        <div class="footer-socials">
+          <a href="https://github.com/leodoerflinger" target="_blank" class="social-link" aria-label="GitHub">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
           </a>
-          <a
-            href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/"
-            target="_blank"
-            class="text-slate-400 hover:text-cyan-400 transition-colors"
-            aria-label="LinkedIn"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path
-                d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-              ></path>
-              <rect x="2" y="9" width="4" height="12"></rect>
-              <circle cx="4" cy="4" r="2"></circle>
-            </svg>
+          <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank" class="social-link" aria-label="LinkedIn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
           </a>
-          <a
-            href="https://www.instagram.com/leo_doerflinger/"
-            target="_blank"
-            class="text-slate-400 hover:text-cyan-400 transition-colors"
-            aria-label="Instagram"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-              <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-            </svg>
+          <a href="https://www.instagram.com/leo_doerflinger/" target="_blank" class="social-link" aria-label="Instagram">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
           </a>
         </div>
-        <p class="text-slate-500 text-sm">
-          Diseñado y construido por Leopoldo Doerflinger.
-        </p>
       </div>
     </footer>
 
-    <!-- Preview Modal -->
-    <div
-      id="preview-modal"
-      class="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-[999] hidden p-4"
-    >
-      <div
-        class="bg-slate-900 rounded-lg shadow-xl w-full max-w-6xl h-[90%] flex flex-col transform transition-transform duration-300 scale-95"
-      >
-        <!-- Modal Header / Browser Bar -->
-        <div
-          class="flex-shrink-0 flex items-center justify-between p-3 border-b border-slate-700"
-        >
-          <div class="flex items-center space-x-2">
-            <span class="w-3 h-3 bg-red-500 rounded-full"></span>
-            <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>
-            <span class="w-3 h-3 bg-green-500 rounded-full"></span>
-          </div>
-          <h4
-            id="modal-title"
-            class="text-sm text-slate-400 truncate mx-4"
-          ></h4>
-          <button
-            id="close-modal-btn"
-            class="text-slate-400 hover:text-white text-2xl leading-none"
-          >
-            &times;
-          </button>
+  </div><!-- /wrapper -->
+
+  <!-- ── Preview Modal ── -->
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-window">
+      <div class="modal-bar">
+        <div class="modal-dots">
+          <span style="background:#ff5f57"></span>
+          <span style="background:#febc2e"></span>
+          <span style="background:#28c840"></span>
         </div>
-        <!-- iFrame Content -->
-        <div class="flex-grow p-1 bg-slate-800 rounded-b-lg">
-          <div id="loader" class="flex items-center justify-center h-full">
-            <div
-              class="w-8 h-8 border-4 border-dashed rounded-full animate-spin border-cyan-400"
-            ></div>
-          </div>
-          <iframe
-            id="preview-iframe"
-            class="w-full h-full border-0 rounded-b-md hidden"
-          ></iframe>
+        <span class="modal-title-text" id="modal-title"></span>
+        <button class="modal-close" id="modal-close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-spinner" id="modal-spinner"><div class="spinner"></div></div>
+        <iframe id="modal-iframe" class="modal-iframe" title="Preview"></iframe>
+        <div class="modal-blocked" id="modal-blocked">
+          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
+          <strong style="color:var(--text-primary)">Este sitio no permite previsualizarse en iframe.</strong>
+          <span style="color:var(--text-secondary);font-size:0.82rem;">Podés abrirlo en una pestaña nueva.</span>
+          <a id="modal-open-link" href="#" target="_blank" class="btn btn-outline" style="margin-top:0.5rem;font-size:0.82rem;">Abrir en nueva pestaña</a>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      // --- Mobile Menu Toggle ---
-      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-      const mobileMenu = document.getElementById("mobile-menu");
+  <script>
+    // ── Cube sizing ──
+    (function() {
+      const scene = document.getElementById('cube-scene');
+      function setTZ() {
+        if (!scene) return;
+        const tz = scene.clientWidth / 2;
+        document.documentElement.style.setProperty('--tz', tz + 'px');
+      }
+      setTZ();
+      window.addEventListener('resize', setTZ);
+    })();
 
-      mobileMenuBtn.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
-      const mobileMenuLinks = mobileMenu.querySelectorAll("a");
-      mobileMenuLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          mobileMenu.classList.add("hidden");
-        });
-      });
+    // ── Navbar scroll ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
 
-      // --- Navbar transparency on scroll ---
-      const header = document.getElementById("header");
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 50) {
-          header.classList.add("shadow-lg");
-        } else {
-          header.classList.remove("shadow-lg");
+    // ── Mobile menu ──
+    const toggle = document.getElementById('nav-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileClose = document.getElementById('mobile-close');
+    toggle.addEventListener('click', () => mobileMenu.classList.add('open'));
+    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    document.querySelectorAll('.mobile-link').forEach(a => {
+      a.addEventListener('click', () => mobileMenu.classList.remove('open'));
+    });
+
+    // ── Scroll reveal ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
         }
       });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => revealObserver.observe(el));
 
-      // --- Fade-in animation on scroll ---
-      const faders = document.querySelectorAll("section");
-      const appearOptions = {
-        threshold: 0.1,
-        rootMargin: "0px 0px -100px 0px",
+    // ── Contact form (EmailJS fallback to mailto) ──
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formStatus = document.getElementById('form-status');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('contact-name').value.trim();
+      const email = document.getElementById('contact-email').value.trim();
+      const message = document.getElementById('contact-message').value.trim();
+
+      if (!name || !email || !message) {
+        formStatus.textContent = 'Por favor completá todos los campos.';
+        formStatus.className = 'form-status visible error';
+        return;
+      }
+
+      // mailto fallback
+      const subject = encodeURIComponent('Consulta desde el portfolio de ' + name);
+      const body = encodeURIComponent('Nombre: ' + name + '\nEmail: ' + email + '\n\n' + message);
+      const mailto = 'mailto:leodoercba@gmail.com?subject=' + subject + '&body=' + body;
+
+      formStatus.textContent = 'Abriendo cliente de email...';
+      formStatus.className = 'form-status visible success';
+      submitBtn.disabled = true;
+      window.location.href = mailto;
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        formStatus.className = 'form-status';
+      }, 4000);
+    });
+
+    // ── Preview modal ──
+    const overlay = document.getElementById('modal-overlay');
+    const modalTitle = document.getElementById('modal-title');
+    const modalSpinner = document.getElementById('modal-spinner');
+    const modalIframe = document.getElementById('modal-iframe');
+    const modalBlocked = document.getElementById('modal-blocked');
+    const modalOpenLink = document.getElementById('modal-open-link');
+    const modalClose = document.getElementById('modal-close');
+
+    let iframeTimeout;
+
+    function openModal(url, title) {
+      modalTitle.textContent = title;
+      modalIframe.src = 'about:blank';
+      modalIframe.style.display = 'none';
+      modalBlocked.style.display = 'none';
+      modalSpinner.style.display = 'flex';
+      modalOpenLink.href = url;
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+
+      clearTimeout(iframeTimeout);
+      // Give it 8 seconds, if no load event → assume blocked
+      iframeTimeout = setTimeout(() => {
+        modalSpinner.style.display = 'none';
+        modalBlocked.style.display = 'flex';
+      }, 8000);
+
+      modalIframe.onload = () => {
+        clearTimeout(iframeTimeout);
+        try {
+          // If we can access contentDocument, it loaded fine
+          const doc = modalIframe.contentDocument;
+          if (!doc || doc.URL === 'about:blank') return;
+          modalSpinner.style.display = 'none';
+          modalIframe.style.display = 'block';
+        } catch(err) {
+          // Cross-origin block
+          modalSpinner.style.display = 'none';
+          modalBlocked.style.display = 'flex';
+        }
       };
-      const appearOnScroll = new IntersectionObserver(function (
-        entries,
-        appearOnScroll
-      ) {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("fade-in");
-          appearOnScroll.unobserve(entry.target);
-        });
-      },
-      appearOptions);
-      faders.forEach((fader) => {
-        fader.style.opacity = "0";
-        fader.style.transform = "translateY(20px)";
-        fader.style.transition =
-          "opacity 0.8s ease-out, transform 0.8s ease-out";
-        appearOnScroll.observe(fader);
+
+      modalIframe.onerror = () => {
+        clearTimeout(iframeTimeout);
+        modalSpinner.style.display = 'none';
+        modalBlocked.style.display = 'flex';
+      };
+
+      modalIframe.src = url;
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+      clearTimeout(iframeTimeout);
+      setTimeout(() => { modalIframe.src = 'about:blank'; }, 300);
+    }
+
+    document.querySelectorAll('.preview-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        openModal(btn.dataset.url, btn.dataset.title);
       });
-      document.getElementById("hero").style.opacity = "1";
-      document.getElementById("hero").style.transform = "translateY(0)";
+    });
+    modalClose.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
 
-      // --- Contact Form Handler ---
-      const contactForm = document.getElementById("contact-form");
-      contactForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-        const name = document.getElementById("name").value;
-        const message = document.getElementById("message").value;
-        const emailTo = "leodoerflinger@icloud.com";
-        const subject = `Consulta desde el portfolio de ${name}`;
-        const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(
-          subject
-        )}&body=${encodeURIComponent(message)}`;
-        window.location.href = mailtoLink;
-      });
-
-      // --- Preview Modal Logic ---
-      const previewModal = document.getElementById("preview-modal");
-      const closeModalBtn = document.getElementById("close-modal-btn");
-      const previewIframe = document.getElementById("preview-iframe");
-      const modalTitle = document.getElementById("modal-title");
-      const loader = document.getElementById("loader");
-      const previewBtns = document.querySelectorAll(".preview-btn");
-      const modalContent = previewModal.querySelector(".transform");
-
-      function openModal(url, title) {
-        previewIframe.src = "about:blank"; // Clear previous content
-        previewIframe.classList.add("hidden");
-        loader.classList.remove("hidden");
-
-        modalTitle.textContent = title;
-        previewIframe.src = url;
-        previewModal.classList.remove("hidden");
-        setTimeout(() => {
-          // For transition effect
-          modalContent.classList.remove("scale-95");
-          modalContent.classList.add("scale-100");
-        }, 50);
-
-        previewIframe.onload = () => {
-          loader.classList.add("hidden");
-          previewIframe.classList.remove("hidden");
-        };
-      }
-
-      function closeModal() {
-        modalContent.classList.add("scale-95");
-        modalContent.classList.remove("scale-100");
-        setTimeout(() => {
-          previewModal.classList.add("hidden");
-          previewIframe.src = "about:blank"; // Stop loading in background
-        }, 300);
-      }
-
-      previewBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-          const card = btn.closest(".project-card");
-          const url = card.dataset.url;
-          const title = card.dataset.title;
-          openModal(url, title);
-        });
-      });
-
-      closeModalBtn.addEventListener("click", closeModal);
-      previewModal.addEventListener("click", (event) => {
-        if (event.target === previewModal) {
-          closeModal();
-        }
-      });
-
-      // --- Tech Cube Sizing ---
-      document.addEventListener("DOMContentLoaded", () => {
-        const scene = document.querySelector(".scene");
-        if (scene) {
-          const setCubeSize = () => {
-            const size = scene.clientWidth;
-            const translateZ = size / 2;
-            document.documentElement.style.setProperty(
-              "--translateZ",
-              `${translateZ}px`
-            );
-          };
-          setCubeSize();
-          window.addEventListener("resize", setCubeSize);
-        }
-      });
-    </script>
-  </body>
+</body>
 </html>

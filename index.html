@@ -3,1315 +3,845 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leo Doerflinger — Desarrollador Web Full Stack</title>
+  <title>Leo Doerflinger — Certified Tech Developer & Full Stack Developer</title>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Leo Doerflinger — Desarrollador Web Full Stack" />
-  <meta property="og:description" content="Programador Full Stack apasionado por crear aplicaciones y experiencias digitales intuitivas, eficientes y atractivas." />
-  <meta property="og:url" content="https://portfolio-leodoerflinger.vercel.app/" />
+  <!-- Primary Meta Tags -->
+  <meta name="title" content="Leo Doerflinger — Certified Tech Developer & Full Stack Developer" />
+  <meta name="description" content="Portfolio profesional de Leopoldo Doerflinger. Desarrollador Web Full Stack especializado en JavaScript, React, Node.js, Python, MongoDB y diseño de experiencias digitales modernas." />
+  <meta name="keywords" content="Leo Doerflinger, Desarrollador Web, Full Stack Developer, Frontend, Backend, React, Node.js, JavaScript, Python, Portfolio, Argentina" />
+  <meta name="author" content="Leopoldo Doerflinger" />
+  <meta name="theme-color" content="#070a0e" />
+
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://portfolio-leodoerflinger.vercel.app/" />
+  <meta property="og:title" content="Leo Doerflinger — Certified Tech Developer & Full Stack Developer" />
+  <meta property="og:description" content="Explorá mis proyectos de desarrollo web, aplicaciones interactivas, PWAs y dashboards construidos con código limpio y alto rendimiento." />
+  <meta property="og:image" content="assets/news.png" />
 
-  <!-- Fonts -->
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://portfolio-leodoerflinger.vercel.app/" />
+  <meta property="twitter:title" content="Leo Doerflinger — Certified Tech Developer & Full Stack Developer" />
+  <meta property="twitter:description" content="Desarrollador Web Full Stack enfocado en soluciones eficientes, escalables y orientadas a la experiencia de usuario." />
+  <meta property="twitter:image" content="assets/news.png" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/icono.png" />
+  <link rel="apple-touch-icon" href="assets/icono.png" />
+
+  <!-- Google Fonts Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Favicon SVG inline (pequeño, sin peso) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230a0a0a'/><text x='6' y='23' font-family='serif' font-size='20' fill='%2364ffda'>L</text></svg>" />
-
-  <style>
-    :root {
-      --bg: #080c10;
-      --surface: #0e1419;
-      --surface2: #141c24;
-      --border: rgba(255,255,255,0.06);
-      --border-hover: rgba(100,255,218,0.2);
-      --accent: #64ffda;
-      --accent-dim: rgba(100,255,218,0.08);
-      --text-primary: #e8edf2;
-      --text-secondary: #7a8899;
-      --text-muted: #3d4f61;
-      --heading-font: 'Syne', sans-serif;
-      --body-font: 'DM Sans', sans-serif;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html { font-size: 16px; }
-
-    body {
-      font-family: var(--body-font);
-      background-color: var(--bg);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ── Scrollbar ── */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
-    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-    /* ── Noise texture overlay ── */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0.4;
-    }
-
-    /* ── Grid lines background ── */
-    .grid-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
-      background-size: 60px 60px;
-    }
-
-    /* ── Layout ── */
-    .wrapper { position: relative; z-index: 1; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
-
-    /* ── Nav ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      padding: 1.25rem 0;
-      transition: background 0.4s, border-color 0.4s;
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      background: rgba(8,12,16,0.88);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-color: var(--border);
-    }
-    .nav-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-family: var(--heading-font);
-      font-weight: 800;
-      font-size: 1.4rem;
-      color: var(--accent);
-      text-decoration: none;
-      letter-spacing: -0.02em;
-    }
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
-      align-items: center;
-    }
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--text-primary); }
-    .nav-cta {
-      padding: 0.5rem 1.25rem;
-      border: 1px solid var(--border-hover);
-      border-radius: 4px;
-      color: var(--accent) !important;
-      transition: background 0.2s !important;
-    }
-    .nav-cta:hover { background: var(--accent-dim) !important; }
-
-    /* Mobile nav */
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 0.5rem;
-      color: var(--text-secondary);
-    }
-    .nav-toggle svg { display: block; }
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: var(--bg);
-      z-index: 99;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 2.5rem;
-    }
-    .mobile-menu.open { display: flex; }
-    .mobile-menu a {
-      font-family: var(--heading-font);
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .mobile-menu a:hover { color: var(--accent); }
-    .mobile-close {
-      position: absolute;
-      top: 1.5rem; right: 2rem;
-      background: none; border: none;
-      color: var(--text-secondary);
-      cursor: pointer; font-size: 2rem; line-height: 1;
-    }
-
-    /* ── Hero ── */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding-top: 6rem;
-      position: relative;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      width: 100%;
-    }
-    .hero-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
-    }
-    .hero-label::before {
-      content: '';
-      width: 24px; height: 1px;
-      background: var(--accent);
-    }
-    .hero-name {
-      font-family: var(--heading-font);
-      font-size: clamp(3rem, 6vw, 5.5rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.03em;
-      color: var(--text-primary);
-      margin-bottom: 0.25rem;
-    }
-    .hero-name span { color: var(--accent); }
-    .hero-role {
-      font-family: var(--heading-font);
-      font-size: clamp(1.1rem, 2vw, 1.5rem);
-      font-weight: 400;
-      color: var(--text-secondary);
-      margin-bottom: 2rem;
-      letter-spacing: -0.01em;
-    }
-    .hero-bio {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      line-height: 1.7;
-      max-width: 440px;
-      font-weight: 300;
-      margin-bottom: 2.5rem;
-    }
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-      transition: all 0.2s;
-      padding: 0.75rem 1.75rem;
-      cursor: pointer;
-      font-family: var(--body-font);
-    }
-    .btn-primary {
-      background: var(--accent);
-      color: #080c10;
-      border: 1px solid var(--accent);
-    }
-    .btn-primary:hover { background: transparent; color: var(--accent); }
-    .btn-outline {
-      background: transparent;
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    .btn-outline:hover { border-color: var(--border-hover); color: var(--accent); }
-
-    /* Hero right - cube */
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .scene {
-      width: 260px; height: 260px;
-      perspective: 900px;
-    }
-    .cube {
-      width: 100%; height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: rotateCube 22s infinite linear;
-    }
-    .scene:hover .cube { animation-play-state: paused; }
-    @keyframes rotateCube {
-      from { transform: rotateY(0deg) rotateX(10deg); }
-      to { transform: rotateY(360deg) rotateX(10deg); }
-    }
-    .cube__face {
-      position: absolute;
-      width: 100%; height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(14,20,25,0.7);
-      border: 1px solid rgba(100,255,218,0.12);
-      border-radius: 8px;
-    }
-    .cube__face img { width: 55%; height: 55%; object-fit: contain; filter: brightness(0.9); transition: filter 0.3s; }
-    .cube__face:hover img { filter: brightness(1.15); }
-    .cube__face--front  { transform: rotateY(0deg)    translateZ(var(--tz)); }
-    .cube__face--back   { transform: rotateY(180deg)  translateZ(var(--tz)); }
-    .cube__face--right  { transform: rotateY(90deg)   translateZ(var(--tz)); }
-    .cube__face--left   { transform: rotateY(-90deg)  translateZ(var(--tz)); }
-    .cube__face--top    { transform: rotateX(90deg)   translateZ(var(--tz)); }
-    .cube__face--bottom { transform: rotateX(-90deg)  translateZ(var(--tz)); }
-
-    /* Scroll indicator */
-    .scroll-indicator {
-      position: absolute;
-      bottom: 2.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-    }
-    .scroll-line {
-      width: 1px; height: 40px;
-      background: linear-gradient(to bottom, var(--text-muted), transparent);
-      animation: scrollBounce 2s ease-in-out infinite;
-    }
-    @keyframes scrollBounce {
-      0%, 100% { transform: scaleY(1); opacity: 0.5; }
-      50% { transform: scaleY(0.5); opacity: 1; }
-    }
-
-    /* ── Section commons ── */
-    section { padding: 7rem 0; }
-    .section-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-    }
-    .section-tag::before {
-      content: '';
-      width: 16px; height: 1px;
-      background: var(--accent);
-    }
-    .section-title {
-      font-family: var(--heading-font);
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      color: var(--text-primary);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: var(--border);
-      margin: 0;
-    }
-
-    /* ── About ── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 5rem;
-      align-items: start;
-      margin-top: 3.5rem;
-    }
-    .about-text p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      line-height: 1.8;
-      font-weight: 300;
-      margin-bottom: 1.25rem;
-    }
-    .about-text p:last-of-type { margin-bottom: 0; }
-    .tech-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.6rem;
-      margin-top: 2rem;
-      list-style: none;
-    }
-    .tech-list li {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-    }
-    .tech-list li::before {
-      content: '';
-      width: 5px; height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* About stats */
-    .about-stats {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-    .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1.5rem;
-      transition: border-color 0.3s;
-    }
-    .stat-card:hover { border-color: var(--border-hover); }
-    .stat-number {
-      font-family: var(--heading-font);
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--text-primary);
-      line-height: 1;
-      letter-spacing: -0.03em;
-    }
-    .stat-number span { color: var(--accent); }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-      margin-top: 0.4rem;
-      font-weight: 300;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    /* ── Projects ── */
-    .projects-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      margin-bottom: 3rem;
-    }
-    .project-count {
-      font-family: var(--heading-font);
-      font-size: 4rem;
-      font-weight: 800;
-      color: var(--text-muted);
-      line-height: 1;
-      letter-spacing: -0.05em;
-    }
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .project-card {
-      background: var(--surface);
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      transition: background 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .project-card:hover { background: var(--surface2); }
-    .project-thumb {
-      width: 100%;
-      aspect-ratio: 16/9;
-      object-fit: cover;
-      display: block;
-      filter: brightness(0.75) saturate(0.7);
-      transition: filter 0.4s;
-    }
-    .project-card:hover .project-thumb { filter: brightness(0.9) saturate(0.85); }
-    .project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-    .project-index {
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      letter-spacing: 0.1em;
-      font-family: var(--heading-font);
-      margin-bottom: 0.75rem;
-    }
-    .project-title {
-      font-family: var(--heading-font);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.5rem;
-      letter-spacing: -0.02em;
-    }
-    .project-desc {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      line-height: 1.6;
-      flex: 1;
-      margin-bottom: 1.25rem;
-    }
-    .project-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 1.25rem;
-    }
-    .tag {
-      font-size: 0.7rem;
-      padding: 0.2rem 0.6rem;
-      background: rgba(100,255,218,0.06);
-      border: 1px solid rgba(100,255,218,0.12);
-      border-radius: 3px;
-      color: var(--accent);
-      letter-spacing: 0.04em;
-      font-weight: 400;
-    }
-    .project-links {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-    }
-    .project-link {
-      font-size: 0.78rem;
-      color: var(--text-secondary);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-      transition: color 0.2s;
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: var(--body-font);
-      padding: 0;
-    }
-    .project-link:hover { color: var(--accent); }
-    .project-link svg { width: 12px; height: 12px; }
-
-    /* ── Contact ── */
-    .contact-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 5rem;
-      align-items: start;
-      margin-top: 3.5rem;
-    }
-    .contact-tagline {
-      font-size: 1.05rem;
-      color: var(--text-secondary);
-      font-weight: 300;
-      line-height: 1.7;
-      margin-bottom: 2.5rem;
-    }
-    .contact-direct {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 300;
-    }
-    .contact-item a {
-      color: inherit;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .contact-item a:hover { color: var(--accent); }
-    .contact-icon {
-      width: 36px; height: 36px;
-      border-radius: 6px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .contact-icon svg { width: 16px; height: 16px; color: var(--accent); }
-
-    /* Form */
-    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
-    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
-    .form-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-weight: 400;
-    }
-    .form-input, .form-textarea {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 0.75rem 1rem;
-      color: var(--text-primary);
-      font-family: var(--body-font);
-      font-size: 0.9rem;
-      font-weight: 300;
-      transition: border-color 0.2s;
-      outline: none;
-      resize: none;
-    }
-    .form-input:focus, .form-textarea:focus { border-color: var(--border-hover); }
-    .form-input::placeholder, .form-textarea::placeholder { color: var(--text-muted); }
-    .form-textarea { min-height: 120px; }
-    .form-status {
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-      display: none;
-      margin-top: 0.25rem;
-    }
-    .form-status.visible { display: block; }
-    .form-status.success { color: var(--accent); }
-    .form-status.error { color: #ff6b6b; }
-
-    /* ── Footer ── */
-    footer {
-      padding: 3rem 0;
-      border-top: 1px solid var(--border);
-    }
-    .footer-inner {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-copy {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      font-weight: 300;
-    }
-    .footer-socials {
-      display: flex;
-      gap: 1.25rem;
-    }
-    .social-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-      display: flex;
-    }
-    .social-link:hover { color: var(--accent); }
-    .social-link svg { width: 18px; height: 18px; }
-
-    /* ── Modal ── */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.85);
-      z-index: 200;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s;
-      backdrop-filter: blur(4px);
-    }
-    .modal-overlay.open { opacity: 1; pointer-events: all; }
-    .modal-window {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      width: 100%;
-      max-width: 1100px;
-      height: 85vh;
-      display: flex;
-      flex-direction: column;
-      transform: scale(0.96);
-      transition: transform 0.25s;
-      overflow: hidden;
-    }
-    .modal-overlay.open .modal-window { transform: scale(1); }
-    .modal-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0.75rem 1.25rem;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-    .modal-dots { display: flex; gap: 6px; }
-    .modal-dots span { width: 11px; height: 11px; border-radius: 50%; display: block; }
-    .modal-title-text { font-size: 0.8rem; color: var(--text-secondary); }
-    .modal-close {
-      background: none; border: none;
-      color: var(--text-secondary); cursor: pointer;
-      font-size: 1.2rem; line-height: 1; padding: 0.25rem;
-      transition: color 0.2s;
-    }
-    .modal-close:hover { color: var(--text-primary); }
-    .modal-body { flex: 1; position: relative; }
-    .modal-spinner {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .spinner {
-      width: 28px; height: 28px;
-      border: 2px solid var(--border);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .modal-iframe {
-      width: 100%; height: 100%; border: none;
-      display: none;
-      background: white;
-    }
-    .modal-blocked {
-      display: none;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      gap: 1rem;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      text-align: center;
-      padding: 2rem;
-    }
-    .modal-blocked svg { width: 40px; height: 40px; color: var(--text-muted); margin-bottom: 0.5rem; }
-
-    /* ── Reveal animations ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .hero-visual { order: -1; }
-      .scene { width: 180px; height: 180px; }
-      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-      .about-stats { flex-direction: row; flex-wrap: wrap; }
-      .stat-card { flex: 1; min-width: 140px; }
-      .projects-grid { grid-template-columns: 1fr 1fr; }
-      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
-      .footer-inner { flex-direction: column; gap: 1.5rem; text-align: center; }
-    }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-      .nav-toggle { display: block; }
-      .projects-grid { grid-template-columns: 1fr; }
-      .hero-name { font-size: 2.8rem; }
-      section { padding: 4.5rem 0; }
-      .about-stats { flex-direction: column; }
-      .projects-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-    }
-  </style>
+  <!-- Modular Stylesheets -->
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
+
+  <!-- Ambient Glow & Decor -->
+  <div class="ambient-glow glow-orb-1"></div>
+  <div class="ambient-glow glow-orb-2"></div>
   <div class="grid-bg"></div>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+
   <div class="wrapper">
 
-    <!-- ── Nav ── -->
-    <nav id="navbar">
-      <div class="container nav-inner">
-        <a href="#" class="logo">LD</a>
-        <ul class="nav-links">
-          <li><a href="#about">Sobre mí</a></li>
-          <li><a href="#projects">Proyectos</a></li>
-          <li><a href="#contact">Contacto</a></li>
-          <li><a href="https://curriculumvitae-leo.vercel.app/" target="_blank" class="nav-cta">Ver CV</a></li>
-        </ul>
-        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
-          <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </div>
-    </nav>
+    <!-- ======================================================================
+         NAVIGATION BAR
+         ====================================================================== -->
+    <header>
+      <nav id="navbar" aria-label="Navegación principal">
+        <div class="container nav-inner">
 
-    <!-- Mobile menu -->
-    <div class="mobile-menu" id="mobile-menu">
-      <button class="mobile-close" id="mobile-close">×</button>
-      <a href="#about" class="mobile-link">Sobre mí</a>
-      <a href="#projects" class="mobile-link">Proyectos</a>
-      <a href="#contact" class="mobile-link">Contacto</a>
-      <a href="https://curriculumvitae-leo.vercel.app/" target="_blank">Ver CV →</a>
+          <!-- Brand / Logo -->
+          <div class="brand-wrapper">
+            <a href="#hero" class="brand-logo" aria-label="Ir al inicio de la página">
+              <div class="brand-icon-box">
+                <img src="assets/icono.png" alt="Monograma LD" width="24" height="24" />
+              </div>
+              <span class="brand-text">Leo<span>.</span></span>
+            </a>
+            <div class="status-badge" title="Actualmente disponible para propuestas laborales y proyectos">
+              <span class="status-dot"></span>
+              Disponible para proyectos
+            </div>
+          </div>
+
+          <!-- Navigation Links -->
+          <ul class="nav-links">
+            <li><a href="#about">Sobre mí</a></li>
+            <li><a href="#skills">Habilidades</a></li>
+            <li><a href="#timeline">Trayectoria</a></li>
+            <li><a href="#projects">Proyectos</a></li>
+            <li><a href="#contact">Contacto</a></li>
+          </ul>
+
+          <!-- Nav Actions -->
+          <div class="nav-actions">
+            <!-- Theme Toggle Button -->
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="5"></circle>
+                <line x1="12" y1="1" x2="12" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="23"></line>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                <line x1="1" y1="12" x2="3" y2="12"></line>
+                <line x1="21" y1="12" x2="23" y2="12"></line>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+              </svg>
+            </button>
+
+            <!-- CV Link -->
+            <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Ver CV Interactivo">
+              <span>Ver CV</span>
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+            </a>
+
+            <!-- Mobile Hamburger Toggle -->
+            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú de navegación">
+              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+
+        </div>
+      </nav>
+    </header>
+
+    <!-- Mobile Drawer Menu -->
+    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú móvil">
+      <button class="mobile-close-btn" id="mobile-close" aria-label="Cerrar menú">×</button>
+      <a href="#about" class="mobile-nav-link">Sobre mí</a>
+      <a href="#skills" class="mobile-nav-link">Habilidades</a>
+      <a href="#timeline" class="mobile-nav-link">Trayectoria</a>
+      <a href="#projects" class="mobile-nav-link">Proyectos</a>
+      <a href="#contact" class="mobile-nav-link">Contacto</a>
+      <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 1rem;">
+        Ver CV Interactivo →
+      </a>
     </div>
 
-    <!-- ── Hero ── -->
-    <section id="hero">
-      <div class="container">
-        <div class="hero-grid">
-          <div>
-            <div class="hero-label">Disponible para proyectos</div>
-            <h1 class="hero-name">Leo<br><span>Doerflinger</span><br>.</h1>
-            <p class="hero-role">Desarrollador Web Full Stack</p>
-            <p class="hero-bio">Apasionado por crear aplicaciones y experiencias digitales intuitivas, eficientes y atractivas. Me especializo en convertir ideas en soluciones tecnológicas funcionales con enfoque en UX/UI.</p>
-            <div class="hero-actions">
-              <a href="#projects" class="btn btn-primary">Ver proyectos</a>
-              <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" class="btn btn-outline">
-                Descargar CV
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
-              </a>
-            </div>
-          </div>
-          <div class="hero-visual">
-            <div class="scene" id="cube-scene">
-              <div class="cube" id="cube">
-                <div class="cube__face cube__face--front"><img src="assets/html.png" alt="HTML5" /></div>
-                <div class="cube__face cube__face--back"><img src="assets/python.png" alt="Python" /></div>
-                <div class="cube__face cube__face--right"><img src="assets/js.png" alt="JavaScript" /></div>
-                <div class="cube__face cube__face--left"><img src="assets/mongodb.png" alt="MongoDB" /></div>
-                <div class="cube__face cube__face--top"><img src="assets/java.png" alt="Java" /></div>
-                <div class="cube__face cube__face--bottom"><img src="assets/node.png" alt="NodeJs" /></div>
+    <!-- ======================================================================
+         HERO SECTION
+         ====================================================================== -->
+    <main>
+      <section id="hero">
+        <div class="container">
+          <div class="hero-grid">
+
+            <!-- Hero Intro Left -->
+            <div>
+              <div class="hero-eyebrow reveal">
+                Certified Tech Developer • Full Stack
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="scroll-indicator">
-          <div class="scroll-line"></div>
-          Scroll
-        </div>
-      </div>
-    </section>
+              <h1 class="hero-title reveal reveal-delay-1">
+                Leo<br /><span>Doerflinger</span>.
+              </h1>
+              <p class="hero-role reveal reveal-delay-1">
+                Desarrollador Web Full Stack
+              </p>
+              <p class="hero-bio reveal reveal-delay-2">
+                Creo aplicaciones modernas, escalables y optimizadas que transforman ideas complejas en experiencias intuitivas. Con enfoque en código limpio, arquitectura sólida y atención minuciosa al diseño UI/UX.
+              </p>
 
-    <div class="divider"></div>
-
-    <!-- ── About ── -->
-    <section id="about">
-      <div class="container">
-        <div class="section-tag">Sobre mí</div>
-        <h2 class="section-title">Código limpio,<br>resultados reales.</h2>
-        <div class="about-grid">
-          <div class="about-text">
-            <p>Desde que descubrí la programación, me dediqué a aprender y aplicar las mejores tecnologías para resolver problemas reales. Mi enfoque se centra en escribir código limpio, escalable y mantenible, siempre con el objetivo de entregar un producto final de alta calidad que cumpla con las expectativas del cliente.</p>
-            <p>Tengo experiencia trabajando tanto en frontend como en backend, lo que me da una perspectiva completa del ciclo de vida de una aplicación. Me gusta trabajar en equipo y estoy siempre abierto a nuevos desafíos que me permitan crecer profesionalmente.</p>
-            <p>Tecnologías con las que trabajo actualmente:</p>
-            <ul class="tech-list">
-              <li>JavaScript (ES6+)</li>
-              <li>React.js</li>
-              <li>Node.js</li>
-              <li>HTML5 & CSS3</li>
-              <li>Tailwind CSS</li>
-              <li>Firebase</li>
-            </ul>
-          </div>
-          <div class="about-stats">
-            <div class="stat-card reveal">
-              <div class="stat-number">6<span>+</span></div>
-              <div class="stat-label">Proyectos completados</div>
-            </div>
-            <div class="stat-card reveal reveal-delay-1">
-              <div class="stat-number">Full<span>.</span></div>
-              <div class="stat-label">Stack developer</div>
-            </div>
-            <div class="stat-card reveal reveal-delay-2">
-              <div class="stat-number">UX<span>/</span>UI</div>
-              <div class="stat-label">Enfocado en la experiencia</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ── Projects ── -->
-    <section id="projects">
-      <div class="container">
-        <div class="projects-header">
-          <div>
-            <div class="section-tag">Proyectos</div>
-            <h2 class="section-title">Trabajo destacado.</h2>
-          </div>
-          <div class="project-count">06</div>
-        </div>
-
-        <div class="projects-grid">
-
-          <!-- 1: Noticias -->
-          <div class="project-card reveal">
-            <img src="assets/news.png" alt="Panel de Noticias" class="project-thumb"
-              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Noticias';" />
-            <div class="project-body">
-              <div class="project-index">01 — Dashboard</div>
-              <h3 class="project-title">Panel de Noticias</h3>
-              <p class="project-desc">Dashboard financiero con noticias, cotizaciones y conversor de divisas en tiempo real mediante APIs externas.</p>
-              <div class="project-tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">API REST</span>
-                <span class="tag">Tailwind</span>
-              </div>
-              <div class="project-links">
-                <a href="https://news-leodoerflinger.vercel.app/" target="_blank" class="project-link">
+              <div class="hero-actions reveal reveal-delay-3">
+                <a href="#projects" class="btn btn-primary">
+                  <span>Explorar Proyectos</span>
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                </a>
+                <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                  <span>CV Interactivo</span>
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                  Visitar
                 </a>
-                <button class="project-link preview-btn" data-url="https://news-leodoerflinger.vercel.app/" data-title="Panel de Noticias">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Preview
+                <button type="button" class="hero-quick-email" id="btn-copy-email-hero" title="Copiar correo electrónico">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span>leodoercba@gmail.com</span>
                 </button>
-                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                  GitHub
-                </a>
               </div>
             </div>
-          </div>
 
-          <!-- 2: Pastillero -->
-          <div class="project-card reveal reveal-delay-1">
-            <img
-              src="https://image.thum.io/get/width/600/crop/340/https://pastillero10.vercel.app/"
-              alt="Pastillero App"
-              class="project-thumb"
-              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Pastillero';" />
-            <div class="project-body">
-              <div class="project-index">02 — App</div>
-              <h3 class="project-title">Pastillero App</h3>
-              <p class="project-desc">App PWA para gestionar y notificar la toma y dosificación de medicamentos de forma sencilla y eficaz.</p>
-              <div class="project-tags">
-                <span class="tag">React</span>
-                <span class="tag">Firebase</span>
-                <span class="tag">PWA</span>
-              </div>
-              <div class="project-links">
-                <a href="https://pastillero10.vercel.app/" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                  Visitar
-                </a>
-                <button class="project-link preview-btn" data-url="https://pastillero10.vercel.app/" data-title="Pastillero App">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Preview
-                </button>
-                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 3: Climax -->
-          <div class="project-card reveal reveal-delay-2">
-            <img src="assets/climax.png" alt="Climax Weather" class="project-thumb"
-              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Climax';" />
-            <div class="project-body">
-              <div class="project-index">03 — Weather</div>
-              <h3 class="project-title">Climax Weather</h3>
-              <p class="project-desc">Aplicación que consulta una API para mostrar el pronóstico del tiempo en cualquier ciudad del mundo.</p>
-              <div class="project-tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">API REST</span>
-                <span class="tag">HTML</span>
-              </div>
-              <div class="project-links">
-                <a href="https://climax-leodoer.vercel.app/" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                  Visitar
-                </a>
-                <button class="project-link preview-btn" data-url="https://climax-leodoer.vercel.app/" data-title="Climax Weather">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Preview
-                </button>
-                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 4: Pixel y Mate -->
-          <div class="project-card reveal">
-            <img src="assets/pym.png" alt="Pixel y Mate" class="project-thumb"
-              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Pixel+y+Mate';" />
-            <div class="project-body">
-              <div class="project-index">04 — Agencia</div>
-              <h3 class="project-title">Pixel y Mate</h3>
-              <p class="project-desc">Sitio web profesional para una agencia de servicios, enfocado en presentación de portfolio y captación de clientes.</p>
-              <div class="project-tags">
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-                <span class="tag">JavaScript</span>
-              </div>
-              <div class="project-links">
-                <a href="https://pixel-y-mate.vercel.app/" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                  Visitar
-                </a>
-                <button class="project-link preview-btn" data-url="https://pixel-y-mate.vercel.app/" data-title="Pixel y Mate">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Preview
-                </button>
-                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 5: E-commerce -->
-          <div class="project-card reveal reveal-delay-1">
-            <img src="assets/tienda.png" alt="E-commerce" class="project-thumb"
-              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=MiTienda';" />
-            <div class="project-body">
-              <div class="project-index">05 — E-commerce</div>
-              <h3 class="project-title">MiTienda</h3>
-              <p class="project-desc">Plataforma de e-commerce completa con catálogo de productos, carrito de compras y simulación de proceso de pago.</p>
-              <div class="project-tags">
-                <span class="tag">React</span>
-                <span class="tag">Context API</span>
-                <span class="tag">Firebase</span>
-              </div>
-              <div class="project-links">
-                <a href="https://mitienda-one.vercel.app/" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                  Visitar
-                </a>
-                <button class="project-link preview-btn" data-url="https://mitienda-one.vercel.app/" data-title="MiTienda E-commerce">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Preview
-                </button>
-                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- 6: Contraseñas -->
-          <div class="project-card reveal reveal-delay-2">
-            <img src="assets/pass.png" alt="Generador de Contraseñas" class="project-thumb"
-              onerror="this.src='https://placehold.co/600x340/0e1419/64ffda?text=Passwords';" />
-            <div class="project-body">
-              <div class="project-index">06 — Tool</div>
-              <h3 class="project-title">Generador de Contraseñas</h3>
-              <p class="project-desc">Crea contraseñas seguras y personalizables ajustando longitud y tipos de caracteres para máxima seguridad.</p>
-              <div class="project-tags">
-                <span class="tag">JavaScript</span>
-                <span class="tag">HTML</span>
-                <span class="tag">CSS</span>
-              </div>
-              <div class="project-links">
-                <a href="https://proyectos-v2fv.vercel.app/" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                  Visitar
-                </a>
-                <button class="project-link preview-btn" data-url="https://proyectos-v2fv.vercel.app/" data-title="Generador de Contraseñas">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                  Preview
-                </button>
-                <a href="https://github.com/LeoDoerflinger" target="_blank" class="project-link">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-                  GitHub
-                </a>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ── Contact ── -->
-    <section id="contact">
-      <div class="container">
-        <div class="section-tag">Contacto</div>
-        <h2 class="section-title">Trabajemos juntos.</h2>
-        <div class="contact-inner">
-
-          <div>
-            <p class="contact-tagline">Mi bandeja de entrada está siempre abierta. Si tenés una consulta, una propuesta o simplemente querés saludar, no dudes en escribirme.</p>
-            <div class="contact-direct">
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <!-- Hero Visual Right: Interactive 3D Cube -->
+            <div class="hero-visual reveal reveal-delay-2">
+              <div class="cube-wrapper">
+                <div class="scene" id="cube-scene" title="Arrastrá con el ratón o desliza con el dedo para rotar en 3D">
+                  <div class="cube" id="cube">
+                    <div class="cube__face cube__face--front">
+                      <img src="assets/html.png" alt="HTML5" />
+                      <span class="cube__face-label">HTML5</span>
+                    </div>
+                    <div class="cube__face cube__face--back">
+                      <img src="assets/python.png" alt="Python" />
+                      <span class="cube__face-label">Python</span>
+                    </div>
+                    <div class="cube__face cube__face--right">
+                      <img src="assets/js.png" alt="JavaScript" />
+                      <span class="cube__face-label">JavaScript</span>
+                    </div>
+                    <div class="cube__face cube__face--left">
+                      <img src="assets/mongodb.png" alt="MongoDB" />
+                      <span class="cube__face-label">MongoDB</span>
+                    </div>
+                    <div class="cube__face cube__face--top">
+                      <img src="assets/java.png" alt="Java" />
+                      <span class="cube__face-label">Java</span>
+                    </div>
+                    <div class="cube__face cube__face--bottom">
+                      <img src="assets/node.png" alt="Node.js" />
+                      <span class="cube__face-label">Node.js</span>
+                    </div>
+                  </div>
                 </div>
-                <a href="https://wa.me/543512619874" target="_blank">WhatsApp — +54 351 261 9874</a>
-              </div>
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <div class="cube-hint">
+                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+                  <span>Arrastrá para interactuar en 3D</span>
                 </div>
-                <a href="mailto:leodoercba@gmail.com">leodoercba@gmail.com</a>
               </div>
-              <div class="contact-item">
-                <div class="contact-icon">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-                </div>
-                <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank">LinkedIn — Leopoldo Doerflinger</a>
-              </div>
+            </div>
+
+          </div>
+
+          <!-- Hero Metrics Strip -->
+          <div class="hero-metrics reveal reveal-delay-3">
+            <div class="metric-item">
+              <div class="metric-number">06<span>+</span></div>
+              <div class="metric-label">Proyectos Productivos</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-number">Full<span>.</span></div>
+              <div class="metric-label">Stack Front & Back</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-number">CTD<span>★</span></div>
+              <div class="metric-label">Digital House & Globant</div>
+            </div>
+            <div class="metric-item">
+              <div class="metric-number">100<span>%</span></div>
+              <div class="metric-label">Responsive & Accesible</div>
             </div>
           </div>
 
-          <div>
-            <form id="contact-form" class="contact-form" novalidate>
-              <div class="form-group">
-                <label class="form-label" for="contact-name">Nombre</label>
-                <input type="text" id="contact-name" name="name" class="form-input" placeholder="Tu nombre" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="contact-email">Email</label>
-                <input type="email" id="contact-email" name="email" class="form-input" placeholder="tu@email.com" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="contact-message">Mensaje</label>
-                <textarea id="contact-message" name="message" class="form-textarea" placeholder="Contame de tu proyecto..." required></textarea>
-              </div>
-              <div>
-                <button type="submit" class="btn btn-primary" id="submit-btn">Enviar mensaje</button>
-                <div class="form-status" id="form-status"></div>
-              </div>
-            </form>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- ======================================================================
+           ABOUT SECTION
+           ====================================================================== -->
+      <section id="about">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag">Sobre Mí</div>
+            <h2 class="section-title">Código limpio,<br><span>resultados de impacto</span>.</h2>
+            <p class="section-subtitle">
+              Desarrollador con mentalidad orientada a producto y resolución de problemas. Combino sólidos fundamentos teóricos con constante práctica en proyectos reales.
+            </p>
           </div>
 
-        </div>
-      </div>
-    </section>
+          <div class="about-grid">
 
-    <!-- ── Footer ── -->
+            <!-- Narrative Column -->
+            <div class="about-text reveal">
+              <p>
+                Comencé mi camino en la tecnología guiado por una curiosidad incesante por entender cómo funcionan los sistemas que utilizamos a diario. A lo largo de mi formación como <strong>Certified Tech Developer</strong> (programa impulsado por Digital House junto a Globant y Mercado Libre) y <strong>Full Stack Developer</strong> en NUCBA, he perfeccionado metodologías ágiles, estándares de desarrollo y arquitectura de software.
+              </p>
+              <p>
+                Me apasiona abarcar tanto el ecosistema <strong>Frontend</strong> (creando interfaces dinámicas, accesibles y estéticas) como el <strong>Backend</strong> (diseñando APIs RESTful seguras, modelando bases de datos y gestionando lógica de negocio).
+              </p>
+              <p>
+                Además, cuento con formación en <strong>Ciberseguridad por Cisco Networking Academy</strong>, lo cual me aporta una perspectiva rigurosa sobre validación de entradas, integridad de datos y buenas prácticas de seguridad web desde el día cero.
+              </p>
+
+              <!-- Value Pillars -->
+              <div class="about-pillars">
+                <div class="pillar-card">
+                  <div class="pillar-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                  </div>
+                  <h3 class="pillar-title">Código Limpio</h3>
+                  <p class="pillar-desc">Estructura modular, componentes reutilizables y fácil mantenibilidad a largo plazo.</p>
+                </div>
+                <div class="pillar-card">
+                  <div class="pillar-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
+                  </div>
+                  <h3 class="pillar-title">Enfoque Full Stack</h3>
+                  <p class="pillar-desc">Visión integral desde el diseño de interfaz hasta la base de datos y despliegue en la nube.</p>
+                </div>
+                <div class="pillar-card">
+                  <div class="pillar-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                  </div>
+                  <h3 class="pillar-title">Seguridad Web</h3>
+                  <p class="pillar-desc">Criterios de seguridad preventiva, sanitización y protección de datos inspirados en normas Cisco.</p>
+                </div>
+                <div class="pillar-card">
+                  <div class="pillar-icon">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                  </div>
+                  <h3 class="pillar-title">Optimización & UX</h3>
+                  <p class="pillar-desc">Carga veloz, renderizado fluido y experiencia de usuario placentera en cualquier dispositivo.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Profile Summary Box -->
+            <div class="about-profile-box reveal reveal-delay-1">
+              <h3 class="profile-box-title">Perfil Profesional</h3>
+              <ul class="profile-details-list">
+                <li class="profile-details-item">
+                  <span class="profile-key">Nombre</span>
+                  <span class="profile-val">Leopoldo Doerflinger</span>
+                </li>
+                <li class="profile-details-item">
+                  <span class="profile-key">Ubicación</span>
+                  <span class="profile-val">Córdoba, Argentina (Remoto)</span>
+                </li>
+                <li class="profile-details-item">
+                  <span class="profile-key">Especialidad</span>
+                  <span class="profile-val">Desarrollo Web Full Stack</span>
+                </li>
+                <li class="profile-details-item">
+                  <span class="profile-key">Idiomas</span>
+                  <span class="profile-val">Español (Nativo) • Inglés (Avanzado)</span>
+                </li>
+                <li class="profile-details-item">
+                  <span class="profile-key">Disponibilidad</span>
+                  <span class="profile-val">Inmediata (Freelance o Relación de Dep.)</span>
+                </li>
+              </ul>
+
+              <div class="soft-skills-container">
+                <div class="soft-skills-label">Habilidades Blandas</div>
+                <div class="soft-skills-tags">
+                  <span class="soft-tag">Aprendizaje Rápido</span>
+                  <span class="soft-tag">Atención al Detalle</span>
+                  <span class="soft-tag">Resolución de Problemas</span>
+                  <span class="soft-tag">Comunicación Asertiva</span>
+                  <span class="soft-tag">Proactividad</span>
+                  <span class="soft-tag">Trabajo en Equipo</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- ======================================================================
+           SKILLS & TECH STACK SECTION
+           ====================================================================== -->
+      <section id="skills">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag">Stack Tecnológico</div>
+            <h2 class="section-title">Herramientas que domino<br><span>para construir soluciones</span>.</h2>
+            <p class="section-subtitle">
+              Tecnologías y lenguajes aplicados en proyectos frontend, arquitecturas backend, persistencia de datos y despliegue continuo.
+            </p>
+          </div>
+
+          <!-- Skills Filter Tabs -->
+          <div class="skills-tabs reveal">
+            <button type="button" class="skills-tab-btn active" data-category="all">Todas</button>
+            <button type="button" class="skills-tab-btn" data-category="frontend">Frontend</button>
+            <button type="button" class="skills-tab-btn" data-category="backend">Backend & DB</button>
+            <button type="button" class="skills-tab-btn" data-category="tools">DevOps & Seguridad</button>
+          </div>
+
+          <!-- Skills Matrix Grid -->
+          <div class="skills-grid reveal reveal-delay-1">
+
+            <!-- JavaScript -->
+            <div class="skill-card" data-category="frontend">
+              <div class="skill-icon-wrap">
+                <img src="assets/js.png" alt="JavaScript" />
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">JavaScript</h3>
+                <span class="skill-category">ES6+ • DOM • Async/Await</span>
+              </div>
+            </div>
+
+            <!-- React -->
+            <div class="skill-card" data-category="frontend">
+              <div class="skill-icon-wrap">
+                <svg viewBox="0 0 115.3 100" fill="currentColor">
+                  <path d="M57.6,44.7c-2.9,0-5.3,2.4-5.3,5.3s2.4,5.3,5.3,5.3s5.3-2.4,5.3-5.3S60.5,44.7,57.6,44.7z"/>
+                  <path d="M109.8,40.1C107.4,26.9,98.6,18.7,85.7,16.5c-4.4-0.8-9.1-0.7-14.2,0.2c-4.1-6.1-9-11.4-14.4-15C53.7-0.7,50.1-0.5,46.9,2.4c-4.2,3.8-7.9,9.5-10.9,16.8c-6.8-1.5-13.4-1.9-19.3-0.7C4.6,21.1-2.4,32.3,0.5,45.8c2.4,11.2,9.9,18.5,21.5,21.2c4.1,1,8.6,1.2,13.4,0.7c3.9,5.7,8.4,10.7,13.4,14.3c4.5,3.2,8.9,4.1,12.7,2.2c4.8-2.4,8.9-7.7,12.2-15.5c7.2,1.8,14.2,2.4,20.4,1.4C106.3,88.1,113.8,77,112.5,63.1C111.9,55.3,111,46.9,109.8,40.1z M57.6,63.8c-7.6,0-13.8-6.2-13.8-13.8s6.2-13.8,13.8-13.8s13.8,6.2,13.8,13.8S65.2,63.8,57.6,63.8z"/>
+                </svg>
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">React.js</h3>
+                <span class="skill-category">Hooks • Context API • SPA</span>
+              </div>
+            </div>
+
+            <!-- HTML5 -->
+            <div class="skill-card" data-category="frontend">
+              <div class="skill-icon-wrap">
+                <img src="assets/html.png" alt="HTML5" />
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">HTML5 & Semántica</h3>
+                <span class="skill-category">Accesibilidad • SEO on-page</span>
+              </div>
+            </div>
+
+            <!-- CSS3 & Tailwind -->
+            <div class="skill-card" data-category="frontend">
+              <div class="skill-icon-wrap">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16l-2 15-6 3-6-3L4 4z"></path></svg>
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">CSS3 & Tailwind</h3>
+                <span class="skill-category">Flexbox • Grid • Animaciones</span>
+              </div>
+            </div>
+
+            <!-- Node.js -->
+            <div class="skill-card" data-category="backend">
+              <div class="skill-icon-wrap">
+                <img src="assets/node.png" alt="Node.js" />
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">Node.js & Express</h3>
+                <span class="skill-category">APIs REST • Middleware • CRUD</span>
+              </div>
+            </div>
+
+            <!-- Python -->
+            <div class="skill-card" data-category="backend">
+              <div class="skill-icon-wrap">
+                <img src="assets/python.png" alt="Python" />
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">Python</h3>
+                <span class="skill-category">Scripting • Automatización • Cisco</span>
+              </div>
+            </div>
+
+            <!-- MongoDB -->
+            <div class="skill-card" data-category="backend">
+              <div class="skill-icon-wrap">
+                <img src="assets/mongodb.png" alt="MongoDB" />
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">MongoDB</h3>
+                <span class="skill-category">NoSQL • Mongoose • Modelado</span>
+              </div>
+            </div>
+
+            <!-- Java -->
+            <div class="skill-card" data-category="backend">
+              <div class="skill-icon-wrap">
+                <img src="assets/java.png" alt="Java" />
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">Java & POO</h3>
+                <span class="skill-category">Estructuras • Tipado • Algoritmos</span>
+              </div>
+            </div>
+
+            <!-- Firebase -->
+            <div class="skill-card" data-category="backend">
+              <div class="skill-icon-wrap">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.89 15.672L6.255.461A.542.542 0 0 1 7.27.283l2.87 5.485-6.25 9.904zm16.732-2.91L18.15 2.115a.542.542 0 0 0-.974-.153L3.89 15.672l8.47 4.774a2.08 2.08 0 0 0 2.016 0l6.246-7.684z"/></svg>
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">Firebase</h3>
+                <span class="skill-category">Firestore • Auth • Hosting</span>
+              </div>
+            </div>
+
+            <!-- Ciberseguridad -->
+            <div class="skill-card" data-category="tools">
+              <div class="skill-icon-wrap">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">Ciberseguridad</h3>
+                <span class="skill-category">Cisco Certified • OWASP • Cripto</span>
+              </div>
+            </div>
+
+            <!-- Git & GitHub -->
+            <div class="skill-card" data-category="tools">
+              <div class="skill-icon-wrap">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">Git & GitHub</h3>
+                <span class="skill-category">Control de Versiones • CI/CD</span>
+              </div>
+            </div>
+
+            <!-- Vercel & Cloud -->
+            <div class="skill-card" data-category="tools">
+              <div class="skill-icon-wrap">
+                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L24 22H0L12 1Z"/></svg>
+              </div>
+              <div class="skill-info">
+                <h3 class="skill-name">Vercel & Despliegue</h3>
+                <span class="skill-category">Serverless • Producción • DNS</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- ======================================================================
+           TIMELINE / EDUCATION & PATH
+           ====================================================================== -->
+      <section id="timeline">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag">Formación & Certificaciones</div>
+            <h2 class="section-title">Trayectoria académica<br><span>y especialización</span>.</h2>
+            <p class="section-subtitle">
+              Capacitación continua en academias líderes de la industria tecnológica y de software.
+            </p>
+          </div>
+
+          <div class="timeline reveal">
+
+            <!-- Item 1 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-degree">Certified Tech Developer</h3>
+                  <span class="timeline-period">2023 — Presente</span>
+                </div>
+                <div class="timeline-school">Digital House • Globant • Mercado Libre</div>
+                <p class="timeline-details">
+                  Carrera intensiva codiseñada por las tecnológicas líderes de Latinoamérica. Especialización en desarrollo frontend y backend avanzado, patrones de arquitectura de software, metodologías ágiles (Scrum) y buenas prácticas de ingeniería de calidad.
+                </p>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-degree">Full Stack Web Developer</h3>
+                  <span class="timeline-period">2022 — 2023</span>
+                </div>
+                <div class="timeline-school">NUCBA</div>
+                <p class="timeline-details">
+                  Programa integral enfocado en la construcción de aplicaciones web completas utilizando la pila moderna: HTML5, CSS3, JavaScript avanzado, React, Node.js, Express, MongoDB y despliegue productivo en plataformas Cloud.
+                </p>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-degree">Cybersecurity Essentials & Python</h3>
+                  <span class="timeline-period">2021</span>
+                </div>
+                <div class="timeline-school">Cisco Networking Academy</div>
+                <p class="timeline-details">
+                  Certificación enfocada en fundamentos de seguridad en redes, vectores de ataque web, criptografía, defensas perimetrales y scripting con Python para tareas de auditoría y automatización.
+                </p>
+              </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="timeline-item">
+              <div class="timeline-dot"></div>
+              <div class="timeline-card">
+                <div class="timeline-header">
+                  <h3 class="timeline-degree">Diplomatura en Nuevas Tecnologías</h3>
+                  <span class="timeline-period">2020</span>
+                </div>
+                <div class="timeline-school">UTN-FRC (Universidad Tecnológica Nacional)</div>
+                <p class="timeline-details">
+                  Módulos de programación en JAVA, bases de Inteligencia Artificial, Impresión 3D, Realidad Aumentada y ecosistemas de innovación tecnológica.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- ======================================================================
+           PROJECTS SECTION
+           ====================================================================== -->
+      <section id="projects">
+        <div class="container">
+          <div class="projects-header-row reveal">
+            <div>
+              <div class="section-tag">Portfolio</div>
+              <h2 class="section-title">Trabajo destacado<br><span>y aplicaciones en vivo</span>.</h2>
+              <p class="section-subtitle">
+                Una selección de proyectos funcionales que demuestran capacidades en interfaces de usuario, integración de APIs y aplicaciones web progresivas.
+              </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="project-filters">
+              <button type="button" class="filter-btn active" data-filter="all">Todos</button>
+              <button type="button" class="filter-btn" data-filter="webapp">Web Apps & PWAs</button>
+              <button type="button" class="filter-btn" data-filter="frontend">Frontend & APIs</button>
+              <button type="button" class="filter-btn" data-filter="tools">E-Commerce & Tools</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Projects Grid (Rendered by projects.js) -->
+          <div class="projects-grid" id="projects-grid">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <div class="divider"></div>
+
+      <!-- ======================================================================
+           CONTACT SECTION
+           ====================================================================== -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag">Contacto Directo</div>
+            <h2 class="section-title">¿Tenés un proyecto?<br><span>Hablemos y hagámoslo realidad</span>.</h2>
+            <p class="section-subtitle">
+              Estoy disponible para nuevas oportunidades laborales, proyectos freelance o colaboraciones de desarrollo.
+            </p>
+          </div>
+
+          <div class="contact-grid">
+
+            <!-- Contact Channels Column -->
+            <div class="reveal">
+              <p style="color:var(--text-secondary); line-height:1.75; font-size:1.02rem; font-weight:300;">
+                Podés escribirme por cualquiera de los siguientes canales directos. Suelo responder en el mismo día.
+              </p>
+
+              <div class="contact-channels">
+
+                <!-- WhatsApp Card -->
+                <div class="contact-card">
+                  <div class="contact-card-left">
+                    <div class="contact-card-icon">
+                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    </div>
+                    <div class="contact-card-info">
+                      <span class="contact-card-name">WhatsApp Directo</span>
+                      <span class="contact-card-val">+54 351 261 9874</span>
+                    </div>
+                  </div>
+                  <a href="https://wa.me/543512619874" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+                    Chatear
+                  </a>
+                </div>
+
+                <!-- Email Card -->
+                <div class="contact-card">
+                  <div class="contact-card-left">
+                    <div class="contact-card-icon">
+                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    </div>
+                    <div class="contact-card-info">
+                      <span class="contact-card-name">Correo Electrónico</span>
+                      <span class="contact-card-val">leodoercba@gmail.com</span>
+                    </div>
+                  </div>
+                  <button type="button" class="copy-btn" id="btn-copy-email">
+                    <span>Copiar</span>
+                  </button>
+                </div>
+
+                <!-- LinkedIn Card -->
+                <div class="contact-card">
+                  <div class="contact-card-left">
+                    <div class="contact-card-icon">
+                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                    </div>
+                    <div class="contact-card-info">
+                      <span class="contact-card-name">LinkedIn</span>
+                      <span class="contact-card-val">in/leopoldo-doerflinger</span>
+                    </div>
+                  </div>
+                  <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                    Conectar
+                  </a>
+                </div>
+
+                <!-- GitHub Card -->
+                <div class="contact-card">
+                  <div class="contact-card-left">
+                    <div class="contact-card-icon">
+                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>
+                    </div>
+                    <div class="contact-card-info">
+                      <span class="contact-card-name">GitHub</span>
+                      <span class="contact-card-val">github.com/LeoDoerflinger</span>
+                    </div>
+                  </div>
+                  <a href="https://github.com/LeoDoerflinger" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
+                    Seguir
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Contact Form Box Column -->
+            <div class="contact-form-box reveal reveal-delay-1">
+              <h3 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.25rem;">Enviar un mensaje</h3>
+              <form id="contact-form" class="contact-form" novalidate>
+                <div class="form-group">
+                  <label class="form-label" for="contact-name">Nombre Completo *</label>
+                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="Ej: Santiago Pérez" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-email">Correo Electrónico *</label>
+                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="ejemplo@empresa.com" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-subject">Motivo / Tipo de Proyecto</label>
+                  <select id="contact-subject" class="form-select">
+                    <option value="Propuesta Laboral">Propuesta Laboral (Full Time / Part Time)</option>
+                    <option value="Proyecto Freelance">Desarrollo de Proyecto Web Freelance</option>
+                    <option value="Consulta Técnica">Consulta Técnica o Asesoramiento</option>
+                    <option value="Otro">Otro</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="contact-message">Mensaje *</label>
+                  <textarea id="contact-message" name="message" class="form-textarea" placeholder="Contame sobre tu idea, empresa o proyecto..." required></textarea>
+                </div>
+
+                <div class="form-actions-row">
+                  <button type="submit" id="btn-email-submit" class="btn btn-primary">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                    <span>Enviar por Email</span>
+                  </button>
+                  <button type="button" id="btn-whatsapp-submit" class="btn btn-secondary">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                    <span>Enviar a WhatsApp</span>
+                  </button>
+                </div>
+
+                <div class="form-status" id="form-status" role="alert"></div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ======================================================================
+         FOOTER
+         ====================================================================== -->
     <footer>
       <div class="container footer-inner">
-        <p class="footer-copy">© 2025 — Diseñado y construido por Leopoldo Doerflinger</p>
+        <p class="footer-copy">
+          © 2026 <strong>Leopoldo Doerflinger</strong> — Diseñado y programado con código limpio & pasión por la tecnología.
+        </p>
+
         <div class="footer-socials">
-          <a href="https://github.com/leodoerflinger" target="_blank" class="social-link" aria-label="GitHub">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          <a href="https://github.com/LeoDoerflinger" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>
           </a>
-          <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank" class="social-link" aria-label="LinkedIn">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
           </a>
-          <a href="https://www.instagram.com/leo_doerflinger/" target="_blank" class="social-link" aria-label="Instagram">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="CV Interactivo">
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           </a>
+          <button type="button" id="back-to-top" class="back-to-top-btn" aria-label="Volver arriba">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+          </button>
         </div>
       </div>
     </footer>
 
   </div><!-- /wrapper -->
 
-  <!-- ── Preview Modal ── -->
-  <div class="modal-overlay" id="modal-overlay">
+  <!-- ======================================================================
+       PROJECT DETAILS MODAL
+       ====================================================================== -->
+  <div class="modal-overlay" id="project-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-project-title">
     <div class="modal-window">
-      <div class="modal-bar">
+      <!-- Window Title Bar -->
+      <div class="modal-header-bar">
         <div class="modal-dots">
-          <span style="background:#ff5f57"></span>
-          <span style="background:#febc2e"></span>
-          <span style="background:#28c840"></span>
+          <span style="background: #ff5f57;"></span>
+          <span style="background: #febc2e;"></span>
+          <span style="background: #28c840;"></span>
         </div>
-        <span class="modal-title-text" id="modal-title"></span>
-        <button class="modal-close" id="modal-close">×</button>
+        <div class="modal-title-header" id="modal-project-category">Ficha Técnica</div>
+        <button type="button" class="modal-close-btn" id="project-modal-close" aria-label="Cerrar ventana modal">✕</button>
       </div>
+
+      <!-- Modal Body Content -->
       <div class="modal-body">
-        <div class="modal-spinner" id="modal-spinner"><div class="spinner"></div></div>
-        <iframe id="modal-iframe" class="modal-iframe" title="Preview"></iframe>
-        <div class="modal-blocked" id="modal-blocked">
-          <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
-          <strong style="color:var(--text-primary)">Este sitio no permite previsualizarse en iframe.</strong>
-          <span style="color:var(--text-secondary);font-size:0.82rem;">Podés abrirlo en una pestaña nueva.</span>
-          <a id="modal-open-link" href="#" target="_blank" class="btn btn-outline" style="margin-top:0.5rem;font-size:0.82rem;">Abrir en nueva pestaña</a>
+        <div class="modal-media-box">
+          <img id="modal-project-img" src="" alt="" />
         </div>
+
+        <div class="modal-details-grid">
+          <div>
+            <h3 id="modal-project-title" style="font-family:var(--font-heading); font-size:1.6rem; margin-bottom:0.75rem; color:var(--text-primary);"></h3>
+            <p id="modal-project-desc" class="modal-long-desc"></p>
+            <div class="modal-features-title">Características Principales:</div>
+            <ul id="modal-project-features" class="modal-features-list"></ul>
+          </div>
+
+          <div class="modal-sidebar">
+            <div>
+              <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); font-weight:600; margin-bottom:0.6rem;">Tecnologías Utilizadas</div>
+              <div id="modal-project-tags" class="project-tags"></div>
+            </div>
+
+            <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;">
+              <a id="modal-project-live" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                <span>Visitar Sitio Web</span>
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+              </a>
+              <a id="modal-project-github" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+                <span>Ver Código en GitHub</span>
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <script>
-    // ── Cube sizing ──
-    (function() {
-      const scene = document.getElementById('cube-scene');
-      function setTZ() {
-        if (!scene) return;
-        const tz = scene.clientWidth / 2;
-        document.documentElement.style.setProperty('--tz', tz + 'px');
-      }
-      setTZ();
-      window.addEventListener('resize', setTZ);
-    })();
-
-    // ── Navbar scroll ──
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-
-    // ── Mobile menu ──
-    const toggle = document.getElementById('nav-toggle');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileClose = document.getElementById('mobile-close');
-    toggle.addEventListener('click', () => mobileMenu.classList.add('open'));
-    mobileClose.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    document.querySelectorAll('.mobile-link').forEach(a => {
-      a.addEventListener('click', () => mobileMenu.classList.remove('open'));
-    });
-
-    // ── Scroll reveal ──
-    const revealEls = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          revealObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-    revealEls.forEach(el => revealObserver.observe(el));
-
-    // ── Contact form (EmailJS fallback to mailto) ──
-    const form = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const formStatus = document.getElementById('form-status');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const name = document.getElementById('contact-name').value.trim();
-      const email = document.getElementById('contact-email').value.trim();
-      const message = document.getElementById('contact-message').value.trim();
-
-      if (!name || !email || !message) {
-        formStatus.textContent = 'Por favor completá todos los campos.';
-        formStatus.className = 'form-status visible error';
-        return;
-      }
-
-      // mailto fallback
-      const subject = encodeURIComponent('Consulta desde el portfolio de ' + name);
-      const body = encodeURIComponent('Nombre: ' + name + '\nEmail: ' + email + '\n\n' + message);
-      const mailto = 'mailto:leodoercba@gmail.com?subject=' + subject + '&body=' + body;
-
-      formStatus.textContent = 'Abriendo cliente de email...';
-      formStatus.className = 'form-status visible success';
-      submitBtn.disabled = true;
-      window.location.href = mailto;
-
-      setTimeout(() => {
-        submitBtn.disabled = false;
-        formStatus.className = 'form-status';
-      }, 4000);
-    });
-
-    // ── Preview modal ──
-    const overlay = document.getElementById('modal-overlay');
-    const modalTitle = document.getElementById('modal-title');
-    const modalSpinner = document.getElementById('modal-spinner');
-    const modalIframe = document.getElementById('modal-iframe');
-    const modalBlocked = document.getElementById('modal-blocked');
-    const modalOpenLink = document.getElementById('modal-open-link');
-    const modalClose = document.getElementById('modal-close');
-
-    let iframeTimeout;
-
-    function openModal(url, title) {
-      modalTitle.textContent = title;
-      modalIframe.src = 'about:blank';
-      modalIframe.style.display = 'none';
-      modalBlocked.style.display = 'none';
-      modalSpinner.style.display = 'flex';
-      modalOpenLink.href = url;
-      overlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-
-      clearTimeout(iframeTimeout);
-      // Give it 8 seconds, if no load event → assume blocked
-      iframeTimeout = setTimeout(() => {
-        modalSpinner.style.display = 'none';
-        modalBlocked.style.display = 'flex';
-      }, 8000);
-
-      modalIframe.onload = () => {
-        clearTimeout(iframeTimeout);
-        try {
-          // If we can access contentDocument, it loaded fine
-          const doc = modalIframe.contentDocument;
-          if (!doc || doc.URL === 'about:blank') return;
-          modalSpinner.style.display = 'none';
-          modalIframe.style.display = 'block';
-        } catch(err) {
-          // Cross-origin block
-          modalSpinner.style.display = 'none';
-          modalBlocked.style.display = 'flex';
-        }
-      };
-
-      modalIframe.onerror = () => {
-        clearTimeout(iframeTimeout);
-        modalSpinner.style.display = 'none';
-        modalBlocked.style.display = 'flex';
-      };
-
-      modalIframe.src = url;
-    }
-
-    function closeModal() {
-      overlay.classList.remove('open');
-      document.body.style.overflow = '';
-      clearTimeout(iframeTimeout);
-      setTimeout(() => { modalIframe.src = 'about:blank'; }, 300);
-    }
-
-    document.querySelectorAll('.preview-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        openModal(btn.dataset.url, btn.dataset.title);
-      });
-    });
-    modalClose.addEventListener('click', closeModal);
-    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-  </script>
+  <!-- Modular Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/cube.js"></script>
+  <script src="js/projects.js"></script>
+  <script src="js/contact.js"></script>
 
 </body>
 </html>

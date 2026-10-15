@@ -1423,8 +1423,8 @@ a:hover {
   position: fixed;
   bottom: 1.5rem;
   left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
+  transform: translateX(-50%) translateY(16px);
+  z-index: 1000;
   padding: 0.75rem 1.25rem;
   background-color: var(--ink-primary);
   color: var(--bg-paper);
@@ -1434,13 +1434,16 @@ a:hover {
   box-shadow: var(--shadow-tactile-lg);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.2s ease;
+  visibility: hidden;
+  transition: opacity 0.25s var(--ease-out-expo), transform 0.25s var(--ease-out-expo), visibility 0.25s ease;
   max-width: 90vw;
   text-align: center;
 }
 
 .site-toast.show {
   opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* --- FOOTER & COLOFÓN --- */

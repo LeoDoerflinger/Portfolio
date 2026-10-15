@@ -131,8 +131,10 @@
   window.ldApp.showToast = function (msg, duration = 3000) {
     if (!toastEl) return;
     toastEl.textContent = msg;
-    toastEl.classList.add('show', 'toast-slip');
     clearTimeout(toastTimer);
+    toastEl.classList.remove('toast-slip');
+    toastEl.classList.add('show');
+
     toastTimer = setTimeout(() => {
       toastEl.classList.remove('show');
     }, duration);

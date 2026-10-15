@@ -87,21 +87,8 @@
 .face-top    { transform: rotateX(90deg) translateZ(110px); }
 .face-bottom { transform: rotateX(-90deg) translateZ(110px); }
 
-/* --- Toast Notification (Slip de Taller) --- */
-@keyframes slipIn {
-  from {
-    transform: translateY(16px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-.toast-slip {
-  animation: slipIn 0.28s var(--ease-out-expo) forwards;
-}
+/* --- Toast Notification (Transición limpia en main.css) --- */
+/* Las animaciones de entrada y salida del toast se gestionan vía transition en .site-toast */
 
 /* --- Tape & Stamp Imperfections --- */
 .stamp-tilt-left {

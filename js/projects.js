@@ -1,241 +1,491 @@
 /* ==========================================================================
-   PROJECTS DATA, FILTERING & MODAL CONTROLLER
-   Portfolio - Leopoldo Doerflinger
+   PROJECTS DATA, INTERACTIVE DOSSIER & SPECIMEN INSPECTOR
+   Portfolio - Leopoldo Doerflinger (Full Stack Developer)
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  // Projects Registry
+  // 1. REGISTRO DE PROYECTOS REALES
   const PROJECTS = [
     {
-      id: 'news-dashboard',
-      title: 'Panel de Noticias & Divisas',
-      category: 'webapp',
-      categoryLabel: 'Dashboard Financiero',
-      desc: 'Dashboard dinámico con noticias en tiempo real, cotizaciones del dólar oficial/blue/cripto y conversor de divisas integrado mediante APIs REST.',
-      fullDesc: 'Aplicación web orientada a la visualización de datos financieros y noticias actualizadas al instante. Integra múltiples endpoints REST para consultar cotizaciones del mercado cambiario argentino (dólar oficial, blue, MEP, tarjeta), calcular conversiones en tiempo real y presentar un feed de noticias categorizado.',
-      features: [
-        'Cotizaciones financieras y dólar en tiempo real mediante APIs',
-        'Calculadora y conversor interactivo de divisas',
-        'Consumo asíncrono con manejo de caché y reintentos',
-        'Diseño 100% responsivo y optimizado con Tailwind CSS'
-      ],
-      tags: ['JavaScript', 'API REST', 'Tailwind CSS', 'Vercel', 'Async/Await'],
-      image: 'assets/news.png',
-      liveUrl: 'https://news-leodoerflinger.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger'
-    },
-    {
       id: 'pastillero-pwa',
+      index: '01',
       title: 'Mi Pastillero Virtual',
-      category: 'webapp',
-      categoryLabel: 'PWA Asistiva',
-      desc: 'Progressive Web App para planificar, registrar y notificar tomas de medicamentos con soporte offline, notificaciones web y lupa con cámara.',
-      fullDesc: 'Solución integral desarrollada como Progressive Web Application (PWA) instalable en móviles y desktop. Permite crear tratamientos, configurar horarios y frecuencias personalizadas, emitir recordatorios mediante Notification API, almacenar el historial localmente sin conexión y usar la cámara como lupa de lectura asistiva.',
-      features: [
-        'Instalable como PWA en móviles y computadoras de escritorio',
-        'Notificaciones de alerta y recordatorios programados',
-        'Historial de tomas y persistencia de datos local (Offline-first)',
-        'Herramienta de lupa de asistencia visual mediante acceso a cámara'
-      ],
-      tags: ['React / JS', 'PWA', 'Service Workers', 'Web Push', 'Local Storage'],
-      image: 'assets/pastillero.png',
+      subtitle: 'PWA asistiva & organizador de tomas con lupa integrada',
+      category: 'utilidad',
+      categoryLabel: 'Salud & Utilidad',
+      year: '2025',
+      assetPath: 'assets/pastillero.png',
       liveUrl: 'https://pastillero10.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger'
+      githubUrl: 'https://github.com/LeoDoerflinger',
+      problem: 'La mayoría de las apps de salud están llenas de menús complejos y pasos innecesarios, cuando lo único que necesitás saber a las 8 de la mañana antes de salir al laburo es: "¿ya me tomé la pastilla o no?". Sin dar mil vueltas ni comerte un registro eterno con contraseñas complicadas.',
+      solution: 'Desarrollé una Progressive Web App (PWA) pensada para resolver de una: funciona sin conexión a internet, envía alertas programadas con la Notification API nativa y suma una lupa con la cámara del celular para facilitar la lectura de prospectos pequeños.',
+      stack: ['React / JS', 'PWA', 'Service Workers', 'Web Push', 'Local Storage', 'Camera API'],
+      demoType: 'pastillero'
     },
     {
       id: 'climax-weather',
-      title: 'Climax Weather App',
-      category: 'frontend',
-      categoryLabel: 'Weather & Geolocalización',
-      desc: 'Aplicación meteorológica que consulta la API de OpenWeather para pronóstico en tiempo real por búsqueda global o geolocalización automática.',
-      fullDesc: 'Herramienta interactiva para consulta de datos meteorológicos globales. Implementa geolocalización por coordenadas del navegador y buscador reactivo con autocompletado para cualquier ciudad del planeta. Presenta temperatura, humedad, viento, sensación térmica y estados climáticos dinámicos con interfaz minimalista.',
-      features: [
-        'Geolocalización automática mediante Geolocation API',
-        'Búsqueda mundial de ciudades con control de errores 404',
-        'Diseño dinámico adaptable según condición climática y hora',
-        'Consumo de OpenWeather API con optimización de payload'
-      ],
-      tags: ['JavaScript ES6+', 'OpenWeather API', 'CSS3', 'Geolocalización'],
-      image: 'assets/climax.png',
+      index: '02',
+      title: 'ClimaX — Weather App',
+      subtitle: 'Estación climática reactiva & telemetría sin publicidad',
+      category: 'datos',
+      categoryLabel: 'APIs & Datos',
+      year: '2025',
+      assetPath: 'assets/climax.png',
       liveUrl: 'https://climax-leodoer.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger'
+      githubUrl: 'https://github.com/LeoDoerflinger',
+      problem: 'Entrar a un portal meteorológico común suele ser comerse 20 banners de publicidad y videos automáticos que te consumen datos, solo para saber si salís con campera o remera.',
+      solution: 'Construí un cliente meteorológico ultraliviano consumiendo la OpenWeather API. Si le das permiso saca la temperatura, sensación térmica y viento de tu ubicación al instante con la Geolocation API, o podés buscar cualquier ciudad del mundo sin demoras.',
+      stack: ['JavaScript ES6+', 'OpenWeather API', 'Geolocation API', 'CSS Grid', 'Async/Await'],
+      demoType: 'climax'
     },
     {
-      id: 'pixel-y-mate',
-      title: 'Pixel y Mate — Agencia',
-      category: 'frontend',
-      categoryLabel: 'Sitio Web Corporativo',
-      desc: 'Sitio web moderno para una agencia de servicios digitales, estructurado para exhibición de portafolio y captación directa de clientes.',
-      fullDesc: 'Landing y portal institucional desarrollado para una agencia creativa de marketing y diseño. Cuenta con un diseño enfocado en la experiencia de usuario (UI/UX), optimización SEO on-page, carga ultra rápida de recursos gráficos y llamados a la acción estratégicos orientados a la conversión.',
-      features: [
-        'Arquitectura pensada para alta retención y conversión de leads',
-        'Diseño responsive testeado en múltiples resoluciones',
-        'Animaciones fluidas y micro-interacciones con CSS moderno',
-        'Buenas prácticas de accesibilidad y SEO estructural'
-      ],
-      tags: ['HTML5', 'CSS3', 'JavaScript', 'UI/UX Design', 'SEO'],
-      image: 'assets/pym.png',
-      liveUrl: 'https://pixel-y-mate.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger'
+      id: 'news-dashboard',
+      index: '03',
+      title: 'Panel de Noticias & Divisas',
+      subtitle: 'Monitor financiero en vivo, cotizaciones y prensa limpia',
+      category: 'datos',
+      categoryLabel: 'APIs & Datos',
+      year: '2025',
+      assetPath: 'assets/news.png',
+      liveUrl: 'https://news-leodoerflinger.vercel.app/',
+      githubUrl: 'https://github.com/LeoDoerflinger',
+      problem: 'En Argentina las cotizaciones del mercado cambiario varían constantemente y los sitios informativos suelen tapar la pantalla con anuncios flotantes y muros de pago.',
+      solution: 'Integré múltiples endpoints REST concurrentes para consultar las cotizaciones cambiarias en tiempo real, sumé una calculadora de conversión directa y un feed de prensa ordenado para ver las noticias del día sin distracciones.',
+      stack: ['JavaScript', 'REST APIs', 'Tailwind CSS', 'Vercel', 'Async Fetch'],
+      demoType: 'news'
     },
     {
       id: 'mitienda-ecommerce',
+      index: '04',
       title: 'MiTienda — E-Commerce',
-      category: 'tools',
-      categoryLabel: 'Comercio Electrónico',
-      desc: 'Plataforma de comercio electrónico con catálogo dinámico, filtrado de categorías, carrito de compras reactivo y persistencia de órdenes.',
-      fullDesc: 'Plataforma interactiva de e-commerce construida con arquitectura modular en React. Gestiona el estado global del carrito mediante Context API, permitiendo agregar, restar cantidades, calcular totales con impuestos y simular procesos de checkout con almacenamiento en Firebase.',
-      features: [
-        'Catálogo con navegación por categorías y filtros en tiempo real',
-        'Carrito de compras dinámico gestionado con Context API',
-        'Persistencia de productos y órdenes en base de datos Firebase',
-        'Diseño adaptado para móviles y tablets'
-      ],
-      tags: ['React.js', 'Context API', 'Firebase', 'CSS Modules'],
-      image: 'assets/tienda.png',
+      subtitle: 'Catálogo dinámico, filtrado instantáneo & carrito reactivo',
+      category: 'comercio',
+      categoryLabel: 'E-Commerce & Gestión',
+      year: '2025',
+      assetPath: 'assets/tienda.png',
       liveUrl: 'https://mitienda-one.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger'
+      githubUrl: 'https://github.com/LeoDoerflinger',
+      problem: 'Muchas tiendas online pequeñas sufren con carritos que se traban, páginas que se recargan por completo al filtrar productos o pedidos que se pierden si el usuario toca atrás.',
+      solution: 'Implementé una gestión de estado global reactiva para el carrito con Context API. El cálculo de subtotales, cantidades y filtros responde al instante, con arquitectura preparada para conectar pasarelas de pago y base de datos.',
+      stack: ['React.js', 'Context API', 'CSS Modules', 'Firebase / DB', 'LocalStorage'],
+      demoType: 'tienda'
+    },
+    {
+      id: 'pixel-y-mate',
+      index: '05',
+      title: 'Pixel y Mate — Agencia',
+      subtitle: 'Portal corporativo, arquitectura UI/UX & captación directa',
+      category: 'comercio',
+      categoryLabel: 'E-Commerce & Gestión',
+      year: '2025',
+      assetPath: 'assets/pym.png',
+      liveUrl: 'https://pixel-y-mate.vercel.app/',
+      githubUrl: 'https://github.com/LeoDoerflinger',
+      problem: 'Muchos sitios de agencias cargan páginas de 15 megabytes saturadas de librerías pesadas que tardan una eternidad en abrir desde el celular, perjudicando la conversión de clientes.',
+      solution: 'Diseñé una landing institucional moderna y liviana: maquetación semántica, optimización SEO on-page, carga inferior a 1 segundo y llamados a la acción claros para canalizar consultas comerciales directamente.',
+      stack: ['HTML5 Semántico', 'CSS3 Moderno', 'JavaScript', 'UI/UX Design', 'SEO On-Page'],
+      demoType: 'pym'
     },
     {
       id: 'password-generator',
-      title: 'Generador de Contraseñas',
-      category: 'tools',
-      categoryLabel: 'Herramienta de Seguridad',
-      desc: 'Herramienta que genera contraseñas de alta entropía con reglas configurables (mayúsculas, números, caracteres especiales) y copiado en 1 clic.',
-      fullDesc: 'Aplicación orientada a la seguridad digital y privacidad. Genera contraseñas criptográficamente seguras ajustando la longitud deseada y la combinación de caracteres requerida (alfanumérico, símbolos). Incluye función de copiado instantáneo al portapapeles y medidor de complejidad.',
-      features: [
-        'Generación de alta entropía matemática',
-        'Personalización de reglas y longitud exacta en tiempo real',
-        'Copiado seguro al portapapeles mediante Clipboard API',
-        'Estética visual ciberpunk / terminal con modo claro y oscuro'
-      ],
-      tags: ['JavaScript', 'Cybersecurity', 'Web Crypto', 'CSS3'],
-      image: 'assets/pass.png',
+      index: '06',
+      title: 'Pass — Bóveda & Generador',
+      subtitle: 'Generador criptográfico con Web Crypto API & auditor de entropía',
+      category: 'utilidad',
+      categoryLabel: 'Salud & Utilidad',
+      year: '2025',
+      assetPath: 'assets/pass.png',
       liveUrl: 'https://proyectos-v2fv.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger'
+      githubUrl: 'https://github.com/LeoDoerflinger',
+      problem: 'Mucha gente sigue usando "123456" o datos personales predecibles porque inventar contraseñas seguras y memorizarlas resulta tedioso, o porque desconfían de herramientas online que puedan almacenar sus claves.',
+      solution: 'Desarrollé un generador que calcula claves de alta entropía matemática directamente en el navegador mediante la Web Crypto API nativa, con parámetros configurables y copiado al portapapeles en un clic.',
+      stack: ['JavaScript', 'Web Crypto API', 'Cybersecurity', 'Entropy Metrics', 'Clipboard API'],
+      demoType: 'pass'
     }
   ];
 
-  // DOM Elements
-  const gridContainer = document.getElementById('projects-grid');
-  const filterBtns = document.querySelectorAll('.filter-btn');
+  // Estado del Inspector
+  let activeProjectId = PROJECTS[0].id;
+  let currentFilter = 'all';
+  let inspectorViewMode = 'demo'; // 'demo' o 'capture'
 
-  // Modal Elements
-  const modalOverlay = document.getElementById('project-modal-overlay');
-  const modalCloseBtn = document.getElementById('project-modal-close');
-  const modalTitle = document.getElementById('modal-project-title');
-  const modalCategory = document.getElementById('modal-project-category');
-  const modalImg = document.getElementById('modal-project-img');
-  const modalDesc = document.getElementById('modal-project-desc');
-  const modalFeatures = document.getElementById('modal-project-features');
-  const modalTags = document.getElementById('modal-project-tags');
-  const modalLiveBtn = document.getElementById('modal-project-live');
-  const modalGithubBtn = document.getElementById('modal-project-github');
+  // Muestras meteorológicas
+  const weatherSamples = [
+    { city: 'CÓRDOBA, AR', temp: '25°C', desc: 'Despejado · Viento 12 km/h', icon: '☀️' },
+    { city: 'BUENOS AIRES, AR', temp: '21°C', desc: 'Templado con humedad · 68%', icon: '⛅' },
+    { city: 'BARILOCHE, AR', temp: '9°C', desc: 'Fresco de cordillera · 88%', icon: '🌧️' },
+    { city: 'MENDOZA, AR', temp: '23°C', desc: 'Tarde despejada · Viento calmo', icon: '🌤️' }
+  ];
+  let weatherIdx = 0;
+  let demoCartQty = 2;
 
-  // Render Projects Grid
-  function renderProjects(filter = 'all') {
-    if (!gridContainer) return;
-    gridContainer.innerHTML = '';
-
-    const filtered = filter === 'all' 
-      ? PROJECTS 
-      : PROJECTS.filter(p => p.category === filter);
-
-    filtered.forEach((proj, idx) => {
-      const card = document.createElement('article');
-      card.className = `project-card reveal reveal-delay-${(idx % 3) + 1} visible`;
-      card.setAttribute('data-category', proj.category);
-
-      card.innerHTML = `
-        <div class="project-media-wrapper">
-          <img src="${proj.image}" alt="${proj.title}" class="project-thumb" loading="lazy" />
-          <span class="project-badge-overlay">${proj.categoryLabel}</span>
-        </div>
-        <div class="project-body">
-          <h3 class="project-title">${proj.title}</h3>
-          <p class="project-desc">${proj.desc}</p>
-          <div class="project-tags">
-            ${proj.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+  // Helper para generar micro-simuladores
+  function getMicroDemoMarkup(demoType) {
+    switch (demoType) {
+      case 'pastillero':
+        return `
+          <div class="micro-demo-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
+              <span>SIMULADOR PWA · TOMAS DE HOY</span>
+              <span style="color:var(--accent-terracotta);">Tocá una para marcar</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem;">
+              <button type="button" class="btn-dose p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.toggleDose(this)">
+                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">08:00 AM</span>
+                <strong style="font-size:0.75rem; display:block; margin:0.15rem 0;">Vitamina D</strong>
+                <span class="dose-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-moss);">✓ Tomada</span>
+              </button>
+              <button type="button" class="btn-dose p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.toggleDose(this)">
+                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">02:00 PM</span>
+                <strong style="font-size:0.75rem; display:block; margin:0.15rem 0;">Omega 3</strong>
+                <span class="dose-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-terracotta);">○ Pendiente</span>
+              </button>
+              <button type="button" class="btn-dose p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.toggleDose(this)">
+                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">10:00 PM</span>
+                <strong style="font-size:0.75rem; display:block; margin:0.15rem 0;">Magnesio</strong>
+                <span class="dose-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-terracotta);">○ Pendiente</span>
+              </button>
+            </div>
           </div>
-          <div class="project-actions">
-            <a href="${proj.liveUrl}" target="_blank" rel="noopener noreferrer" class="project-action-link" title="Abrir sitio en pestaña nueva">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-              Visitar Web
-            </a>
-            <button type="button" class="project-action-link btn-open-modal" data-id="${proj.id}" title="Ver ficha técnica completa">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              Ficha Técnica
-            </button>
-            <a href="${proj.githubUrl}" target="_blank" rel="noopener noreferrer" class="project-action-link" title="Ver código fuente en GitHub">
-              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-              GitHub
-            </a>
+        `;
+
+      case 'climax':
+        return `
+          <div class="micro-demo-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
+              <span>ESTACIÓN CLIMÁTICA · TELEMETRÍA</span>
+              <button type="button" onclick="window.ldApp.cycleWeather()" style="color:var(--accent-terracotta); background:none; border:none; text-decoration:underline; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">
+                Cambiar ciudad ↻
+              </button>
+            </div>
+            <div style="padding:0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div id="demoWxCity" style="font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">${weatherSamples[0].city}</div>
+                <div id="demoWxTemp" style="font-family:var(--font-serif); font-size:2.1rem; line-height:1.1; margin:0.2rem 0;">${weatherSamples[0].temp}</div>
+                <div id="demoWxDesc" style="font-family:var(--font-mono); font-size:0.7rem; color:var(--accent-moss);">${weatherSamples[0].desc}</div>
+              </div>
+              <div id="demoWxIcon" style="font-size:2.4rem;">${weatherSamples[0].icon}</div>
+            </div>
           </div>
-        </div>
+        `;
+
+      case 'pass':
+        return `
+          <div class="micro-demo-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
+              <span>GENERADOR CRIPTOGRÁFICO EN VIVO</span>
+              <button type="button" onclick="window.ldApp.generateCryptoKey()" style="color:var(--accent-terracotta); background:none; border:none; text-decoration:underline; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">
+                Generar otra ↻
+              </button>
+            </div>
+            <div style="padding:0.75rem 0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+              <code id="demoPassCode" style="font-family:var(--font-mono); font-size:0.875rem; font-weight:600; letter-spacing:0.04em; user-select:all;">k7#mP9!vL2$qR8@x</code>
+              <span style="font-family:var(--font-mono); font-size:0.65rem; padding:0.2rem 0.5rem; border-radius:var(--radius-xs); background:var(--accent-moss); color:#FAF8F4;">128-bit</span>
+            </div>
+          </div>
+        `;
+
+      case 'tienda':
+        return `
+          <div class="micro-demo-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
+              <span>ESTADO REACTIVO DEL CARRITO</span>
+              <span id="demoCartBadge" style="font-weight:700; color:var(--accent-terracotta); font-family:var(--font-mono); font-size:0.75rem;">
+                ${demoCartQty} artículos ($${(demoCartQty * 24.5).toFixed(2)})
+              </span>
+            </div>
+            <div style="padding:0.85rem 0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-size:0.8125rem; font-weight:600;">Cuaderno Técnico A5</div>
+                <div style="font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">$24.50 c/u · Stock en tiempo real</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.8rem;">
+                <button type="button" onclick="window.ldApp.updateCartDemo(-1)" style="width:26px; height:26px; border:1px solid var(--rule-color); background:var(--bg-paper); border-radius:3px; cursor:pointer;">-</button>
+                <span id="demoCartQtyDisplay" style="font-weight:700; min-width:18px; text-align:center;">${demoCartQty}</span>
+                <button type="button" onclick="window.ldApp.updateCartDemo(1)" style="width:26px; height:26px; border:1px solid var(--rule-color); background:var(--bg-paper); border-radius:3px; cursor:pointer;">+</button>
+              </div>
+            </div>
+          </div>
+        `;
+
+      case 'pym':
+        return `
+          <div class="micro-demo-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
+              <span>MÉTRICAS DE RENDIMIENTO WEB</span>
+              <span>Lighthouse Score</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.5rem;">
+              <div style="padding:0.75rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color);">
+                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">PERFORMANCE</span>
+                <span style="font-family:var(--font-serif); font-size:1.55rem; color:var(--accent-moss); font-weight:600;">99 / 100</span>
+              </div>
+              <div style="padding:0.75rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color);">
+                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">CARGA INICIAL</span>
+                <span style="font-family:var(--font-serif); font-size:1.55rem; color:var(--ink-primary); font-weight:600;">0.65 seg</span>
+              </div>
+            </div>
+          </div>
+        `;
+
+      case 'news':
+      default:
+        return `
+          <div class="micro-demo-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
+              <span>COTIZACIONES & PRENSA EN VIVO</span>
+              <span style="color:var(--accent-moss);">DÓLAR BLUE: $1.220</span>
+            </div>
+            <div style="padding:0.85rem 0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color);">
+              <span style="font-family:var(--font-mono); font-size:0.65rem; text-transform:uppercase; color:var(--accent-terracotta); font-weight:700;">[ECONOMÍA & TECNOLOGÍA]</span>
+              <p style="font-family:var(--font-serif); font-size:0.925rem; margin-top:0.25rem; line-height:1.35; color:var(--ink-primary);">
+                Lectura sin distracciones: la información económica clave al instante, sin pop-ups ni muros de suscripción molestos.
+              </p>
+            </div>
+          </div>
+        `;
+    }
+  }
+
+  // Renderizar la lista editorial de proyectos
+  function renderProjectsList() {
+    const listContainer = document.getElementById('projects-list-container');
+    if (!listContainer) return;
+
+    const filtered = currentFilter === 'all'
+      ? PROJECTS
+      : PROJECTS.filter(p => p.category === currentFilter);
+
+    if (!filtered.some(p => p.id === activeProjectId) && filtered.length > 0) {
+      activeProjectId = filtered[0].id;
+    }
+
+    listContainer.innerHTML = filtered.map(proj => {
+      const isActive = proj.id === activeProjectId;
+      return `
+        <article
+          class="project-row ${isActive ? 'active' : ''}"
+          data-project-id="${proj.id}"
+          role="button"
+          tabindex="0"
+          aria-label="Inspeccionar proyecto ${proj.title}">
+          <div>
+            <div class="project-meta-line">
+              <span class="project-idx">${proj.index}</span>
+              <span>/</span>
+              <span>${proj.categoryLabel}</span>
+              <span>·</span>
+              <span>${proj.year}</span>
+            </div>
+            <h3 class="project-row-title">${proj.title}</h3>
+            <p class="project-row-subtitle">${proj.subtitle}</p>
+          </div>
+          <div class="project-row-action">
+            ${isActive ? '● En Ficha' : 'Ver Ficha →'}
+          </div>
+        </article>
       `;
+    }).join('');
 
-      gridContainer.appendChild(card);
-    });
+    // Eventos de selección
+    listContainer.querySelectorAll('[data-project-id]').forEach(row => {
+      row.addEventListener('click', () => {
+        activeProjectId = row.getAttribute('data-project-id');
+        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('click');
+        renderProjectsList();
+        renderInspector();
+      });
 
-    // Attach click listeners to open modal
-    gridContainer.querySelectorAll('.btn-open-modal').forEach(btn => {
-      btn.addEventListener('click', () => {
-        openModal(btn.dataset.id);
+      row.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          row.click();
+        }
       });
     });
   }
 
-  // Filter Buttons Handler
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderProjects(btn.dataset.filter);
-    });
-  });
+  // Renderizar la ficha técnica del proyecto
+  function renderInspector() {
+    const inspectorContainer = document.getElementById('project-inspector-card');
+    if (!inspectorContainer) return;
 
-  // Modal Functionality
-  function openModal(projectId) {
-    const proj = PROJECTS.find(p => p.id === projectId);
-    if (!proj || !modalOverlay) return;
+    const project = PROJECTS.find(p => p.id === activeProjectId) || PROJECTS[0];
 
-    modalTitle.textContent = proj.title;
-    modalCategory.textContent = proj.categoryLabel;
-    modalImg.src = proj.image;
-    modalImg.alt = proj.title;
-    modalDesc.textContent = proj.fullDesc;
+    const visualHtml = inspectorViewMode === 'demo'
+      ? getMicroDemoMarkup(project.demoType)
+      : `
+        <div class="img-preview-box">
+          <img src="${project.assetPath}" alt="Captura de ${project.title}"
+               onerror="this.onerror=null; this.src='https://placehold.co/600x340/EDE7DC/191816?text=${encodeURIComponent(project.title)}';">
+        </div>
+      `;
 
-    modalFeatures.innerHTML = proj.features.map(f => `<li>${f}</li>`).join('');
-    modalTags.innerHTML = proj.tags.map(t => `<span class="tag">${t}</span>`).join('');
+    inspectorContainer.innerHTML = `
+      <!-- Encabezado de la Ficha -->
+      <div class="inspector-header">
+        <span>EXPEDIENTE #${project.index} — ${project.id.toUpperCase()}</span>
+        <span class="font-mono text-xs">${project.year}</span>
+      </div>
 
-    modalLiveBtn.href = proj.liveUrl;
-    modalGithubBtn.href = proj.githubUrl;
+      <!-- Conmutador de Vista (Simulador vs Captura Real) -->
+      <div class="inspector-view-switch">
+        <button type="button" class="switch-btn ${inspectorViewMode === 'demo' ? 'active' : ''}" id="btnViewDemo">
+          ⚡ Simulador Interactivo
+        </button>
+        <button type="button" class="switch-btn ${inspectorViewMode === 'capture' ? 'active' : ''}" id="btnViewCapture">
+          🖼️ Captura Real (${project.assetPath})
+        </button>
+      </div>
 
-    modalOverlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
+      <!-- Área Visual de la Ficha -->
+      <div class="inspector-visual-stage">
+        ${visualHtml}
+      </div>
 
-  function closeModal() {
-    if (!modalOverlay) return;
-    modalOverlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
+      <!-- Contenido y Análisis Técnico -->
+      <div class="inspector-content">
+        <div>
+          <h3 class="inspector-title">${project.title}</h3>
+          <p class="inspector-subtitle">${project.subtitle}</p>
+        </div>
 
-  if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal);
-  if (modalOverlay) {
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal();
-    });
-  }
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('open')) {
-      closeModal();
+        <div class="editorial-note-box">
+          <span class="note-label" style="color:var(--accent-terracotta);">EL PROBLEMA A RESOLVER</span>
+          <p class="note-text">${project.problem}</p>
+        </div>
+
+        <div class="editorial-note-box">
+          <span class="note-label" style="color:var(--accent-moss);">SOLUCIÓN TÉCNICA IMPLEMENTADA</span>
+          <p class="note-text">${project.solution}</p>
+        </div>
+
+        <div>
+          <span class="note-label" style="display:block; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted); text-transform:uppercase; margin-bottom:0.4rem;">
+            TECNOLOGÍAS EMPLEADAS
+          </span>
+          <div class="tech-tag-list">
+            ${project.stack.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+          </div>
+        </div>
+
+        <!-- Botones de Acción Directa -->
+        <div class="inspector-action-buttons">
+          <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-tactile btn-primary btn-sm">
+            <span>Visitar Aplicación en Vivo</span>
+            <span>↗</span>
+          </a>
+          <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-tactile btn-sm">
+            <span>Código en GitHub</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    `;
+
+    // Conectar botones de conmutación de vista
+    const btnDemo = document.getElementById('btnViewDemo');
+    const btnCapture = document.getElementById('btnViewCapture');
+
+    if (btnDemo) {
+      btnDemo.addEventListener('click', () => {
+        inspectorViewMode = 'demo';
+        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('toggle');
+        renderInspector();
+      });
     }
+
+    if (btnCapture) {
+      btnCapture.addEventListener('click', () => {
+        inspectorViewMode = 'capture';
+        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('toggle');
+        renderInspector();
+      });
+    }
+  }
+
+  // Configurar filtros por categoría
+  function initFilters() {
+    const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentFilter = btn.getAttribute('data-filter');
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('click');
+        renderProjectsList();
+        renderInspector();
+      });
+    });
+  }
+
+  // Métodos expuestos globalmente para los micro-demos
+  window.ldApp = window.ldApp || {};
+
+  window.ldApp.toggleDose = function (btn) {
+    const status = btn.querySelector('.dose-tag');
+    if (!status) return;
+    const isTaken = status.textContent.includes('Tomada');
+    if (isTaken) {
+      status.textContent = '○ Pendiente';
+      status.style.color = 'var(--accent-terracotta)';
+    } else {
+      status.textContent = '✓ Tomada';
+      status.style.color = 'var(--accent-moss)';
+    }
+    if (window.ldApp.playSound) window.ldApp.playSound('click');
+  };
+
+  window.ldApp.cycleWeather = function () {
+    weatherIdx = (weatherIdx + 1) % weatherSamples.length;
+    const w = weatherSamples[weatherIdx];
+    const cityEl = document.getElementById('demoWxCity');
+    const tempEl = document.getElementById('demoWxTemp');
+    const descEl = document.getElementById('demoWxDesc');
+    const iconEl = document.getElementById('demoWxIcon');
+    if (cityEl) cityEl.textContent = w.city;
+    if (tempEl) tempEl.textContent = w.temp;
+    if (descEl) descEl.textContent = w.desc;
+    if (iconEl) iconEl.textContent = w.icon;
+    if (window.ldApp.playSound) window.ldApp.playSound('click');
+  };
+
+  window.ldApp.generateCryptoKey = function () {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*_+-=';
+    let res = '';
+    const array = new Uint8Array(16);
+    if (window.crypto && window.crypto.getRandomValues) {
+      window.crypto.getRandomValues(array);
+      for (let i = 0; i < 16; i++) {
+        res += chars.charAt(array[i] % chars.length);
+      }
+    } else {
+      for (let i = 0; i < 16; i++) {
+        res += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+    }
+    const codeEl = document.getElementById('demoPassCode');
+    if (codeEl) codeEl.textContent = res;
+    if (window.ldApp.playSound) window.ldApp.playSound('click');
+  };
+
+  window.ldApp.updateCartDemo = function (delta) {
+    demoCartQty = Math.max(1, Math.min(9, demoCartQty + delta));
+    const qtyDisplay = document.getElementById('demoCartQtyDisplay');
+    const badgeDisplay = document.getElementById('demoCartBadge');
+    if (qtyDisplay) qtyDisplay.textContent = demoCartQty;
+    if (badgeDisplay) {
+      badgeDisplay.textContent = `${demoCartQty} artículos ($${(demoCartQty * 24.5).toFixed(2)})`;
+    }
+    if (window.ldApp.playSound) window.ldApp.playSound('click');
+  };
+
+  // Inicialización
+  document.addEventListener('DOMContentLoaded', () => {
+    initFilters();
+    renderProjectsList();
+    renderInspector();
   });
-
-  // Initial render
-  renderProjects('all');
-
 })();

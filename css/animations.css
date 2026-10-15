@@ -1,127 +1,129 @@
 /* ==========================================================================
-   ANIMATIONS & KEYFRAMES
+   ANIMATIONS & KEYFRAMES — MOVIMIENTO FÍSICO & TÁCTIL
    Portfolio - Leopoldo Doerflinger
    ========================================================================== */
 
-/* --- 3D Cube Auto Rotation --- */
-@keyframes rotateCube3D {
+/* --- Tactile Button Press (Efecto Sello Físico) --- */
+.btn-press {
+  transition: transform 0.15s var(--ease-snap), box-shadow 0.15s var(--ease-snap), background-color 0.18s ease;
+}
+
+.btn-press:hover {
+  transform: translate(-1.5px, -1.5px);
+  box-shadow: var(--shadow-tactile-lg);
+}
+
+.btn-press:active {
+  transform: translate(2px, 2px);
+  box-shadow: var(--shadow-tactile-sm);
+}
+
+/* --- Pulse Sutil de Estado (Disponible) --- */
+@keyframes humanPulse {
   0% {
-    transform: rotateX(-12deg) rotateY(0deg);
+    transform: scale(0.96);
+    opacity: 0.8;
   }
   50% {
-    transform: rotateX(12deg) rotateY(180deg);
-  }
-  100% {
-    transform: rotateX(-12deg) rotateY(360deg);
-  }
-}
-
-/* --- Status Dot Pulse --- */
-@keyframes pulseGlow {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 8px rgba(100, 255, 218, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(100, 255, 218, 0);
-  }
-}
-
-/* --- Floating Orb Background Drift --- */
-@keyframes floatOrb1 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(30px, -40px) scale(1.08);
-  }
-  66% {
-    transform: translate(-25px, 20px) scale(0.95);
-  }
-}
-
-@keyframes floatOrb2 {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
-  }
-  33% {
-    transform: translate(-35px, 35px) scale(0.96);
-  }
-  66% {
-    transform: translate(25px, -25px) scale(1.06);
-  }
-}
-
-/* --- Scroll Bounce Indicator --- */
-@keyframes scrollBounce {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 0.4;
-  }
-  50% {
-    transform: translateY(10px);
+    transform: scale(1.08);
     opacity: 1;
   }
-}
-
-/* --- Spinner Animation --- */
-@keyframes spinFast {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* --- Shimmer Gradient --- */
-@keyframes shimmerWave {
-  0% {
-    background-position: -200% 0;
-  }
   100% {
-    background-position: 200% 0;
+    transform: scale(0.96);
+    opacity: 0.8;
   }
 }
 
-/* --- Toast Fade Slide --- */
-@keyframes toastSlideIn {
+.pulse-indicator {
+  animation: humanPulse 2.8s ease-in-out infinite;
+}
+
+/* --- 3D Scene & Cube Mechanics --- */
+.scene-3d {
+  width: 220px;
+  height: 220px;
+  perspective: 900px;
+  user-select: none;
+  touch-action: none;
+  margin: 0 auto;
+}
+
+.cube-3d {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.08s linear;
+}
+
+.cube-3d.smooth-snap {
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cube-face {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  background: var(--bg-elevated);
+  border: 2px solid var(--ink-primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem;
+  backface-visibility: visible;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+  cursor: grab;
+}
+
+.cube-face:active {
+  cursor: grabbing;
+}
+
+/* Cube Face Positioning (110px = half of 220px) */
+.face-front  { transform: rotateY(0deg) translateZ(110px); }
+.face-right  { transform: rotateY(90deg) translateZ(110px); }
+.face-back   { transform: rotateY(180deg) translateZ(110px); }
+.face-left   { transform: rotateY(-90deg) translateZ(110px); }
+.face-top    { transform: rotateX(90deg) translateZ(110px); }
+.face-bottom { transform: rotateX(-90deg) translateZ(110px); }
+
+/* --- Toast Notification (Slip de Taller) --- */
+@keyframes slipIn {
   from {
+    transform: translateY(16px);
     opacity: 0;
-    transform: translate(-50%, 20px);
   }
   to {
+    transform: translateY(0);
     opacity: 1;
-    transform: translate(-50%, 0);
   }
 }
 
-/* ==========================================================================
-   SCROLL REVEAL STYLES
-   ========================================================================== */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.75s var(--ease-spring), transform 0.75s var(--ease-spring);
-  will-change: opacity, transform;
+.toast-slip {
+  animation: slipIn 0.28s var(--ease-out-expo) forwards;
 }
 
-.reveal.visible {
+/* --- Tape & Stamp Imperfections --- */
+.stamp-tilt-left {
+  transform: rotate(-2.5deg);
+}
+
+.stamp-tilt-right {
+  transform: rotate(2deg);
+}
+
+.tape-tilt {
+  transform: rotate(1.2deg);
+}
+
+/* --- Scroll Reveal Sutil (Sin dramatismo exagerado) --- */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s var(--ease-out-expo);
+}
+
+.reveal-item.revealed {
   opacity: 1;
   transform: translateY(0);
-}
-
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-
-/* Micro-interactions */
-.hover-lift {
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-}
-.hover-lift:hover {
-  transform: translateY(-4px);
 }

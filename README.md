@@ -1,7 +1,7 @@
-# 🚀 Portfolio Profesional — Leopoldo Doerflinger
+# 🚀 Portfolio Profesional — Leo Doerflinger
 
-> **Certified Tech Developer & Full Stack Web Developer**  
-> Portfolio web interactivo de alto rendimiento, diseñado con arquitectura moderna, animaciones en 3D y experiencia de usuario fluida y accesible.
+> **Certified Tech Developer & Full Stack Software Developer**  
+> Portfolio web interactivo de alto rendimiento, diseñado con estética editorial limpia, arquitectura modular moderna y experiencia de usuario fluida desde Córdoba, Argentina.
 
 [![Vercel Deployment](https://img.shields.io/badge/Deploy-Vercel-black?style=for-the-badge&logo=vercel)](https://portfolio-leodoerflinger.vercel.app/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/es/docs/Web/JavaScript)
@@ -19,33 +19,30 @@ Podés visualizar y probar el portfolio online en:
 
 ## ✨ Características Principales
 
-- **🎨 Diseño UI/UX Moderno & Cyber-Minimalista**:
-  - Paleta de colores oscuros con acentos esmeralda/cian y detalles violeta índigo.
-  - Modo Claro / Modo Oscuro con conmutador dinámico y persistencia en `localStorage`.
-  - Fondo sutil con cuadrícula técnica, orbes ambientales con difuminado suave y textura noise.
+- **🎨 Diseño UI/UX Editorial & Elegante**:
+  - Paleta equilibrada en modo Claro (Papel & Tinta) y modo Oscuro (Carbón & Arcilla) con persistencia en `localStorage`.
+  - Tipografía cuidada de alto nivel ([Newsreader](https://fonts.google.com/specimen/Newsreader), [Plus Jakarta Sans](https://fonts.google.com/specimen/Plus+Jakarta+Sans), [JetBrains Mono](https://fonts.google.com/specimen/JetBrains+Mono)).
+  - Maquetación 100% responsiva testeada en dispositivos móviles sin desbordes.
+
+- **📂 Fichas Técnicas & Expediente de Proyectos**:
+  - Exploración de 6 proyectos reales con filtros por categoría.
+  - Conmutador de vista para alternar entre el **Simulador Interactivo** y la **Captura Real** de pantalla.
+  - Enlaces directos a los despliegues en Vercel y al código fuente en GitHub.
 
 - **🎲 Cubo Tecnológico 3D Interactivo**:
-  - Renderizado en 3D nativo con CSS Transforms (`preserve-3d`).
-  - Interactividad completa: arrastrá con el ratón o con el dedo en pantallas táctiles para rotar en cualquier eje con física de inercia y deceleración suave.
-  - Auto-rotación y pausa al colocar el cursor encima.
+  - Renderizado 3D nativo con CSS Transforms (`preserve-3d`) y física de inercia y arrastre táctil / mouse.
+  - Sincronización bidireccional con las tarjetas del stack tecnológico.
 
-- **📂 Fichas Técnicas & Modal de Proyectos**:
-  - Exploración de proyectos con filtros por categoría (`Todos`, `Web Apps & PWAs`, `Frontend & APIs`, `E-Commerce & Tools`).
-  - Modal técnico con descripción detallada, lista de características clave, etiquetas de tecnologías, enlace al código en GitHub y visita a la web en vivo.
-  - Soporte de navegación por teclado (cierre con tecla `Escape`).
+- **📊 Trayectoria & Formación**:
+  - **Certified Tech Developer:** Digital House, Globant y Mercado Libre (2022 — PRESENTE).
+  - **Full Stack Web Developer:** NUCBA (2021 — 2022).
+  - **Cybersecurity Essentials & Python:** Cisco Networking Academy (2022).
+  - **Diplomatura en Nuevas Tecnologías:** Universidad Tecnológica Nacional FRC (2021).
 
-- **📊 Matriz de Tecnologías & Línea de Tiempo (Trayectoria)**:
-  - Filtro dinámico de habilidades por categoría (Frontend, Backend & DB, DevOps & Seguridad).
-  - Línea de tiempo visual con los hitos académicos:
-    - **Certified Tech Developer** (Digital House, Globant & Mercado Libre).
-    - **Full Stack Web Developer** (NUCBA).
-    - **Cybersecurity Essentials & Python** (Cisco Networking Academy).
-    - **Diplomatura en Nuevas Tecnologías** (UTN-FRC).
-
-- **📬 Sección de Contacto Rápido & Accesible**:
-  - Tarjetas con acción de copiado en un clic de Email y WhatsApp con notificaciones toast.
-  - Formulario de contacto interactivo con validación en cliente.
-  - Envío dual: apertura directa de cliente de correo electrónico o generación automática de mensaje estructurado para WhatsApp.
+- **📬 Contacto Directo**:
+  - Copiado rápido de email (`leodoercba@gmail.com`) con notificaciones toast.
+  - Acceso directo a WhatsApp (`+54 351 261 9874`).
+  - Formulario de contacto funcional con validación en cliente y envío dual (WhatsApp o Correo).
 
 ---
 
@@ -53,61 +50,52 @@ Podés visualizar y probar el portfolio online en:
 
 ```text
 Portfolio/
-├── assets/                  # Recursos gráficos optimizados
-│   ├── climax.png           # Mockup de Climax Weather
-│   ├── html.png             # Logo HTML5
-│   ├── icono.png            # Monograma personal LD
-│   ├── java.png             # Logo Java
-│   ├── js.png               # Logo JavaScript
-│   ├── mongodb.png          # Logo MongoDB
-│   ├── news.png             # Mockup de Panel de Noticias
-│   ├── node.png             # Logo Node.js
-│   ├── pass.png             # Mockup de Generador de Contraseñas
-│   ├── pastillero.png       # Mockup de Mi Pastillero Virtual (PWA)
-│   ├── pym.png              # Mockup de Pixel y Mate
-│   ├── python.png           # Logo Python
-│   └── tienda.png           # Mockup de MiTienda E-Commerce
-├── css/                     # Estilos modulares desacoplados
-│   ├── variables.css        # Tokens de diseño, temas claro/oscuro y tipografía
-│   ├── animations.css       # Keyframes, transiciones 3D y scroll reveals
-│   └── main.css             # Layout responsivo, componentes y utilidades
-├── js/                      # Lógica interactiva desacoplada
-│   ├── main.js              # Scrollspy, menú móvil, tema y observers
-│   ├── cube.js              # Controlador del Cubo 3D con drag e inercia
-│   ├── projects.js          # Dataset de proyectos, filtros y modal
-│   └── contact.js           # Validación de formulario y portapapeles
-├── index.html               # Documento semántico y accesible (HTML5)
-└── README.md                # Documentación del proyecto
+├── assets/                    # Capturas y monograma personal
+│   ├── climax.png             # Climax Weather App
+│   ├── html.png               # HTML5 & CSS3 Logo
+│   ├── icono.png              # Monograma personal LD
+│   ├── java.png               # Java Logo
+│   ├── js.png                 # JavaScript Logo
+│   ├── mongodb.png            # MongoDB Logo
+│   ├── news.png               # Panel de Noticias & Divisas
+│   ├── node.png               # Node.js Logo
+│   ├── pass.png               # Pass — Bóveda & Generador
+│   ├── pastillero.png         # Mi Pastillero Virtual (PWA)
+│   ├── pym.png                # Pixel y Mate — Agencia
+│   ├── python.png             # Python Logo
+│   └── tienda.png             # MiTienda — E-Commerce
+├── css/                       # Estilos modulares desacoplados
+│   ├── variables.css          # Tokens de diseño, temas claro/oscuro y paleta
+│   ├── animations.css         # Keyframes físicos, transformaciones 3D e inercia
+│   └── main.css               # Grillas, tipografía editorial y responsive móvil
+├── js/                        # Lógica desacoplada orientada al usuario
+│   ├── main.js                # Orquestador: temas, audio Web Audio API, reloj en vivo y menú
+│   ├── cube.js                # Controlador del Cubo 3D y sincronización de tecnologías
+│   ├── projects.js            # Registro de proyectos, dossier interactivo y simuladores
+│   └── contact.js             # Formulario de contacto, validación y portapapeles
+├── index.html                 # Documento semántico y accesible (HTML5)
+└── README.md                  # Documentación del proyecto
 ```
-
----
-
-## 🛠️ Tecnologías Empleadas
-
-- **Lenguajes:** HTML5 Semántico, CSS3 Moderno, JavaScript (ES6+ Vanilla).
-- **Diseño & Animación:** CSS 3D Transforms, CSS Grid, Flexbox, Keyframe Animations.
-- **APIs Web Nativas:** IntersectionObserver, Clipboard API, Touch & Pointer Events.
-- **Tipografía:** [Syne](https://fonts.google.com/specimen/Syne) & [DM Sans](https://fonts.google.com/specimen/DM+Sans) (Google Fonts).
 
 ---
 
 ## 💻 Ejecución Local
 
-Para visualizar el proyecto localmente sin necesidad de instalar dependencias externas:
-
-1. Cloná o descargá la carpeta del proyecto:
+1. Abrí la terminal en la carpeta `Portfolio`:
    ```bash
-   git clone https://github.com/LeoDoerflinger/Portfolio.git
+   cd Portfolio
    ```
-2. Abrí el archivo `index.html` en tu navegador preferido:
-   - Haciendo doble clic sobre `index.html`.
-   - O usando extensiones como **Live Server** en VS Code.
+2. Ejecutá un servidor local simple:
+   ```bash
+   python -m http.server 8080
+   ```
+3. Ingresá en: `http://localhost:8080`
 
 ---
 
 ## 👤 Autor
 
-**Leopoldo Doerflinger**  
+**Leopoldo Doerflinger** — Córdoba, Argentina  
 - **LinkedIn:** [linkedin.com/in/leopoldo-doerflinger](https://www.linkedin.com/in/leopoldo-doerflinger-737570186/)  
 - **GitHub:** [github.com/LeoDoerflinger](https://github.com/LeoDoerflinger)  
 - **CV Interactivo:** [curriculumvitae-leo.vercel.app](https://curriculumvitae-leo.vercel.app/)  

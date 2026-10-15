@@ -1,80 +1,171 @@
 /* ==========================================================================
    MAIN APPLICATION ORCHESTRATOR
-   Portfolio - Leopoldo Doerflinger
+   Portfolio - Leopoldo Doerflinger (Full Stack Developer)
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  // --- THEME SWITCHER (Dark / Light) ---
-  const themeToggleBtn = document.getElementById('theme-toggle');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  window.ldApp = window.ldApp || {};
+
+  // 1. TEMA CLARO / OSCURO
+  const themeToggleBtn = document.getElementById('theme-toggle-btn');
+  const themeIcon = document.getElementById('theme-icon');
+  const themeLabel = document.getElementById('theme-label');
   const savedTheme = localStorage.getItem('ld-theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
 
   function applyTheme(theme) {
-    if (theme === 'light') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      updateThemeIcon(true);
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      if (themeIcon) themeIcon.textContent = '◐';
+      if (themeLabel) themeLabel.textContent = 'Oscuro';
     } else {
       document.documentElement.removeAttribute('data-theme');
-      updateThemeIcon(false);
+      if (themeIcon) themeIcon.textContent = '☼';
+      if (themeLabel) themeLabel.textContent = 'Claro';
     }
     localStorage.setItem('ld-theme', theme);
   }
 
-  function updateThemeIcon(isLight) {
-    if (!themeToggleBtn) return;
-    themeToggleBtn.setAttribute('aria-label', isLight ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro');
-    themeToggleBtn.innerHTML = isLight
-      ? `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`
-      : `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
-  }
-
-  // Initial theme check
+  // Inicializar tema
   if (savedTheme) {
     applyTheme(savedTheme);
-  } else if (!prefersDark.matches) {
-    applyTheme('light');
-  } else {
+  } else if (prefersDark.matches) {
     applyTheme('dark');
+  } else {
+    applyTheme('light');
   }
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const isCurrentlyLight = document.documentElement.getAttribute('data-theme') === 'light';
-      applyTheme(isCurrentlyLight ? 'dark' : 'light');
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      applyTheme(isDark ? 'light' : 'dark');
+      if (window.ldApp.playSound) window.ldApp.playSound('toggle');
     });
   }
 
-  // --- NAVBAR SCROLL EFFECT ---
-  const navbar = document.getElementById('navbar');
-  const backToTopBtn = document.getElementById('back-to-top');
+  // 2. SONIDO TÁCTIL (Web Audio API nativa sin dependencias)
+  let soundEnabled = localStorage.getItem('ld-sound') === 'true';
+  const soundToggleBtn = document.getElementById('sound-toggle-btn');
+  const soundIcon = document.getElementById('sound-icon');
+  const soundLabel = document.getElementById('sound-label');
 
-  function handleScroll() {
-    const scrollY = window.scrollY;
-    if (navbar) {
-      navbar.classList.toggle('scrolled', scrollY > 40);
+  let audioCtx = null;
+  function getAudioContext() {
+    if (!audioCtx) {
+      const AudioCtxClass = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtxClass) audioCtx = new AudioCtxClass();
     }
-    if (backToTopBtn) {
-      backToTopBtn.style.opacity = scrollY > 400 ? '1' : '0';
-      backToTopBtn.style.pointerEvents = scrollY > 400 ? 'all' : 'none';
+    if (audioCtx && audioCtx.state === 'suspended') {
+      audioCtx.resume();
     }
+    return audioCtx;
   }
-  window.addEventListener('scroll', handleScroll, { passive: true });
-  handleScroll();
 
-  if (backToTopBtn) {
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+  window.ldApp.playSound = function (type = 'click') {
+    if (!soundEnabled) return;
+    try {
+      const ctx = getAudioContext();
+      if (!ctx) return;
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      const now = ctx.currentTime;
+
+      if (type === 'click') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(340, now);
+        osc.frequency.exponentialRampToValueAtTime(150, now + 0.04);
+        gain.gain.setValueAtTime(0.045, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.04);
+        osc.start(now);
+        osc.stop(now + 0.04);
+      } else if (type === 'toggle') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(460, now);
+        osc.frequency.exponentialRampToValueAtTime(600, now + 0.06);
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+        osc.start(now);
+        osc.stop(now + 0.06);
+      } else if (type === 'success') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(520, now);
+        osc.frequency.exponentialRampToValueAtTime(800, now + 0.12);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+        osc.start(now);
+        osc.stop(now + 0.14);
+      }
+    } catch (e) {
+      // Audio seguro
+    }
+  };
+
+  function updateSoundUI() {
+    if (!soundIcon || !soundLabel) return;
+    soundIcon.textContent = soundEnabled ? '🔔' : '🔕';
+    soundLabel.textContent = soundEnabled ? 'Sonido: On' : 'Sonido: Off';
+  }
+  updateSoundUI();
+
+  if (soundToggleBtn) {
+    soundToggleBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('ld-sound', soundEnabled ? 'true' : 'false');
+      updateSoundUI();
+      if (soundEnabled) {
+        window.ldApp.playSound('toggle');
+      }
     });
   }
 
-  // --- SCROLLSPY (Active Navigation Link) ---
+  // 3. TOAST NOTIFICATION SLIP
+  const toastEl = document.getElementById('site-toast');
+  let toastTimer = null;
+
+  window.ldApp.showToast = function (msg, duration = 3000) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add('show', 'toast-slip');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toastEl.classList.remove('show');
+    }, duration);
+  };
+
+  // 4. RELOJ EN VIVO (Hora de Córdoba, Argentina)
+  function updateLiveClock() {
+    const clockEl = document.getElementById('live-time-readout');
+    if (!clockEl) return;
+    const now = new Date();
+    const options = {
+      timeZone: 'America/Argentina/Cordoba',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    };
+    try {
+      const timeStr = new Intl.DateTimeFormat('es-AR', options).format(now);
+      clockEl.textContent = `${timeStr} (CBA · ART)`;
+    } catch (e) {
+      clockEl.textContent = now.toTimeString().split(' ')[0];
+    }
+  }
+  updateLiveClock();
+  setInterval(updateLiveClock, 1000);
+
+  // 5. SCROLLSPY & NAVEGACIÓN ACTIVA
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+  const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
 
-  function highlightNavOnScroll() {
-    const scrollPos = window.scrollY + 180;
+  function handleScrollSpy() {
+    const scrollPos = window.scrollY + 140;
     sections.forEach(sec => {
       const top = sec.offsetTop;
       const height = sec.offsetHeight;
@@ -82,69 +173,50 @@
 
       if (scrollPos >= top && scrollPos < top + height) {
         navLinks.forEach(link => {
-          link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          const isMatch = link.getAttribute('href') === `#${id}`;
+          link.classList.toggle('active', isMatch);
         });
       }
     });
   }
-  window.addEventListener('scroll', highlightNavOnScroll, { passive: true });
+  window.addEventListener('scroll', handleScrollSpy, { passive: true });
 
-  // --- MOBILE MENU DRAWER ---
-  const navToggle = document.getElementById('nav-toggle');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const mobileClose = document.getElementById('mobile-close');
-  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  // 6. MENÚ MÓVIL (DRAWER LATERAL)
+  const mobileToggle = document.getElementById('mobile-menu-toggle');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  const drawerClose = document.getElementById('drawer-close-btn');
+  const drawerLinks = document.querySelectorAll('.drawer-link');
 
-  function openMobileMenu() {
-    if (!mobileMenu) return;
-    mobileMenu.classList.add('open');
+  function openDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 
-  function closeMobileMenu() {
-    if (!mobileMenu) return;
-    mobileMenu.classList.remove('open');
+  function closeDrawer() {
+    if (!mobileDrawer) return;
+    mobileDrawer.classList.remove('open');
     document.body.style.overflow = '';
   }
 
-  if (navToggle) navToggle.addEventListener('click', openMobileMenu);
-  if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
-  mobileLinks.forEach(link => link.addEventListener('click', closeMobileMenu));
+  if (mobileToggle) mobileToggle.addEventListener('click', openDrawer);
+  if (drawerClose) drawerClose.addEventListener('click', closeDrawer);
+  drawerLinks.forEach(l => l.addEventListener('click', closeDrawer));
 
-  // --- SCROLL REVEAL ANIMATIONS ---
-  const revealElements = document.querySelectorAll('.reveal');
-  const revealObserver = new IntersectionObserver((entries) => {
+  if (mobileDrawer) {
+    mobileDrawer.addEventListener('click', (e) => {
+      if (e.target === mobileDrawer) closeDrawer();
+    });
+  }
+
+  // 7. SCROLL REVEAL SUAVE
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
+        entry.target.classList.add('revealed');
       }
     });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  });
+  }, { threshold: 0.1 });
 
-  revealElements.forEach(el => revealObserver.observe(el));
-
-  // --- SKILLS TAB FILTERING ---
-  const skillTabs = document.querySelectorAll('.skills-tab-btn');
-  const skillCards = document.querySelectorAll('.skill-card');
-
-  skillTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      skillTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const category = tab.dataset.category;
-      skillCards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'flex';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-
+  document.querySelectorAll('.reveal-item').forEach(el => observer.observe(el));
 })();

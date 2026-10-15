@@ -1,134 +1,129 @@
 /* ==========================================================================
-   CONTACT FORM & CLIPBOARD CONTROLLER
-   Portfolio - Leopoldo Doerflinger
+   CONTACT FORM, CLIPBOARD & WHATSAPP
+   Portfolio - Leopoldo Doerflinger (Full Stack Developer)
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  const form = document.getElementById('contact-form');
-  const formStatus = document.getElementById('form-status');
-  const btnEmailSubmit = document.getElementById('btn-email-submit');
-  const btnWhatsappSubmit = document.getElementById('btn-whatsapp-submit');
-  const toast = document.getElementById('toast');
+  const EMAIL_ADDRESS = 'leodoercba@gmail.com';
+  const WHATSAPP_PHONE = '543512619874';
 
-  // Helper Toast notification
-  function showToast(message, duration = 3200) {
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.add('show');
-    setTimeout(() => {
-      toast.classList.remove('show');
-    }, duration);
+  // Elementos DOM
+  const form = document.getElementById('postal-contact-form');
+  const formAlert = document.getElementById('form-status-alert');
+  const btnCopyEmail = document.getElementById('btn-copy-email');
+  const btnOpenWhatsapp = document.getElementById('btn-open-whatsapp');
+  const btnSubmitEmail = document.getElementById('btn-submit-email');
+  const btnSubmitWhatsapp = document.getElementById('btn-submit-whatsapp');
+
+  // Helper Copiar al Portapapeles
+  async function copyText(text, successMessage) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const temp = document.createElement('textarea');
+        temp.value = text;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+      }
+      if (window.ldApp && window.ldApp.showToast) {
+        window.ldApp.showToast(successMessage);
+      }
+      if (window.ldApp && window.ldApp.playSound) {
+        window.ldApp.playSound('success');
+      }
+    } catch (err) {
+      console.warn('Error al copiar al portapapeles:', err);
+    }
   }
 
-  // Copy to clipboard helper
-  function setupCopyButton(btnId, textToCopy, successMsg) {
-    const btn = document.getElementById(btnId);
-    if (!btn) return;
-    btn.addEventListener('click', async () => {
-      try {
-        await navigator.clipboard.writeText(textToCopy);
-        showToast(successMsg);
-      } catch (err) {
-        // Fallback for older browsers
-        const textarea = document.createElement('textarea');
-        textarea.value = textToCopy;
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-        showToast(successMsg);
-      }
+  // Copiar Email Directo
+  if (btnCopyEmail) {
+    btnCopyEmail.addEventListener('click', () => {
+      copyText(EMAIL_ADDRESS, `✓ Correo copiado: ${EMAIL_ADDRESS}`);
     });
   }
 
-  setupCopyButton('btn-copy-email', 'leodoercba@gmail.com', '📋 Email copiado al portapapeles: leodoercba@gmail.com');
-  setupCopyButton('btn-copy-email-hero', 'leodoercba@gmail.com', '📋 Email copiado: leodoercba@gmail.com');
-  setupCopyButton('btn-copy-phone', '+54 351 261 9874', '📋 WhatsApp copiado: +54 351 261 9874');
+  // Abrir WhatsApp Directo
+  if (btnOpenWhatsapp) {
+    btnOpenWhatsapp.addEventListener('click', () => {
+      const msg = encodeURIComponent('¡Hola Leo! Vi tu portafolio y me gustaría ponerme en contacto con vos.');
+      window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${msg}`, '_blank');
+      if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('click');
+    });
+  }
 
-  // Form Validation
-  function getFormData() {
+  // Validación de campos
+  function validateForm() {
     const name = document.getElementById('contact-name')?.value.trim();
     const email = document.getElementById('contact-email')?.value.trim();
-    const subject = document.getElementById('contact-subject')?.value.trim();
+    const topic = document.getElementById('contact-topic')?.value;
     const message = document.getElementById('contact-message')?.value.trim();
 
     if (!name || !email || !message) {
-      if (formStatus) {
-        formStatus.textContent = 'Por favor, completá los campos obligatorios (Nombre, Email y Mensaje).';
-        formStatus.className = 'form-status visible error';
-      }
+      showFormAlert('Por favor, completá tu nombre, correo y mensaje antes de enviar.', 'error');
       return null;
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      if (formStatus) {
-        formStatus.textContent = 'Por favor, ingresá un correo electrónico válido.';
-        formStatus.className = 'form-status visible error';
-      }
+      showFormAlert('El correo ingresado no parece tener un formato válido (ej. tu@correo.com).', 'error');
       return null;
     }
 
-    if (formStatus) {
-      formStatus.className = 'form-status';
-    }
-
-    return { name, email, subject: subject || 'Consulta General', message };
+    return { name, email, topic, message };
   }
 
-  // Email Submit (mailto)
-  if (btnEmailSubmit) {
-    btnEmailSubmit.addEventListener('click', (e) => {
+  function showFormAlert(text, type) {
+    if (!formAlert) return;
+    formAlert.className = `form-status-alert ${type}`;
+    formAlert.textContent = text;
+  }
+
+  // Envío vía Mailto
+  if (btnSubmitEmail) {
+    btnSubmitEmail.addEventListener('click', (e) => {
       e.preventDefault();
-      const data = getFormData();
+      const data = validateForm();
       if (!data) return;
 
-      const subjectLine = encodeURIComponent(`[Portfolio] ${data.subject} — De: ${data.name}`);
-      const bodyText = encodeURIComponent(
-        `Hola Leo,\n\nMi nombre es: ${data.name}\nEmail de contacto: ${data.email}\nTipo de consulta: ${data.subject}\n\nMensaje:\n${data.message}\n\nEnviado desde portfolio-leodoerflinger`
+      const subject = encodeURIComponent(`[Contacto] ${data.topic} — De: ${data.name}`);
+      const body = encodeURIComponent(
+        `Hola Leo,\n\nMi nombre es: ${data.name}\nCorreo de contacto: ${data.email}\nMotivo: ${data.topic}\n\nMensaje:\n${data.message}\n\n— Enviado desde tu portafolio web`
       );
 
-      const mailtoUrl = `mailto:leodoercba@gmail.com?subject=${subjectLine}&body=${bodyText}`;
-
-      if (formStatus) {
-        formStatus.textContent = 'Abriendo tu cliente de correo...';
-        formStatus.className = 'form-status visible success';
-      }
-
-      window.location.href = mailtoUrl;
+      showFormAlert(`✓ Mensaje preparado, ${data.name}. Abriendo tu cliente de correo...`, 'success');
+      if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('success');
 
       setTimeout(() => {
-        if (formStatus) formStatus.className = 'form-status';
-      }, 5000);
+        window.location.href = `mailto:${EMAIL_ADDRESS}?subject=${subject}&body=${body}`;
+        if (form) form.reset();
+      }, 700);
     });
   }
 
-  // WhatsApp Submit
-  if (btnWhatsappSubmit) {
-    btnWhatsappSubmit.addEventListener('click', (e) => {
+  // Envío directo vía WhatsApp
+  if (btnSubmitWhatsapp) {
+    btnSubmitWhatsapp.addEventListener('click', (e) => {
       e.preventDefault();
-      const data = getFormData();
+      const data = validateForm();
       if (!data) return;
 
       const waText = encodeURIComponent(
-        `¡Hola Leo! Te contacto desde tu Portfolio.\n\n*Nombre:* ${data.name}\n*Email:* ${data.email}\n*Tema:* ${data.subject}\n\n*Mensaje:* ${data.message}`
+        `*¡Hola Leo! Te contacto desde tu portafolio.*\n\n*Nombre:* ${data.name}\n*Email:* ${data.email}\n*Motivo:* ${data.topic}\n\n*Mensaje:*\n${data.message}`
       );
 
-      const waUrl = `https://wa.me/543512619874?text=${waText}`;
-
-      if (formStatus) {
-        formStatus.textContent = 'Redirigiendo a WhatsApp...';
-        formStatus.className = 'form-status visible success';
-      }
-
-      window.open(waUrl, '_blank', 'noopener,noreferrer');
+      showFormAlert(`✓ Abriendo WhatsApp con tu mensaje preparado...`, 'success');
+      if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('success');
 
       setTimeout(() => {
-        if (formStatus) formStatus.className = 'form-status';
-      }, 4000);
+        window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${waText}`, '_blank');
+        if (form) form.reset();
+      }, 700);
     });
   }
-
 })();

@@ -2,846 +2,714 @@
 <html lang="es" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Leo Doerflinger — Certified Tech Developer & Full Stack Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Leo Doerflinger — Desarrollador Full Stack | Portfolio</title>
 
-  <!-- Primary Meta Tags -->
-  <meta name="title" content="Leo Doerflinger — Certified Tech Developer & Full Stack Developer" />
-  <meta name="description" content="Portfolio profesional de Leopoldo Doerflinger. Desarrollador Web Full Stack especializado en JavaScript, React, Node.js, Python, MongoDB y diseño de experiencias digitales modernas." />
-  <meta name="keywords" content="Leo Doerflinger, Desarrollador Web, Full Stack Developer, Frontend, Backend, React, Node.js, JavaScript, Python, Portfolio, Argentina" />
+  <!-- Meta Tags Primarios -->
+  <meta name="title" content="Leo Doerflinger — Desarrollador Full Stack | Portfolio" />
+  <meta name="description" content="Portfolio profesional de Leopoldo Doerflinger. Desarrollador Web Full Stack (Certified Tech Developer). Proyectos reales, arquitectura limpia y soluciones enfocadas en rendimiento." />
   <meta name="author" content="Leopoldo Doerflinger" />
-  <meta name="theme-color" content="#070a0e" />
+  <meta name="theme-color" content="#F6F2EB" />
 
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Redes Sociales -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://portfolio-leodoerflinger.vercel.app/" />
-  <meta property="og:title" content="Leo Doerflinger — Certified Tech Developer & Full Stack Developer" />
-  <meta property="og:description" content="Explorá mis proyectos de desarrollo web, aplicaciones interactivas, PWAs y dashboards construidos con código limpio y alto rendimiento." />
+  <meta property="og:title" content="Leo Doerflinger — Desarrollador Full Stack" />
+  <meta property="og:description" content="Proyectos web funcionales en producción, arquitectura modular y código mantenible desde Córdoba, Argentina." />
   <meta property="og:image" content="assets/news.png" />
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image" />
-  <meta property="twitter:url" content="https://portfolio-leodoerflinger.vercel.app/" />
-  <meta property="twitter:title" content="Leo Doerflinger — Certified Tech Developer & Full Stack Developer" />
-  <meta property="twitter:description" content="Desarrollador Web Full Stack enfocado en soluciones eficientes, escalables y orientadas a la experiencia de usuario." />
-  <meta property="twitter:image" content="assets/news.png" />
-
-  <!-- Favicon -->
+  <!-- Favicon Monograma LD -->
   <link rel="icon" type="image/png" href="assets/icono.png" />
   <link rel="apple-touch-icon" href="assets/icono.png" />
 
-  <!-- Google Fonts Preconnect -->
+  <!-- Tipografías de Calidad Editorial -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Modular Stylesheets -->
+  <!-- Hojas de Estilo Modulares -->
   <link rel="stylesheet" href="css/variables.css" />
   <link rel="stylesheet" href="css/animations.css" />
   <link rel="stylesheet" href="css/main.css" />
 </head>
-<body>
+<body class="paper-grain">
 
-  <!-- Ambient Glow & Decor -->
-  <div class="ambient-glow glow-orb-1"></div>
-  <div class="ambient-glow glow-orb-2"></div>
-  <div class="grid-bg"></div>
+  <!-- Elemento Toast Global -->
+  <div id="site-toast" class="site-toast" role="alert" aria-live="polite"></div>
 
-  <!-- Toast Notification -->
-  <div class="toast" id="toast" role="alert" aria-live="polite"></div>
+  <!-- ======================================================================
+       CABECERA PRINCIPAL (MASTHEAD)
+       ====================================================================== -->
+  <header class="site-header hairline-b">
+    <div class="max-w-layout header-inner">
 
-  <div class="wrapper">
+      <!-- Logotipo & Identidad -->
+      <a href="#inicio" class="brand-badge" aria-label="Volver al inicio">
+        <div class="brand-stamp">LD</div>
+        <div class="brand-titles">
+          <span class="brand-title-main">Leo Doerflinger</span>
+          <span class="brand-title-sub">Full Stack Developer · Córdoba, AR</span>
+        </div>
+      </a>
+
+      <!-- Navegación Principal Escritorio -->
+      <nav class="desktop-nav" aria-label="Secciones del portafolio">
+        <a href="#proyectos" class="nav-link">[01. Proyectos]</a>
+        <a href="#taller" class="nav-link">[02. Habilidades]</a>
+        <a href="#trayectoria" class="nav-link">[03. Trayectoria]</a>
+        <a href="#manifiesto" class="nav-link">[04. Enfoque]</a>
+        <a href="#contacto" class="nav-link">[05. Contacto]</a>
+      </nav>
+
+      <!-- Controles de Cabecera (Sonido, Tema, CV y Menú Móvil) -->
+      <div class="header-controls">
+        <button id="sound-toggle-btn" type="button" class="icon-toggle-btn" title="Alternar efectos de sonido táctil">
+          <span id="sound-icon">🔕</span>
+          <span id="sound-label" class="header-btn-text">Sonido: Off</span>
+        </button>
+
+        <button id="theme-toggle-btn" type="button" class="icon-toggle-btn" title="Alternar modo claro y oscuro">
+          <span id="theme-icon">☼</span>
+          <span id="theme-label" class="header-btn-text">Claro</span>
+        </button>
+
+        <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-tactile btn-sm header-cv-btn" title="Abrir CV Interactivo">
+          <span>Ver CV</span>
+          <span>↗</span>
+        </a>
+
+        <!-- Botón Menú Móvil (Siempre accesible) -->
+        <button id="mobile-menu-toggle" type="button" class="icon-toggle-btn mobile-menu-btn" aria-label="Abrir menú de navegación">
+          ☰
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ======================================================================
+       MENÚ MÓVIL (DRAWER LATERAL)
+       ====================================================================== -->
+  <aside id="mobile-drawer" class="mobile-drawer" aria-label="Navegación móvil" aria-hidden="true">
+    <div class="drawer-panel">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <div class="brand-stamp">LD</div>
+          <button id="drawer-close-btn" type="button" class="icon-toggle-btn" aria-label="Cerrar menú">✕</button>
+        </div>
+        <div class="drawer-links">
+          <a href="#proyectos" class="drawer-link">01. Proyectos</a>
+          <a href="#taller" class="drawer-link">02. Habilidades & Stack</a>
+          <a href="#trayectoria" class="drawer-link">03. Trayectoria Académica</a>
+          <a href="#manifiesto" class="drawer-link">04. Enfoque de Trabajo</a>
+          <a href="#contacto" class="drawer-link">05. Contacto</a>
+        </div>
+      </div>
+      <div>
+        <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-tactile btn-primary" style="width:100%; text-align:center;">
+          Abrir CV Interactivo ↗
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ======================================================================
+       CONTENIDO PRINCIPAL
+       ====================================================================== -->
+  <main id="inicio" class="max-w-layout">
+
+    <!-- Franja de Metadatos -->
+    <div class="metadata-strip hairline-b">
+      <div>
+        <span class="meta-label">ROL</span>
+        <span class="meta-val">Desarrollo Web & Software</span>
+      </div>
+      <div>
+        <span class="meta-label">UBICACIÓN</span>
+        <span class="meta-val">Córdoba, Argentina</span>
+      </div>
+      <div>
+        <span class="meta-label">ESTADO</span>
+        <span class="meta-val">
+          <span class="status-dot pulse-indicator"></span>Disponible para propuestas
+        </span>
+      </div>
+      <div>
+        <span class="meta-label">HORA LOCAL</span>
+        <span class="meta-val" id="live-time-readout">--:--:-- (CBA · ART)</span>
+      </div>
+    </div>
+
+    <!-- SECCIÓN HERO: PRESENTACIÓN & ENFOQUE -->
+    <section class="hero-grid hairline-b">
+
+      <!-- Columna Izquierda: Presentación Directa -->
+      <div>
+        <div class="hero-pill">
+          <span>Certified Tech Developer · Full Stack</span>
+        </div>
+
+        <h1 class="hero-title">
+          Construyo aplicaciones web combinando <em>lógica sólida</em> y experiencias ágiles.
+        </h1>
+
+        <p class="hero-intro">
+          Hola, soy <strong>Leopoldo Doerflinger</strong>. Me dedico al desarrollo de software, especializándome tanto en armar arquitecturas backend robustas en <strong>Python, Java y Node.js</strong> con persistencia en <strong>MongoDB</strong>, como en cuidar que la interfaz en <strong>JavaScript, HTML y CSS</strong> sea rápida, clara y fácil de usar.
+        </p>
+
+        <!-- Botones de Acción -->
+        <div class="hero-actions">
+          <a href="#proyectos" class="btn-tactile btn-primary">
+            <span>Explorar Proyectos</span>
+            <span>↓</span>
+          </a>
+          <a href="#contacto" class="btn-tactile">
+            <span>Contactarme</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Tarjeta de Enfoque Técnico -->
+      <div class="workshop-card-container">
+        <div class="masking-tape"></div>
+
+        <aside class="workshop-card">
+          <div class="card-stamp-head">
+            <span class="tag">ENFOQUE TÉCNICO</span>
+            <span class="serial font-mono">CÓRDOBA, AR</span>
+          </div>
+
+          <div class="card-body-text">
+            <p>
+              Me interesa trabajar en proyectos que resuelvan necesidades concretas, priorizando el rendimiento, la mantenibilidad del código y una navegación fluida.
+            </p>
+            <p>
+              Acá vas a encontrar una selección de aplicaciones funcionales que desarrollé, con su código disponible en GitHub y su despliegue activo en la nube.
+            </p>
+          </div>
+
+          <div class="card-footer-metrics">
+            <div>
+              <span class="meta-label">PROYECTOS PUBLICADOS</span>
+              <span class="meta-val" style="font-size:0.875rem;">06 Apps Activas</span>
+            </div>
+            <div style="text-align:right;">
+              <span class="meta-label">ESPECIALIDAD</span>
+              <span class="meta-val" style="color:var(--accent-moss); font-size:0.875rem;">Frontend & Backend</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+
+    </section>
 
     <!-- ======================================================================
-         NAVIGATION BAR
+         SECCIÓN 01: PROYECTOS DESTACADOS (DOSSIER & SIMULADORES)
          ====================================================================== -->
-    <header>
-      <nav id="navbar" aria-label="Navegación principal">
-        <div class="container nav-inner">
+    <section id="proyectos" class="hairline-b" style="padding: 3.5rem 0;">
+      
+      <div class="projects-header-bar">
+        <div class="section-masthead" style="margin-bottom:0;">
+          <span class="section-label">01 / PROYECTOS DESTACADOS</span>
+          <h2 class="section-title">Soluciones web funcionales en producción.</h2>
+          <p class="section-lead">
+            Cada desarrollo resuelve un problema puntual, cuenta con arquitectura modular y está desplegado para probarse en vivo.
+          </p>
+        </div>
 
-          <!-- Brand / Logo -->
-          <div class="brand-wrapper">
-            <a href="#hero" class="brand-logo" aria-label="Ir al inicio de la página">
-              <div class="brand-icon-box">
-                <img src="assets/icono.png" alt="Monograma LD" width="24" height="24" />
+        <!-- Filtros por Categoría -->
+        <div class="filter-pills" role="tablist" aria-label="Filtrar por categoría">
+          <button type="button" class="filter-btn active" data-filter="all">Todos (06)</button>
+          <button type="button" class="filter-btn" data-filter="utilidad">Salud & Utilidad</button>
+          <button type="button" class="filter-btn" data-filter="datos">APIs & Datos</button>
+          <button type="button" class="filter-btn" data-filter="comercio">E-Commerce & Gestión</button>
+        </div>
+      </div>
+
+      <!-- Split Layout: Lista Editorial (Izq) + Expediente Inspector (Der) -->
+      <div class="dossier-grid">
+        
+        <!-- Lista de Proyectos -->
+        <div id="projects-list-container" class="projects-list">
+          <!-- Generado dinámicamente por projects.js -->
+        </div>
+
+        <!-- Inspector / Ficha Técnica Sticky -->
+        <div class="inspector-sticky-wrapper">
+          <div id="project-inspector-card" class="project-inspector">
+            <!-- Renderizado dinámicamente con simulador interactivo o captura real -->
+          </div>
+          <p class="font-mono text-xs" style="display:block; text-align:center; margin-top:0.85rem; color:var(--ink-muted);">
+            Podés probar la interacción en el simulador o alternar a la captura de pantalla real
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         SECCIÓN 02: HABILIDADES & CUBO 3D (STACK TECNOLÓGICO)
+         ====================================================================== -->
+    <section id="taller" class="hairline-b" style="padding: 3.5rem 0;">
+      
+      <div class="section-masthead">
+        <span class="section-label">02 / STACK TECNOLÓGICO</span>
+        <h2 class="section-title">Herramientas con las que trabajo en el día a día.</h2>
+        <p class="section-lead">
+          Cada tecnología cumple un rol específico en mis proyectos, desde la lógica del servidor hasta la maquetación accesible en el navegador.
+        </p>
+      </div>
+
+      <div class="workshop-cube-grid">
+
+        <!-- Columna Izquierda: Cubo 3D Interactivo -->
+        <div class="cube-assembly-stage">
+          <div class="cube-crosshairs">
+            <div class="crosshair-h"></div>
+            <div class="crosshair-v"></div>
+          </div>
+
+          <div class="cube-telemetry">
+            <span>FIG 2.1 — CUBO INTERACTIVO</span>
+            <span id="cube-telemetry-readout">X:-18° Y:32°</span>
+          </div>
+
+          <!-- Escenario 3D -->
+          <div class="scene-3d" id="cube-scene-container" aria-label="Cubo 3D interactivo de tecnologías">
+            <div class="cube-3d" id="workshop-cube">
+              
+              <!-- Cara Frontal: JavaScript -->
+              <div class="cube-face face-front">
+                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">
+                  <span>CARA 01</span>
+                  <span>CLIENTE / DOM</span>
+                </div>
+                <div style="text-align:center; margin:auto 0;">
+                  <img src="assets/js.png" alt="JavaScript" style="width:48px; height:48px; margin:0 auto 0.5rem; object-fit:contain;" />
+                  <div class="font-serif" style="font-size:1.55rem; font-weight:600;">JavaScript</div>
+                  <div class="font-mono" style="font-size:0.7rem; color:var(--accent-terracotta);">ES6+ · Async/Await</div>
+                </div>
+                <div style="font-family:var(--font-mono); font-size:0.65rem; border-top:1px solid var(--rule-color); padding-top:0.35rem; display:flex; justify-content:space-between;">
+                  <span>assets/js.png</span>
+                  <span style="color:var(--accent-moss);">● Activo</span>
+                </div>
               </div>
-              <span class="brand-text">Leo<span>.</span></span>
-            </a>
-            <div class="status-badge" title="Actualmente disponible para propuestas laborales y proyectos">
-              <span class="status-dot"></span>
-              Disponible para proyectos
+
+              <!-- Cara Derecha: Node.js -->
+              <div class="cube-face face-right">
+                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">
+                  <span>CARA 02</span>
+                  <span>SERVIDOR / API</span>
+                </div>
+                <div style="text-align:center; margin:auto 0;">
+                  <img src="assets/node.png" alt="Node.js" style="width:48px; height:48px; margin:0 auto 0.5rem; object-fit:contain;" />
+                  <div class="font-serif" style="font-size:1.55rem; font-weight:600;">Node.js</div>
+                  <div class="font-mono" style="font-size:0.7rem; color:var(--accent-moss);">APIs REST · Express</div>
+                </div>
+                <div style="font-family:var(--font-mono); font-size:0.65rem; border-top:1px solid var(--rule-color); padding-top:0.35rem; display:flex; justify-content:space-between;">
+                  <span>assets/node.png</span>
+                  <span style="color:var(--accent-moss);">● Activo</span>
+                </div>
+              </div>
+
+              <!-- Cara Trasera: Python -->
+              <div class="cube-face face-back">
+                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">
+                  <span>CARA 03</span>
+                  <span>SCRIPTS & DATOS</span>
+                </div>
+                <div style="text-align:center; margin:auto 0;">
+                  <img src="assets/python.png" alt="Python" style="width:48px; height:48px; margin:0 auto 0.5rem; object-fit:contain;" />
+                  <div class="font-serif" style="font-size:1.55rem; font-weight:600;">Python</div>
+                  <div class="font-mono" style="font-size:0.7rem; color:var(--accent-ochre);">Scripts · Automatización</div>
+                </div>
+                <div style="font-family:var(--font-mono); font-size:0.65rem; border-top:1px solid var(--rule-color); padding-top:0.35rem; display:flex; justify-content:space-between;">
+                  <span>assets/python.png</span>
+                  <span style="color:var(--accent-moss);">● Activo</span>
+                </div>
+              </div>
+
+              <!-- Cara Izquierda: Java -->
+              <div class="cube-face face-left">
+                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">
+                  <span>CARA 04</span>
+                  <span>POO & ESTRUCTURA</span>
+                </div>
+                <div style="text-align:center; margin:auto 0;">
+                  <img src="assets/java.png" alt="Java" style="width:48px; height:48px; margin:0 auto 0.5rem; object-fit:contain;" />
+                  <div class="font-serif" style="font-size:1.55rem; font-weight:600;">Java</div>
+                  <div class="font-mono" style="font-size:0.7rem; color:var(--accent-terracotta);">Tipado Fuerte · Patrones</div>
+                </div>
+                <div style="font-family:var(--font-mono); font-size:0.65rem; border-top:1px solid var(--rule-color); padding-top:0.35rem; display:flex; justify-content:space-between;">
+                  <span>assets/java.png</span>
+                  <span style="color:var(--accent-moss);">● Activo</span>
+                </div>
+              </div>
+
+              <!-- Cara Superior: MongoDB -->
+              <div class="cube-face face-top">
+                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">
+                  <span>CARA 05</span>
+                  <span>BASE DE DATOS</span>
+                </div>
+                <div style="text-align:center; margin:auto 0;">
+                  <img src="assets/mongodb.png" alt="MongoDB" style="width:48px; height:48px; margin:0 auto 0.5rem; object-fit:contain;" />
+                  <div class="font-serif" style="font-size:1.55rem; font-weight:600;">MongoDB</div>
+                  <div class="font-mono" style="font-size:0.7rem; color:var(--accent-moss);">Colecciones · JSON</div>
+                </div>
+                <div style="font-family:var(--font-mono); font-size:0.65rem; border-top:1px solid var(--rule-color); padding-top:0.35rem; display:flex; justify-content:space-between;">
+                  <span>assets/mongodb.png</span>
+                  <span style="color:var(--accent-moss);">● Activo</span>
+                </div>
+              </div>
+
+              <!-- Cara Inferior: HTML5 & CSS3 -->
+              <div class="cube-face face-bottom">
+                <div style="display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">
+                  <span>CARA 06</span>
+                  <span>MAQUETACIÓN & DISEÑO</span>
+                </div>
+                <div style="text-align:center; margin:auto 0;">
+                  <img src="assets/html.png" alt="HTML5 y CSS3" style="width:48px; height:48px; margin:0 auto 0.5rem; object-fit:contain;" />
+                  <div class="font-serif" style="font-size:1.55rem; font-weight:600;">HTML & CSS</div>
+                  <div class="font-mono" style="font-size:0.7rem; color:var(--accent-ochre);">Semántica · Responsive</div>
+                </div>
+                <div style="font-family:var(--font-mono); font-size:0.65rem; border-top:1px solid var(--rule-color); padding-top:0.35rem; display:flex; justify-content:space-between;">
+                  <span>assets/html.png</span>
+                  <span style="color:var(--accent-moss);">● Activo</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
-          <!-- Navigation Links -->
-          <ul class="nav-links">
-            <li><a href="#about">Sobre mí</a></li>
-            <li><a href="#skills">Habilidades</a></li>
-            <li><a href="#timeline">Trayectoria</a></li>
-            <li><a href="#projects">Proyectos</a></li>
-            <li><a href="#contact">Contacto</a></li>
-          </ul>
+          <p class="font-mono text-xs" style="color:var(--ink-secondary); margin-top:1.25rem; text-align:center;">
+            Arrastrá el cubo con el cursor o el dedo para girarlo libremente:
+          </p>
 
-          <!-- Nav Actions -->
-          <div class="nav-actions">
-            <!-- Theme Toggle Button -->
-            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Cambiar tema">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="5"></circle>
-                <line x1="12" y1="1" x2="12" y2="3"></line>
-                <line x1="12" y1="21" x2="12" y2="23"></line>
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                <line x1="1" y1="12" x2="3" y2="12"></line>
-                <line x1="21" y1="12" x2="23" y2="12"></line>
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-              </svg>
-            </button>
+          <!-- Botones de Acceso Rápido por Cara -->
+          <div class="cube-face-nav">
+            <button type="button" class="cube-face-btn active" data-face="front">JS</button>
+            <button type="button" class="cube-face-btn" data-face="right">Node</button>
+            <button type="button" class="cube-face-btn" data-face="back">Python</button>
+            <button type="button" class="cube-face-btn" data-face="left">Java</button>
+            <button type="button" class="cube-face-btn" data-face="top">MongoDB</button>
+            <button type="button" class="cube-face-btn" data-face="bottom">HTML/CSS</button>
+          </div>
+        </div>
 
-            <!-- CV Link -->
-            <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Ver CV Interactivo">
-              <span>Ver CV</span>
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
+        <!-- Columna Derecha: Tarjetas Explicativas Sincronizadas -->
+        <div>
+          <span class="font-mono text-xs" style="text-transform:uppercase; color:var(--accent-terracotta); letter-spacing:0.1em; font-weight:700;">
+            USO CONCRETO
+          </span>
+          <h3 class="font-serif" style="font-size:1.95rem; font-weight:400; margin:0.4rem 0 0.85rem;">
+            Tecnologías aplicadas a resolver problemas.
+          </h3>
+          <p style="color:var(--ink-secondary); font-size:0.925rem; line-height:1.6;">
+            Tocá cualquier tarjeta para sincronizar el cubo 3D y apuntarlo directamente a esa tecnología:
+          </p>
+
+          <div id="stack-cards-grid" class="stack-cards-grid">
+            <!-- Rellenado dinámicamente por cube.js -->
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         SECCIÓN 03: TRAYECTORIA ACADÉMICA
+         ====================================================================== -->
+    <section id="trayectoria" class="hairline-b" style="padding: 3.5rem 0;">
+      
+      <div class="section-masthead">
+        <span class="section-label">03 / TRAYECTORIA ACADÉMICA</span>
+        <h2 class="section-title">Formación continua y bases de ingeniería de software.</h2>
+        <p class="section-lead">
+          Mi formación combina academias de alto rendimiento con validación directa de referentes de la industria.
+        </p>
+      </div>
+
+      <div class="timeline-archival">
+        
+        <!-- Hito 1: Certified Tech Developer (2022 — PRESENTE) -->
+        <article class="timeline-entry reveal-item">
+          <span class="timeline-marker"></span>
+          <span class="timeline-period">2022 — PRESENTE</span>
+          <h3 class="timeline-institution">Digital House en conjunto con Globant y Mercado Libre</h3>
+          <div class="timeline-role">Certified Tech Developer</div>
+          <p class="timeline-desc">
+            Formación integral orientada a estándares reales de la industria: desarrollo backend, microservicios, bases de datos relacionales y no relacionales, diseño de software y metodologías ágiles validadas por profesionales de Globant y Mercado Libre.
+          </p>
+        </article>
+
+        <!-- Hito 2: Full Stack Developer -->
+        <article class="timeline-entry reveal-item">
+          <span class="timeline-marker"></span>
+          <span class="timeline-period">2021 — 2022</span>
+          <h3 class="timeline-institution">NUCBA</h3>
+          <div class="timeline-role">Full Stack Web Developer</div>
+          <p class="timeline-desc">
+            Desarrollo práctico de aplicaciones web: dominio de JavaScript moderno (ES6+), React.js, Node.js con Express, consumo y diseño de APIs REST y patrones de modularización.
+          </p>
+        </article>
+
+        <!-- Hito 3: Cisco Networking Academy -->
+        <article class="timeline-entry reveal-item">
+          <span class="timeline-marker"></span>
+          <span class="timeline-period">2022</span>
+          <h3 class="timeline-institution">Cisco Networking Academy</h3>
+          <div class="timeline-role">Cybersecurity Essentials & Programming in Python</div>
+          <p class="timeline-desc">
+            Conceptos clave de seguridad en capas, criptografía aplicada para proteger datos sensibles y scripting con Python para automatizar tareas y auditorías de vulnerabilidades.
+          </p>
+        </article>
+
+        <!-- Hito 4: UTN-FRC -->
+        <article class="timeline-entry reveal-item">
+          <span class="timeline-marker"></span>
+          <span class="timeline-period">2021</span>
+          <h3 class="timeline-institution">Universidad Tecnológica Nacional — FRC</h3>
+          <div class="timeline-role">Diplomatura en Nuevas Tecnologías</div>
+          <p class="timeline-desc">
+            Bases firmes de ingeniería de software, fundamentos de bases de datos, lógica algorítmica y tecnologías emergentes cursadas en Córdoba.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         SECCIÓN 04: ENFOQUE DE TRABAJO (PRINCIPIOS)
+         ====================================================================== -->
+    <section id="manifiesto" class="hairline-b" style="padding: 3.5rem 0;">
+      
+      <div class="section-masthead">
+        <span class="section-label">04 / ENFOQUE DE TRABAJO</span>
+        <h2 class="section-title">Tres criterios que priorizo en cada desarrollo.</h2>
+        <p class="section-lead">
+          Principios sencillos que marcan la diferencia entre un código que se vuelve frágil y un sistema mantenible en el tiempo.
+        </p>
+      </div>
+
+      <div class="principles-grid">
+        
+        <!-- Principio 1 -->
+        <article class="principle-card reveal-item">
+          <div>
+            <div class="principle-card-head">
+              <span>CRITERIO 01</span>
+              <span>LEGIBILIDAD</span>
+            </div>
+            <h3 class="principle-title">Código claro y mantenible</h3>
+            <p class="principle-text">
+              Modularidad, funciones con nombres claros y estructuras ordenadas. La claridad en el código facilita el trabajo en equipo y ahorra horas al momento de agregar nuevas funcionalidades o depurar.
+            </p>
+          </div>
+          <div class="principle-quote">
+            "El código se lee muchas más veces de las que se escribe."
+          </div>
+        </article>
+
+        <!-- Principio 2 -->
+        <article class="principle-card reveal-item">
+          <div>
+            <div class="principle-card-head" style="color:var(--accent-moss);">
+              <span>CRITERIO 02</span>
+              <span>UTILIDAD</span>
+            </div>
+            <h3 class="principle-title">Foco en resolver la necesidad</h3>
+            <p class="principle-text">
+              Una buena aplicación debe cumplir su propósito sin fricción ni rodeos innecesarios. El diseño debe estar al servicio de la simplicidad y la velocidad de respuesta para quien la utiliza.
+            </p>
+          </div>
+          <div class="principle-quote">
+            "Menos fricción, mejor experiencia para el usuario."
+          </div>
+        </article>
+
+        <!-- Principio 3 -->
+        <article class="principle-card reveal-item">
+          <div>
+            <div class="principle-card-head" style="color:var(--accent-ochre);">
+              <span>CRITERIO 03</span>
+              <span>FUNDAMENTOS</span>
+            </div>
+            <h3 class="principle-title">Bases sólidas antes de las modas</h3>
+            <p class="principle-text">
+              Comprender a fondo el DOM, los protocolos web, la orientación a objetos y las estructuras de datos permite adoptar cualquier biblioteca o framework con rapidez y sin atarse a tendencias pasajeras.
+            </p>
+          </div>
+          <div class="principle-quote">
+            "Las librerías van y vienen; los fundamentos quedan."
+          </div>
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================================
+         SECCIÓN 05: CONTACTO
+         ====================================================================== -->
+    <section id="contacto" style="padding: 3.5rem 0;">
+      
+      <div class="section-masthead">
+        <span class="section-label">05 / CONTACTO</span>
+        <h2 class="section-title">¿Charlamos de algún proyecto o propuesta laboral?</h2>
+        <p class="section-lead">
+          Si tenés una propuesta, estás armando equipo o te interesa coordinar un desarrollo, escribime y nos ponemos en contacto.
+        </p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Columna Izquierda: Accesos Rápidos y Enlaces Directos -->
+        <div class="contact-direct-info">
+          
+          <!-- Caja de Copiado de Email -->
+          <div class="copy-box">
+            <span class="font-mono text-xs" style="color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.08em;">
+              CORREO ELECTRÓNICO DIRECTO
+            </span>
+            <div class="copy-box-top">
+              <span class="copy-value font-mono">leodoercba@gmail.com</span>
+              <button id="btn-copy-email" type="button" class="btn-tactile btn-sm">
+                Copiar Email
+              </button>
+            </div>
+          </div>
+
+          <!-- Caja de WhatsApp con "Te dejo mi número" -->
+          <div class="copy-box">
+            <span class="font-mono text-xs" style="color:var(--ink-muted); text-transform:uppercase; letter-spacing:0.08em;">
+              TE DEJO MI NÚMERO
+            </span>
+            <div class="copy-box-top">
+              <span class="copy-value font-mono">+54 351 261 9874</span>
+              <button id="btn-open-whatsapp" type="button" class="btn-tactile btn-moss btn-sm">
+                Escribirme por WhatsApp →
+              </button>
+            </div>
+          </div>
+
+          <!-- Enlaces Directos Estilizados -->
+          <div class="direct-links-wrap">
+            <a href="https://github.com/LeoDoerflinger" target="_blank" rel="noopener noreferrer" class="direct-link">
+              ↗ GitHub (LeoDoerflinger)
             </a>
-
-            <!-- Mobile Hamburger Toggle -->
-            <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú de navegación">
-              <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-              </svg>
-            </button>
+            <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank" rel="noopener noreferrer" class="direct-link">
+              ↗ LinkedIn
+            </a>
+            <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="direct-link">
+              ↗ CV Interactivo
+            </a>
+            <a href="#inicio" class="direct-link" style="color:var(--accent-terracotta) !important;">
+              ↑ Subir al inicio
+            </a>
           </div>
 
         </div>
-      </nav>
-    </header>
 
-    <!-- Mobile Drawer Menu -->
-    <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú móvil">
-      <button class="mobile-close-btn" id="mobile-close" aria-label="Cerrar menú">×</button>
-      <a href="#about" class="mobile-nav-link">Sobre mí</a>
-      <a href="#skills" class="mobile-nav-link">Habilidades</a>
-      <a href="#timeline" class="mobile-nav-link">Trayectoria</a>
-      <a href="#projects" class="mobile-nav-link">Proyectos</a>
-      <a href="#contact" class="mobile-nav-link">Contacto</a>
-      <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 1rem;">
-        Ver CV Interactivo →
-      </a>
-    </div>
+        <!-- Columna Derecha: Formulario de Contacto -->
+        <div class="postal-form-wrapper">
+          
+          <!-- Sello Discreto -->
+          <div class="postal-stamp">
+            <span class="stamp-tag">CONTACTO</span>
+            <span class="stamp-year">2026</span>
+            <span class="stamp-tag">CBA · ARG</span>
+          </div>
 
-    <!-- ======================================================================
-         HERO SECTION
-         ====================================================================== -->
-    <main>
-      <section id="hero">
-        <div class="container">
-          <div class="hero-grid">
+          <div style="max-width:520px;">
+            <h3 class="font-serif" style="font-size:1.85rem; font-weight:400;">Mandame un mensaje</h3>
+            <p class="font-mono text-xs" style="color:var(--ink-muted); margin-top:0.25rem;">
+              Completá los datos y te respondo a la brevedad.
+            </p>
+          </div>
 
-            <!-- Hero Intro Left -->
-            <div>
-              <div class="hero-eyebrow reveal">
-                Certified Tech Developer • Full Stack
+          <form id="postal-contact-form" novalidate style="margin-top:1.35rem;">
+            
+            <div class="form-fields-grid two-col">
+              <div>
+                <label for="contact-name" class="field-label">Tu Nombre *</label>
+                <input type="text" id="contact-name" name="name" required placeholder="Ej. Martín Gómez" class="input-tactile" />
               </div>
-              <h1 class="hero-title reveal reveal-delay-1">
-                Leo<br /><span>Doerflinger</span>.
-              </h1>
-              <p class="hero-role reveal reveal-delay-1">
-                Desarrollador Web Full Stack
-              </p>
-              <p class="hero-bio reveal reveal-delay-2">
-                Creo aplicaciones modernas, escalables y optimizadas que transforman ideas complejas en experiencias intuitivas. Con enfoque en código limpio, arquitectura sólida y atención minuciosa al diseño UI/UX.
-              </p>
+              <div>
+                <label for="contact-email" class="field-label">Tu Correo *</label>
+                <input type="email" id="contact-email" name="email" required placeholder="tu@correo.com" class="input-tactile" />
+              </div>
+            </div>
 
-              <div class="hero-actions reveal reveal-delay-3">
-                <a href="#projects" class="btn btn-primary">
-                  <span>Explorar Proyectos</span>
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                </a>
-                <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                  <span>CV Interactivo</span>
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-                </a>
-                <button type="button" class="hero-quick-email" id="btn-copy-email-hero" title="Copiar correo electrónico">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span>leodoercba@gmail.com</span>
+            <div class="form-fields-grid">
+              <div>
+                <label for="contact-topic" class="field-label">Motivo del Contacto</label>
+                <select id="contact-topic" name="topic" class="input-tactile">
+                  <option value="Propuesta laboral / Equipo">Sumarme a un equipo / Propuesta laboral</option>
+                  <option value="Proyecto o desarrollo a medida">Desarrollar un proyecto o web a medida</option>
+                  <option value="Consulta sobre proyectos">Consulta técnica sobre mis proyectos</option>
+                  <option value="Conectar / Networking">Simplemente conectar o charlar</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-fields-grid">
+              <div>
+                <label for="contact-message" class="field-label">Tu Mensaje *</label>
+                <textarea id="contact-message" name="message" rows="4" required placeholder="Contame qué estás necesitando o en qué proyecto estás trabajando..." class="input-tactile" style="resize:vertical;"></textarea>
+              </div>
+            </div>
+
+            <!-- Alerta de Estado del Formulario -->
+            <div id="form-status-alert" class="form-status-alert" style="margin-top:1rem;"></div>
+
+            <!-- Botones de Envío Dual -->
+            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-top:1.35rem; padding-top:1rem; border-top:1px solid var(--rule-color);">
+              <span class="font-mono text-xs" style="color:var(--ink-muted);">
+                Respondo personalmente a la brevedad.
+              </span>
+              <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
+                <button type="button" id="btn-submit-whatsapp" class="btn-tactile btn-moss btn-sm">
+                  Enviar por WhatsApp →
+                </button>
+                <button type="submit" id="btn-submit-email" class="btn-tactile btn-primary btn-sm">
+                  Enviar por Correo →
                 </button>
               </div>
             </div>
 
-            <!-- Hero Visual Right: Interactive 3D Cube -->
-            <div class="hero-visual reveal reveal-delay-2">
-              <div class="cube-wrapper">
-                <div class="scene" id="cube-scene" title="Arrastrá con el ratón o desliza con el dedo para rotar en 3D">
-                  <div class="cube" id="cube">
-                    <div class="cube__face cube__face--front">
-                      <img src="assets/html.png" alt="HTML5" />
-                      <span class="cube__face-label">HTML5</span>
-                    </div>
-                    <div class="cube__face cube__face--back">
-                      <img src="assets/python.png" alt="Python" />
-                      <span class="cube__face-label">Python</span>
-                    </div>
-                    <div class="cube__face cube__face--right">
-                      <img src="assets/js.png" alt="JavaScript" />
-                      <span class="cube__face-label">JavaScript</span>
-                    </div>
-                    <div class="cube__face cube__face--left">
-                      <img src="assets/mongodb.png" alt="MongoDB" />
-                      <span class="cube__face-label">MongoDB</span>
-                    </div>
-                    <div class="cube__face cube__face--top">
-                      <img src="assets/java.png" alt="Java" />
-                      <span class="cube__face-label">Java</span>
-                    </div>
-                    <div class="cube__face cube__face--bottom">
-                      <img src="assets/node.png" alt="Node.js" />
-                      <span class="cube__face-label">Node.js</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="cube-hint">
-                  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
-                  <span>Arrastrá para interactuar en 3D</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <!-- Hero Metrics Strip -->
-          <div class="hero-metrics reveal reveal-delay-3">
-            <div class="metric-item">
-              <div class="metric-number">06<span>+</span></div>
-              <div class="metric-label">Proyectos Productivos</div>
-            </div>
-            <div class="metric-item">
-              <div class="metric-number">Full<span>.</span></div>
-              <div class="metric-label">Stack Front & Back</div>
-            </div>
-            <div class="metric-item">
-              <div class="metric-number">CTD<span>★</span></div>
-              <div class="metric-label">Digital House & Globant</div>
-            </div>
-            <div class="metric-item">
-              <div class="metric-number">100<span>%</span></div>
-              <div class="metric-label">Responsive & Accesible</div>
-            </div>
-          </div>
+          </form>
 
         </div>
-      </section>
 
-      <div class="divider"></div>
-
-      <!-- ======================================================================
-           ABOUT SECTION
-           ====================================================================== -->
-      <section id="about">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-tag">Sobre Mí</div>
-            <h2 class="section-title">Código limpio,<br><span>resultados de impacto</span>.</h2>
-            <p class="section-subtitle">
-              Desarrollador con mentalidad orientada a producto y resolución de problemas. Combino sólidos fundamentos teóricos con constante práctica en proyectos reales.
-            </p>
-          </div>
-
-          <div class="about-grid">
-
-            <!-- Narrative Column -->
-            <div class="about-text reveal">
-              <p>
-                Comencé mi camino en la tecnología guiado por una curiosidad incesante por entender cómo funcionan los sistemas que utilizamos a diario. A lo largo de mi formación como <strong>Certified Tech Developer</strong> (programa impulsado por Digital House junto a Globant y Mercado Libre) y <strong>Full Stack Developer</strong> en NUCBA, he perfeccionado metodologías ágiles, estándares de desarrollo y arquitectura de software.
-              </p>
-              <p>
-                Me apasiona abarcar tanto el ecosistema <strong>Frontend</strong> (creando interfaces dinámicas, accesibles y estéticas) como el <strong>Backend</strong> (diseñando APIs RESTful seguras, modelando bases de datos y gestionando lógica de negocio).
-              </p>
-              <p>
-                Además, cuento con formación en <strong>Ciberseguridad por Cisco Networking Academy</strong>, lo cual me aporta una perspectiva rigurosa sobre validación de entradas, integridad de datos y buenas prácticas de seguridad web desde el día cero.
-              </p>
-
-              <!-- Value Pillars -->
-              <div class="about-pillars">
-                <div class="pillar-card">
-                  <div class="pillar-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-                  </div>
-                  <h3 class="pillar-title">Código Limpio</h3>
-                  <p class="pillar-desc">Estructura modular, componentes reutilizables y fácil mantenibilidad a largo plazo.</p>
-                </div>
-                <div class="pillar-card">
-                  <div class="pillar-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>
-                  </div>
-                  <h3 class="pillar-title">Enfoque Full Stack</h3>
-                  <p class="pillar-desc">Visión integral desde el diseño de interfaz hasta la base de datos y despliegue en la nube.</p>
-                </div>
-                <div class="pillar-card">
-                  <div class="pillar-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                  </div>
-                  <h3 class="pillar-title">Seguridad Web</h3>
-                  <p class="pillar-desc">Criterios de seguridad preventiva, sanitización y protección de datos inspirados en normas Cisco.</p>
-                </div>
-                <div class="pillar-card">
-                  <div class="pillar-icon">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                  </div>
-                  <h3 class="pillar-title">Optimización & UX</h3>
-                  <p class="pillar-desc">Carga veloz, renderizado fluido y experiencia de usuario placentera en cualquier dispositivo.</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Profile Summary Box -->
-            <div class="about-profile-box reveal reveal-delay-1">
-              <h3 class="profile-box-title">Perfil Profesional</h3>
-              <ul class="profile-details-list">
-                <li class="profile-details-item">
-                  <span class="profile-key">Nombre</span>
-                  <span class="profile-val">Leopoldo Doerflinger</span>
-                </li>
-                <li class="profile-details-item">
-                  <span class="profile-key">Ubicación</span>
-                  <span class="profile-val">Córdoba, Argentina (Remoto)</span>
-                </li>
-                <li class="profile-details-item">
-                  <span class="profile-key">Especialidad</span>
-                  <span class="profile-val">Desarrollo Web Full Stack</span>
-                </li>
-                <li class="profile-details-item">
-                  <span class="profile-key">Idiomas</span>
-                  <span class="profile-val">Español (Nativo) • Inglés (Avanzado)</span>
-                </li>
-                <li class="profile-details-item">
-                  <span class="profile-key">Disponibilidad</span>
-                  <span class="profile-val">Inmediata (Freelance o Relación de Dep.)</span>
-                </li>
-              </ul>
-
-              <div class="soft-skills-container">
-                <div class="soft-skills-label">Habilidades Blandas</div>
-                <div class="soft-skills-tags">
-                  <span class="soft-tag">Aprendizaje Rápido</span>
-                  <span class="soft-tag">Atención al Detalle</span>
-                  <span class="soft-tag">Resolución de Problemas</span>
-                  <span class="soft-tag">Comunicación Asertiva</span>
-                  <span class="soft-tag">Proactividad</span>
-                  <span class="soft-tag">Trabajo en Equipo</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- ======================================================================
-           SKILLS & TECH STACK SECTION
-           ====================================================================== -->
-      <section id="skills">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-tag">Stack Tecnológico</div>
-            <h2 class="section-title">Herramientas que domino<br><span>para construir soluciones</span>.</h2>
-            <p class="section-subtitle">
-              Tecnologías y lenguajes aplicados en proyectos frontend, arquitecturas backend, persistencia de datos y despliegue continuo.
-            </p>
-          </div>
-
-          <!-- Skills Filter Tabs -->
-          <div class="skills-tabs reveal">
-            <button type="button" class="skills-tab-btn active" data-category="all">Todas</button>
-            <button type="button" class="skills-tab-btn" data-category="frontend">Frontend</button>
-            <button type="button" class="skills-tab-btn" data-category="backend">Backend & DB</button>
-            <button type="button" class="skills-tab-btn" data-category="tools">DevOps & Seguridad</button>
-          </div>
-
-          <!-- Skills Matrix Grid -->
-          <div class="skills-grid reveal reveal-delay-1">
-
-            <!-- JavaScript -->
-            <div class="skill-card" data-category="frontend">
-              <div class="skill-icon-wrap">
-                <img src="assets/js.png" alt="JavaScript" />
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">JavaScript</h3>
-                <span class="skill-category">ES6+ • DOM • Async/Await</span>
-              </div>
-            </div>
-
-            <!-- React -->
-            <div class="skill-card" data-category="frontend">
-              <div class="skill-icon-wrap">
-                <svg viewBox="0 0 115.3 100" fill="currentColor">
-                  <path d="M57.6,44.7c-2.9,0-5.3,2.4-5.3,5.3s2.4,5.3,5.3,5.3s5.3-2.4,5.3-5.3S60.5,44.7,57.6,44.7z"/>
-                  <path d="M109.8,40.1C107.4,26.9,98.6,18.7,85.7,16.5c-4.4-0.8-9.1-0.7-14.2,0.2c-4.1-6.1-9-11.4-14.4-15C53.7-0.7,50.1-0.5,46.9,2.4c-4.2,3.8-7.9,9.5-10.9,16.8c-6.8-1.5-13.4-1.9-19.3-0.7C4.6,21.1-2.4,32.3,0.5,45.8c2.4,11.2,9.9,18.5,21.5,21.2c4.1,1,8.6,1.2,13.4,0.7c3.9,5.7,8.4,10.7,13.4,14.3c4.5,3.2,8.9,4.1,12.7,2.2c4.8-2.4,8.9-7.7,12.2-15.5c7.2,1.8,14.2,2.4,20.4,1.4C106.3,88.1,113.8,77,112.5,63.1C111.9,55.3,111,46.9,109.8,40.1z M57.6,63.8c-7.6,0-13.8-6.2-13.8-13.8s6.2-13.8,13.8-13.8s13.8,6.2,13.8,13.8S65.2,63.8,57.6,63.8z"/>
-                </svg>
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">React.js</h3>
-                <span class="skill-category">Hooks • Context API • SPA</span>
-              </div>
-            </div>
-
-            <!-- HTML5 -->
-            <div class="skill-card" data-category="frontend">
-              <div class="skill-icon-wrap">
-                <img src="assets/html.png" alt="HTML5" />
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">HTML5 & Semántica</h3>
-                <span class="skill-category">Accesibilidad • SEO on-page</span>
-              </div>
-            </div>
-
-            <!-- CSS3 & Tailwind -->
-            <div class="skill-card" data-category="frontend">
-              <div class="skill-icon-wrap">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16l-2 15-6 3-6-3L4 4z"></path></svg>
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">CSS3 & Tailwind</h3>
-                <span class="skill-category">Flexbox • Grid • Animaciones</span>
-              </div>
-            </div>
-
-            <!-- Node.js -->
-            <div class="skill-card" data-category="backend">
-              <div class="skill-icon-wrap">
-                <img src="assets/node.png" alt="Node.js" />
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">Node.js & Express</h3>
-                <span class="skill-category">APIs REST • Middleware • CRUD</span>
-              </div>
-            </div>
-
-            <!-- Python -->
-            <div class="skill-card" data-category="backend">
-              <div class="skill-icon-wrap">
-                <img src="assets/python.png" alt="Python" />
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">Python</h3>
-                <span class="skill-category">Scripting • Automatización • Cisco</span>
-              </div>
-            </div>
-
-            <!-- MongoDB -->
-            <div class="skill-card" data-category="backend">
-              <div class="skill-icon-wrap">
-                <img src="assets/mongodb.png" alt="MongoDB" />
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">MongoDB</h3>
-                <span class="skill-category">NoSQL • Mongoose • Modelado</span>
-              </div>
-            </div>
-
-            <!-- Java -->
-            <div class="skill-card" data-category="backend">
-              <div class="skill-icon-wrap">
-                <img src="assets/java.png" alt="Java" />
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">Java & POO</h3>
-                <span class="skill-category">Estructuras • Tipado • Algoritmos</span>
-              </div>
-            </div>
-
-            <!-- Firebase -->
-            <div class="skill-card" data-category="backend">
-              <div class="skill-icon-wrap">
-                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M3.89 15.672L6.255.461A.542.542 0 0 1 7.27.283l2.87 5.485-6.25 9.904zm16.732-2.91L18.15 2.115a.542.542 0 0 0-.974-.153L3.89 15.672l8.47 4.774a2.08 2.08 0 0 0 2.016 0l6.246-7.684z"/></svg>
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">Firebase</h3>
-                <span class="skill-category">Firestore • Auth • Hosting</span>
-              </div>
-            </div>
-
-            <!-- Ciberseguridad -->
-            <div class="skill-card" data-category="tools">
-              <div class="skill-icon-wrap">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">Ciberseguridad</h3>
-                <span class="skill-category">Cisco Certified • OWASP • Cripto</span>
-              </div>
-            </div>
-
-            <!-- Git & GitHub -->
-            <div class="skill-card" data-category="tools">
-              <div class="skill-icon-wrap">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="18" cy="18" r="3"></circle><circle cx="6" cy="6" r="3"></circle><path d="M13 6h3a2 2 0 0 1 2 2v7"></path><line x1="6" y1="9" x2="6" y2="21"></line></svg>
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">Git & GitHub</h3>
-                <span class="skill-category">Control de Versiones • CI/CD</span>
-              </div>
-            </div>
-
-            <!-- Vercel & Cloud -->
-            <div class="skill-card" data-category="tools">
-              <div class="skill-icon-wrap">
-                <svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L24 22H0L12 1Z"/></svg>
-              </div>
-              <div class="skill-info">
-                <h3 class="skill-name">Vercel & Despliegue</h3>
-                <span class="skill-category">Serverless • Producción • DNS</span>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- ======================================================================
-           TIMELINE / EDUCATION & PATH
-           ====================================================================== -->
-      <section id="timeline">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-tag">Formación & Certificaciones</div>
-            <h2 class="section-title">Trayectoria académica<br><span>y especialización</span>.</h2>
-            <p class="section-subtitle">
-              Capacitación continua en academias líderes de la industria tecnológica y de software.
-            </p>
-          </div>
-
-          <div class="timeline reveal">
-
-            <!-- Item 1 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <h3 class="timeline-degree">Certified Tech Developer</h3>
-                  <span class="timeline-period">2023 — Presente</span>
-                </div>
-                <div class="timeline-school">Digital House • Globant • Mercado Libre</div>
-                <p class="timeline-details">
-                  Carrera intensiva codiseñada por las tecnológicas líderes de Latinoamérica. Especialización en desarrollo frontend y backend avanzado, patrones de arquitectura de software, metodologías ágiles (Scrum) y buenas prácticas de ingeniería de calidad.
-                </p>
-              </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <h3 class="timeline-degree">Full Stack Web Developer</h3>
-                  <span class="timeline-period">2022 — 2023</span>
-                </div>
-                <div class="timeline-school">NUCBA</div>
-                <p class="timeline-details">
-                  Programa integral enfocado en la construcción de aplicaciones web completas utilizando la pila moderna: HTML5, CSS3, JavaScript avanzado, React, Node.js, Express, MongoDB y despliegue productivo en plataformas Cloud.
-                </p>
-              </div>
-            </div>
-
-            <!-- Item 3 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <h3 class="timeline-degree">Cybersecurity Essentials & Python</h3>
-                  <span class="timeline-period">2021</span>
-                </div>
-                <div class="timeline-school">Cisco Networking Academy</div>
-                <p class="timeline-details">
-                  Certificación enfocada en fundamentos de seguridad en redes, vectores de ataque web, criptografía, defensas perimetrales y scripting con Python para tareas de auditoría y automatización.
-                </p>
-              </div>
-            </div>
-
-            <!-- Item 4 -->
-            <div class="timeline-item">
-              <div class="timeline-dot"></div>
-              <div class="timeline-card">
-                <div class="timeline-header">
-                  <h3 class="timeline-degree">Diplomatura en Nuevas Tecnologías</h3>
-                  <span class="timeline-period">2020</span>
-                </div>
-                <div class="timeline-school">UTN-FRC (Universidad Tecnológica Nacional)</div>
-                <p class="timeline-details">
-                  Módulos de programación en JAVA, bases de Inteligencia Artificial, Impresión 3D, Realidad Aumentada y ecosistemas de innovación tecnológica.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- ======================================================================
-           PROJECTS SECTION
-           ====================================================================== -->
-      <section id="projects">
-        <div class="container">
-          <div class="projects-header-row reveal">
-            <div>
-              <div class="section-tag">Portfolio</div>
-              <h2 class="section-title">Trabajo destacado<br><span>y aplicaciones en vivo</span>.</h2>
-              <p class="section-subtitle">
-                Una selección de proyectos funcionales que demuestran capacidades en interfaces de usuario, integración de APIs y aplicaciones web progresivas.
-              </p>
-            </div>
-
-            <!-- Filter Buttons -->
-            <div class="project-filters">
-              <button type="button" class="filter-btn active" data-filter="all">Todos</button>
-              <button type="button" class="filter-btn" data-filter="webapp">Web Apps & PWAs</button>
-              <button type="button" class="filter-btn" data-filter="frontend">Frontend & APIs</button>
-              <button type="button" class="filter-btn" data-filter="tools">E-Commerce & Tools</button>
-            </div>
-          </div>
-
-          <!-- Dynamic Projects Grid (Rendered by projects.js) -->
-          <div class="projects-grid" id="projects-grid">
-            <!-- Dynamically populated -->
-          </div>
-        </div>
-      </section>
-
-      <div class="divider"></div>
-
-      <!-- ======================================================================
-           CONTACT SECTION
-           ====================================================================== -->
-      <section id="contact">
-        <div class="container">
-          <div class="section-header reveal">
-            <div class="section-tag">Contacto Directo</div>
-            <h2 class="section-title">¿Tenés un proyecto?<br><span>Hablemos y hagámoslo realidad</span>.</h2>
-            <p class="section-subtitle">
-              Estoy disponible para nuevas oportunidades laborales, proyectos freelance o colaboraciones de desarrollo.
-            </p>
-          </div>
-
-          <div class="contact-grid">
-
-            <!-- Contact Channels Column -->
-            <div class="reveal">
-              <p style="color:var(--text-secondary); line-height:1.75; font-size:1.02rem; font-weight:300;">
-                Podés escribirme por cualquiera de los siguientes canales directos. Suelo responder en el mismo día.
-              </p>
-
-              <div class="contact-channels">
-
-                <!-- WhatsApp Card -->
-                <div class="contact-card">
-                  <div class="contact-card-left">
-                    <div class="contact-card-icon">
-                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                    </div>
-                    <div class="contact-card-info">
-                      <span class="contact-card-name">WhatsApp Directo</span>
-                      <span class="contact-card-val">+54 351 261 9874</span>
-                    </div>
-                  </div>
-                  <a href="https://wa.me/543512619874" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-                    Chatear
-                  </a>
-                </div>
-
-                <!-- Email Card -->
-                <div class="contact-card">
-                  <div class="contact-card-left">
-                    <div class="contact-card-icon">
-                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                    </div>
-                    <div class="contact-card-info">
-                      <span class="contact-card-name">Correo Electrónico</span>
-                      <span class="contact-card-val">leodoercba@gmail.com</span>
-                    </div>
-                  </div>
-                  <button type="button" class="copy-btn" id="btn-copy-email">
-                    <span>Copiar</span>
-                  </button>
-                </div>
-
-                <!-- LinkedIn Card -->
-                <div class="contact-card">
-                  <div class="contact-card-left">
-                    <div class="contact-card-icon">
-                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-                    </div>
-                    <div class="contact-card-info">
-                      <span class="contact-card-name">LinkedIn</span>
-                      <span class="contact-card-val">in/leopoldo-doerflinger</span>
-                    </div>
-                  </div>
-                  <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                    Conectar
-                  </a>
-                </div>
-
-                <!-- GitHub Card -->
-                <div class="contact-card">
-                  <div class="contact-card-left">
-                    <div class="contact-card-icon">
-                      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>
-                    </div>
-                    <div class="contact-card-info">
-                      <span class="contact-card-name">GitHub</span>
-                      <span class="contact-card-val">github.com/LeoDoerflinger</span>
-                    </div>
-                  </div>
-                  <a href="https://github.com/LeoDoerflinger" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
-                    Seguir
-                  </a>
-                </div>
-
-              </div>
-            </div>
-
-            <!-- Contact Form Box Column -->
-            <div class="contact-form-box reveal reveal-delay-1">
-              <h3 style="font-family:var(--font-heading); font-size:1.3rem; margin-bottom:1.25rem;">Enviar un mensaje</h3>
-              <form id="contact-form" class="contact-form" novalidate>
-                <div class="form-group">
-                  <label class="form-label" for="contact-name">Nombre Completo *</label>
-                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="Ej: Santiago Pérez" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="contact-email">Correo Electrónico *</label>
-                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="ejemplo@empresa.com" required />
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="contact-subject">Motivo / Tipo de Proyecto</label>
-                  <select id="contact-subject" class="form-select">
-                    <option value="Propuesta Laboral">Propuesta Laboral (Full Time / Part Time)</option>
-                    <option value="Proyecto Freelance">Desarrollo de Proyecto Web Freelance</option>
-                    <option value="Consulta Técnica">Consulta Técnica o Asesoramiento</option>
-                    <option value="Otro">Otro</option>
-                  </select>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" for="contact-message">Mensaje *</label>
-                  <textarea id="contact-message" name="message" class="form-textarea" placeholder="Contame sobre tu idea, empresa o proyecto..." required></textarea>
-                </div>
-
-                <div class="form-actions-row">
-                  <button type="submit" id="btn-email-submit" class="btn btn-primary">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                    <span>Enviar por Email</span>
-                  </button>
-                  <button type="button" id="btn-whatsapp-submit" class="btn btn-secondary">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-                    <span>Enviar a WhatsApp</span>
-                  </button>
-                </div>
-
-                <div class="form-status" id="form-status" role="alert"></div>
-              </form>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-    </main>
-
-    <!-- ======================================================================
-         FOOTER
-         ====================================================================== -->
-    <footer>
-      <div class="container footer-inner">
-        <p class="footer-copy">
-          © 2026 <strong>Leopoldo Doerflinger</strong> — Diseñado y programado con código limpio & pasión por la tecnología.
-        </p>
-
-        <div class="footer-socials">
-          <a href="https://github.com/LeoDoerflinger" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"></path></svg>
-          </a>
-          <a href="https://www.linkedin.com/in/leopoldo-doerflinger-737570186/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-          </a>
-          <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="CV Interactivo">
-            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-          </a>
-          <button type="button" id="back-to-top" class="back-to-top-btn" aria-label="Volver arriba">
-            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
-          </button>
-        </div>
       </div>
-    </footer>
 
-  </div><!-- /wrapper -->
+    </section>
+
+  </main>
 
   <!-- ======================================================================
-       PROJECT DETAILS MODAL
+       PIE DE PÁGINA (COLOFÓN)
        ====================================================================== -->
-  <div class="modal-overlay" id="project-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-project-title">
-    <div class="modal-window">
-      <!-- Window Title Bar -->
-      <div class="modal-header-bar">
-        <div class="modal-dots">
-          <span style="background: #ff5f57;"></span>
-          <span style="background: #febc2e;"></span>
-          <span style="background: #28c840;"></span>
-        </div>
-        <div class="modal-title-header" id="modal-project-category">Ficha Técnica</div>
-        <button type="button" class="modal-close-btn" id="project-modal-close" aria-label="Cerrar ventana modal">✕</button>
+  <footer class="site-footer">
+    <div class="max-w-layout footer-inner">
+      <div>
+        <span>Compuesto en Newsreader, Plus Jakarta Sans & JetBrains Mono.</span>
       </div>
-
-      <!-- Modal Body Content -->
-      <div class="modal-body">
-        <div class="modal-media-box">
-          <img id="modal-project-img" src="" alt="" />
-        </div>
-
-        <div class="modal-details-grid">
-          <div>
-            <h3 id="modal-project-title" style="font-family:var(--font-heading); font-size:1.6rem; margin-bottom:0.75rem; color:var(--text-primary);"></h3>
-            <p id="modal-project-desc" class="modal-long-desc"></p>
-            <div class="modal-features-title">Características Principales:</div>
-            <ul id="modal-project-features" class="modal-features-list"></ul>
-          </div>
-
-          <div class="modal-sidebar">
-            <div>
-              <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); font-weight:600; margin-bottom:0.6rem;">Tecnologías Utilizadas</div>
-              <div id="modal-project-tags" class="project-tags"></div>
-            </div>
-
-            <div style="display:flex; flex-direction:column; gap:0.75rem; margin-top:1rem;">
-              <a id="modal-project-live" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-                <span>Visitar Sitio Web</span>
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" x2="21" y1="14" y2="3"/></svg>
-              </a>
-              <a id="modal-project-github" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-                <span>Ver Código en GitHub</span>
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
-              </a>
-            </div>
-          </div>
-        </div>
-
+      <div>
+        <span>Leopoldo Doerflinger © 2026 · Córdoba, Argentina</span>
       </div>
     </div>
-  </div>
+  </footer>
 
-  <!-- Modular Scripts -->
+  <!-- Scripts Modulares -->
   <script src="js/main.js"></script>
-  <script src="js/cube.js"></script>
   <script src="js/projects.js"></script>
+  <script src="js/cube.js"></script>
   <script src="js/contact.js"></script>
-
 </body>
 </html>

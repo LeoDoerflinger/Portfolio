@@ -1,104 +1,97 @@
 /* ==========================================================================
-   VARIABLES & DESIGN TOKENS
-   Portfolio - Leopoldo Doerflinger (Full Stack Developer)
+   DESIGN TOKENS & ARCHITECTURAL PALETTE — FIGMA / MIDDAY AESTHETIC
+   Portfolio — Leopoldo Doerflinger (Frontend & UI Developer · Córdoba, AR)
    ========================================================================== */
 
 :root {
-  /* --- Tipografías Humanistas & Editoriales --- */
-  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
-  --font-hand: 'Caveat', cursive, sans-serif;
+  /* --- Tipografía Unificada & Limpia (Sin monospace tosco) --- */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
-  /* --- Spacing & Layout --- */
-  --container-max: 1240px;
-  --header-height: 68px;
-  --radius-xs: 3px;
+  /* --- Spacing & Grid --- */
+  --container-max: 1200px;
+  --header-height: 64px;
+  --section-gap: 4.5rem;
+  --section-gap-lg: 6rem;
+
+  /* --- Radios Geométricos Refinados (Figma / Midday: 4px - 8px) --- */
+  --radius-xs: 4px;
   --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
   --radius-pill: 9999px;
 
-  /* --- Transiciones Táctiles --- */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  /* --- Transiciones --- */
+  --ease-architectural: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1);
   --trans-instant: 0.12s ease;
-  --trans-fast: 0.22s var(--ease-snap);
-  --trans-normal: 0.35s var(--ease-out-expo);
+  --trans-fast: 0.18s var(--ease-snap);
+  --trans-smooth: 0.3s var(--ease-architectural);
 
-  /* --- TEMA CLARO (Papel & Tinta) --- */
-  --bg-paper: #F6F2EB;
-  --bg-card: #EDE7DC;
-  --bg-elevated: #FAF8F4;
-  --bg-sunken: #E4DCD0;
+  /* --- MODO NOCHE DE ESTUDIO (PREDETERMINADO: Carbón puro y tiza) --- */
+  --bg-canvas: #090A0C;
+  --bg-canvas-subtle: #0E1013;
+  --bg-surface: #131519;
+  --bg-surface-hover: #181B20;
+  --bg-surface-elevated: #1C1F26;
+  --bg-sunken: #050607;
 
-  --ink-primary: #191816;
-  --ink-secondary: #4A463F;
-  --ink-muted: #827C72;
-  --ink-faint: rgba(25, 24, 22, 0.08);
+  --text-primary: #F3F4F6;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  --text-faint: rgba(243, 244, 246, 0.12);
 
-  --accent-terracotta: #C84B31;
-  --accent-terracotta-hover: #B33D25;
-  --accent-terracotta-dim: rgba(200, 75, 49, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-medium: rgba(255, 255, 255, 0.16);
+  --border-strong: rgba(255, 255, 255, 0.28);
+  --border-focus: #F3F4F6;
 
-  --accent-moss: #33593E;
-  --accent-moss-dim: rgba(51, 89, 62, 0.12);
+  --accent-primary: #F3F4F6;
+  --accent-primary-text: #090A0C;
 
-  --accent-ochre: #C58327;
-  --accent-ochre-dim: rgba(197, 131, 39, 0.14);
+  --tag-bg: rgba(255, 255, 255, 0.04);
+  --tag-border: rgba(255, 255, 255, 0.08);
+  --tag-text: #D1D5DB;
 
-  /* Enlaces & Hipervínculos Elegantes */
-  --link-color: #191816;
-  --link-hover: #C84B31;
-  --link-border: rgba(200, 75, 49, 0.4);
+  --link-color: #F3F4F6;
+  --link-hover: #FFFFFF;
 
-  --rule-color: rgba(25, 24, 22, 0.15);
-  --rule-strong: rgba(25, 24, 22, 0.85);
-
-  --shadow-tactile: 3px 3px 0px var(--ink-primary);
-  --shadow-tactile-lg: 5px 5px 0px var(--ink-primary);
-  --shadow-tactile-sm: 2px 2px 0px var(--ink-primary);
-  --shadow-soft: 0 10px 28px rgba(25, 24, 22, 0.06);
-
-  --tape-color: rgba(216, 201, 172, 0.75);
-  --tape-border: rgba(25, 24, 22, 0.22);
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
+  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.85);
 }
 
-/* --- TEMA OSCURO (Carbón & Arcilla) --- */
-[data-theme="dark"] {
-  --bg-paper: #141312;
-  --bg-card: #1D1B18;
-  --bg-elevated: #25221E;
-  --bg-sunken: #0D0C0B;
+/* --- MODO BLANCO GALERÍA (Alternativa: Blanco puro y tinta profunda) --- */
+[data-theme="light"] {
+  --bg-canvas: #FFFFFF;
+  --bg-canvas-subtle: #F9FAFB;
+  --bg-surface: #F9FAFB;
+  --bg-surface-hover: #F3F4F6;
+  --bg-surface-elevated: #FFFFFF;
+  --bg-sunken: #F1F3F5;
 
-  --ink-primary: #EDE8DF;
-  --ink-secondary: #B7B0A2;
-  --ink-muted: #7E776C;
-  --ink-faint: rgba(237, 232, 223, 0.07);
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --text-muted: #6B7280;
+  --text-faint: rgba(17, 24, 39, 0.08);
 
-  --accent-terracotta: #E26347;
-  --accent-terracotta-hover: #F0765C;
-  --accent-terracotta-dim: rgba(226, 99, 71, 0.16);
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-medium: rgba(0, 0, 0, 0.16);
+  --border-strong: rgba(0, 0, 0, 0.28);
+  --border-focus: #111827;
 
-  --accent-moss: #6BA179;
-  --accent-moss-dim: rgba(107, 161, 121, 0.16);
+  --accent-primary: #111827;
+  --accent-primary-text: #FFFFFF;
 
-  --accent-ochre: #E5A94C;
-  --accent-ochre-dim: rgba(229, 169, 76, 0.16);
+  --tag-bg: rgba(0, 0, 0, 0.03);
+  --tag-border: rgba(0, 0, 0, 0.08);
+  --tag-text: #374151;
 
-  /* Enlaces en Modo Oscuro */
-  --link-color: #EDE8DF;
-  --link-hover: #E26347;
-  --link-border: rgba(226, 99, 71, 0.5);
+  --link-color: #111827;
+  --link-hover: #000000;
 
-  --rule-color: rgba(237, 232, 223, 0.14);
-  --rule-strong: rgba(237, 232, 223, 0.85);
-
-  --shadow-tactile: 3px 3px 0px var(--ink-primary);
-  --shadow-tactile-lg: 5px 5px 0px var(--ink-primary);
-  --shadow-tactile-sm: 2px 2px 0px var(--ink-primary);
-  --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.4);
-
-  --tape-color: rgba(56, 52, 46, 0.78);
-  --tape-border: rgba(237, 232, 223, 0.2);
+  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 12px 28px -8px rgba(0, 0, 0, 0.06);
+  --shadow-modal: 0 25px 60px -15px rgba(0, 0, 0, 0.18);
 }

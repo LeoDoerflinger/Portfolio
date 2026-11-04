@@ -1,585 +1,291 @@
 /* ==========================================================================
-   PROJECTS DATA, INTERACTIVE DOSSIER & SPECIMEN INSPECTOR
-   Portfolio - Leopoldo Doerflinger (Full Stack Developer)
+   PROJECTS DATA & EDITORIAL GRID
+   Portfolio — Leopoldo Doerflinger
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  // 1. REGISTRO DE PROYECTOS REALES
+  window.ldApp = window.ldApp || {};
+
+  // Catálogo de Proyectos Reales (Solo tecnologías reales trabajadas)
   const PROJECTS = [
     {
       id: 'gastropos-saas',
       index: '01',
       title: 'GastroPOS — Gestión Gastronómica',
-      subtitle: 'Plataforma SaaS multi-local, comanda QR para mozos, arqueos y cuentas corrientes',
-      category: 'comercio',
-      categoryLabel: 'E-Commerce & Gestión',
+      subtitle: 'Plataforma SaaS multi-local con comanda táctil para mozos, salón interactivo y arqueos de caja.',
+      categoryLabel: 'SaaS & Gestión',
       year: '2026',
       assetPath: 'assets/gastropos.png',
       liveUrl: 'https://gastro-pos-ld.vercel.app/',
       githubUrl: 'https://github.com/LeoDoerflinger/gastro-pos',
-      problem: 'En gastronomía, un software lento o desarticulado te frena el despacho en pleno horario pico. Mozos con comandas en papel que se traspapelan, mesas que piden la cuenta y quedan colgadas, o arqueos de caja donde nunca cierra la plata por falta de trazabilidad en los turnos, adelantos de sueldos y cuentas corrientes.',
-      solution: 'Desarrollé una plataforma integral multi-local con comanda táctil PWA para mozos (vía QR), salón interactivo en tiempo real con alertas sonoras, arqueo ciego multicanal (efectivo, tarjetas, QR y cuenta corriente), directorio de proveedores y módulo financiero para sueldos, consumos y escandallo estandarizado.',
-      stack: ['Node.js', 'Express', 'Vite / JS', 'PWA / QR', 'Cuentas Corrientes', 'Arqueo de Caja', 'Vercel'],
-      demoType: 'gastropos'
+      featured: true,
+      problem: 'En gastronomía, un sistema lento frena el despacho en horario pico. Comandas que se pierden, demoras al cobrar y arqueos de caja donde no cierra la plata por falta de trazabilidad.',
+      solution: 'Plataforma multi-local con comanda táctil PWA para mozos (vía QR), salón interactivo en tiempo real con alertas sonoras, arqueo ciego multicanal y módulo de proveedores.',
+      stack: ['Node.js', 'Express', 'JavaScript', 'Vite', 'PWA', 'Vercel']
     },
     {
       id: 'pastillero-pwa',
       index: '02',
       title: 'Mi Pastillero Virtual',
-      subtitle: 'PWA asistiva & organizador de tomas con lupa integrada',
-      category: 'utilidad',
-      categoryLabel: 'Salud & Utilidad',
+      subtitle: 'PWA asistiva offline-first, organizador de tomas con alertas y lupa óptica de prospectos.',
+      categoryLabel: 'PWA & Utilidad',
       year: '2025',
       assetPath: 'assets/pastillero.png',
       liveUrl: 'https://pastillero10.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger',
-      problem: 'La mayoría de las apps de salud están llenas de menús complejos y pasos innecesarios, cuando lo único que necesitás saber a las 8 de la mañana antes de salir al laburo es: "¿ya me tomé la pastilla o no?". Sin dar mil vueltas ni comerte un registro eterno con contraseñas complicadas.',
-      solution: 'Desarrollé una Progressive Web App (PWA) pensada para resolver de una: funciona sin conexión a internet, envía alertas programadas con la Notification API nativa y suma una lupa con la cámara del celular para facilitar la lectura de prospectos pequeños.',
-      stack: ['React / JS', 'PWA', 'Service Workers', 'Web Push', 'Local Storage', 'Camera API'],
-      demoType: 'pastillero'
+      githubUrl: 'https://github.com/LeoDoerflinger/Pastillero',
+      featured: false,
+      problem: 'La mayoría de las apps de salud están llenas de menús complejos cuando lo único que necesitás saber es si tomaste la medicación a horario sin dar vueltas.',
+      solution: 'Progressive Web App pensada para resolver de una: funciona sin conexión a internet, envía alertas programadas con Web Push y suma una lupa con la cámara para leer prospectos pequeños.',
+      stack: ['React.js', 'PWA', 'Service Workers', 'Web Push API', 'LocalStorage']
     },
     {
       id: 'climax-weather',
       index: '03',
-      title: 'ClimaX — Weather App',
-      subtitle: 'Estación climática reactiva & telemetría sin publicidad',
-      category: 'datos',
-      categoryLabel: 'APIs & Datos',
+      title: 'ClimaX — Telemetría Climática',
+      subtitle: 'Estación meteorológica reactiva con radar de precipitaciones, geolocalización y cero publicidad.',
+      categoryLabel: 'APIs & Telemetría',
       year: '2025',
       assetPath: 'assets/climax.png',
       liveUrl: 'https://climax-leodoer.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger',
-      problem: 'Entrar a un portal meteorológico común suele ser comerse 20 banners de publicidad y videos automáticos que te consumen datos, solo para saber si salís con campera o remera.',
-      solution: 'Construí un cliente meteorológico ultraliviano consumiendo la OpenWeather API. Si le das permiso saca la temperatura, sensación térmica y viento de tu ubicación al instante con la Geolocation API, o podés buscar cualquier ciudad del mundo sin demoras.',
-      stack: ['JavaScript ES6+', 'OpenWeather API', 'Geolocation API', 'CSS Grid', 'Async/Await'],
-      demoType: 'climax'
+      githubUrl: 'https://github.com/LeoDoerflinger/Climax',
+      featured: false,
+      problem: 'Los portales meteorológicos convencionales están saturados de anuncios y videos que ralentizan la carga solo para ver la temperatura.',
+      solution: 'Cliente meteorológico ultraliviano consumiendo la OpenWeather API. Detecta temperatura, sensación térmica y viento mediante Geolocation API o búsqueda global sin demoras.',
+      stack: ['JavaScript ES6+', 'OpenWeather API', 'Geolocation API', 'CSS Grid', 'Vercel']
     },
     {
       id: 'news-dashboard',
       index: '04',
       title: 'Panel de Noticias & Divisas',
-      subtitle: 'Monitor financiero en vivo, cotizaciones y prensa limpia',
-      category: 'datos',
-      categoryLabel: 'APIs & Datos',
+      subtitle: 'Monitor financiero en vivo, cotizaciones cambiarias en tiempo real y feed editorial limpio.',
+      categoryLabel: 'APIs & Telemetría',
       year: '2025',
       assetPath: 'assets/news.png',
       liveUrl: 'https://news-leodoerflinger.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger',
-      problem: 'En Argentina las cotizaciones del mercado cambiario varían constantemente y los sitios informativos suelen tapar la pantalla con anuncios flotantes y muros de pago.',
-      solution: 'Integré múltiples endpoints REST concurrentes para consultar las cotizaciones cambiarias en tiempo real, sumé una calculadora de conversión directa y un feed de prensa ordenado para ver las noticias del día sin distracciones.',
-      stack: ['JavaScript', 'REST APIs', 'Tailwind CSS', 'Vercel', 'Async Fetch'],
-      demoType: 'news'
+      githubUrl: 'https://github.com/LeoDoerflinger/News',
+      featured: false,
+      problem: 'Las cotizaciones cambiarias en Argentina varían a diario y los sitios informativos suelen bloquear la lectura con publicidad invasiva.',
+      solution: 'Endpoints concurrentes para consultar cotizaciones cambiarias en tiempo real, calculadora de conversión directa y un feed de prensa ordenado para leer sin distracciones.',
+      stack: ['JavaScript ES6+', 'REST APIs', 'Tailwind CSS', 'Vercel']
     },
     {
       id: 'mitienda-ecommerce',
       index: '05',
-      title: 'MiTienda — E-Commerce',
-      subtitle: 'Catálogo dinámico, filtrado instantáneo & carrito reactivo',
-      category: 'comercio',
-      categoryLabel: 'E-Commerce & Gestión',
+      title: 'MiTienda — E-Commerce React',
+      subtitle: 'Catálogo comercial con filtrado instantáneo en memoria, gestión de stock y carrito reactivo.',
+      categoryLabel: 'E-Commerce',
       year: '2025',
       assetPath: 'assets/tienda.png',
       liveUrl: 'https://mitienda-one.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger',
-      problem: 'Muchas tiendas online pequeñas sufren con carritos que se traban, páginas que se recargan por completo al filtrar productos o pedidos que se pierden si el usuario toca atrás.',
-      solution: 'Implementé una gestión de estado global reactiva para el carrito con Context API. El cálculo de subtotales, cantidades y filtros responde al instante, con arquitectura preparada para conectar pasarelas de pago y base de datos.',
-      stack: ['React.js', 'Context API', 'CSS Modules', 'Firebase / DB', 'LocalStorage'],
-      demoType: 'tienda'
+      githubUrl: 'https://github.com/LeoDoerflinger/BarDigital',
+      featured: false,
+      problem: 'Muchas tiendas online sufren con carritos que se traban, páginas que se recargan al filtrar productos o pedidos que se pierden.',
+      solution: 'Estado global reactivo con Context API. Cálculo instantáneo de subtotales, filtros en memoria sin recargas y persistencia en LocalStorage.',
+      stack: ['React.js', 'Context API', 'CSS Modules', 'Firebase DB', 'LocalStorage']
     },
     {
       id: 'pixel-y-mate',
       index: '06',
-      title: 'Pixel y Mate — Agencia',
-      subtitle: 'Portal corporativo, arquitectura UI/UX & captación directa',
-      category: 'comercio',
-      categoryLabel: 'E-Commerce & Gestión',
+      title: 'Pixel y Mate — Agencia Digital',
+      subtitle: 'Portal corporativo, arquitectura UI/UX moderna, métricas de carga ultra-rápidas y captación comercial.',
+      categoryLabel: 'E-Commerce & Branding',
       year: '2025',
       assetPath: 'assets/pym.png',
       liveUrl: 'https://pixel-y-mate.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger',
-      problem: 'Muchos sitios de agencias cargan páginas de 15 megabytes saturadas de librerías pesadas que tardan una eternidad en abrir desde el celular, perjudicando la conversión de clientes.',
-      solution: 'Diseñé una landing institucional moderna y liviana: maquetación semántica, optimización SEO on-page, carga inferior a 1 segundo y llamados a la acción claros para canalizar consultas comerciales directamente.',
-      stack: ['HTML5 Semántico', 'CSS3 Moderno', 'JavaScript', 'UI/UX Design', 'SEO On-Page'],
-      demoType: 'pym'
+      githubUrl: 'https://github.com/LeoDoerflinger/Pixel-y-Mate',
+      featured: false,
+      problem: 'Sitios corporativos que tardan demasiado en abrir desde el celular, perjudicando la retención y la conversión de clientes.',
+      solution: 'Landing institucional ágil: maquetación semántica, optimización SEO on-page, carga inferior a 1 segundo y llamados a la acción claros.',
+      stack: ['HTML5', 'CSS3', 'JavaScript ES6+', 'UI/UX Design', 'SEO On-Page']
     },
     {
       id: 'password-generator',
       index: '07',
       title: 'Pass — Bóveda & Generador',
-      subtitle: 'Generador criptográfico con Web Crypto API & auditor de entropía',
-      category: 'utilidad',
-      categoryLabel: 'Salud & Utilidad',
+      subtitle: 'Generador criptográfico con Web Crypto API nativa, cálculo de bits de entropía y copiado en 1 clic.',
+      categoryLabel: 'PWA & Utilidad',
       year: '2025',
       assetPath: 'assets/pass.png',
       liveUrl: 'https://proyectos-v2fv.vercel.app/',
-      githubUrl: 'https://github.com/LeoDoerflinger',
-      problem: 'Mucha gente sigue usando "123456" o datos personales predecibles porque inventar contraseñas seguras y memorizarlas resulta tedioso, o porque desconfían de herramientas online que puedan almacenar sus claves.',
-      solution: 'Desarrollé un generador que calcula claves de alta entropía matemática directamente en el navegador mediante la Web Crypto API nativa, con parámetros configurables y copiado al portapapeles en un clic.',
-      stack: ['JavaScript', 'Web Crypto API', 'Cybersecurity', 'Entropy Metrics', 'Clipboard API'],
-      demoType: 'pass'
+      githubUrl: 'https://github.com/LeoDoerflinger/Proyectos',
+      featured: false,
+      problem: 'Uso de contraseñas inseguras por dificultad para inventar claves complejas o por desconfianza en generadores online que guardan datos.',
+      solution: 'Generador de claves de alta entropía matemática ejecutado directamente en el navegador mediante Web Crypto API nativa con copiado en 1 clic.',
+      stack: ['JavaScript', 'Web Crypto API', 'Clipboard API', 'CSS3']
     }
   ];
 
-  // Estado del Inspector
-  let activeProjectId = PROJECTS[0].id;
-  let currentFilter = 'all';
-  let inspectorViewMode = 'demo'; // 'demo' o 'capture'
+  // Renderizador de Tarjetas en Grid Asimétrico Editorial
+  function renderProjectsGrid() {
+    const container = document.getElementById('projects-grid-container');
+    if (!container) return;
 
-  // Muestras meteorológicas
-  const weatherSamples = [
-    { city: 'CÓRDOBA, AR', temp: '25°C', desc: 'Despejado · Viento 12 km/h', icon: '☀️' },
-    { city: 'BUENOS AIRES, AR', temp: '21°C', desc: 'Templado con humedad · 68%', icon: '⛅' },
-    { city: 'BARILOCHE, AR', temp: '9°C', desc: 'Fresco de cordillera · 88%', icon: '🌧️' },
-    { city: 'MENDOZA, AR', temp: '23°C', desc: 'Tarde despejada · Viento calmo', icon: '🌤️' }
-  ];
-  let weatherIdx = 0;
-  let demoCartQty = 2;
+    let html = '';
 
-  // Helper para generar micro-simuladores
-  function getMicroDemoMarkup(demoType) {
-    switch (demoType) {
-      case 'gastropos':
-        return `
-          <div class="micro-demo-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
-              <span>SIMULADOR DE SALÓN EN VIVO · PUESTO DE CONTROL</span>
-              <span style="color:var(--accent-terracotta);">Tocá una mesa para operar</span>
+    PROJECTS.forEach((p) => {
+      const isHero = p.featured;
+      const cardClass = isHero ? 'project-card project-card-featured' : 'project-card';
+
+      html += `
+        <article class="${cardClass} reveal-item" data-project-id="${p.id}">
+          <div class="card-inner hairline-box">
+            
+            <!-- Encabezado de Ficha -->
+            <div class="card-meta-bar hairline-b">
+              <div class="meta-left">
+                <span class="meta-index">${p.index}</span>
+                <span class="meta-dot">/</span>
+                <span class="meta-category">${p.categoryLabel}</span>
+              </div>
+              <div class="meta-right">
+                <span class="meta-year">${p.year}</span>
+              </div>
             </div>
-            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.5rem;" id="demoPosTablesGrid">
-              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 0)">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 01</span>
-                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Salón</span>
+
+            <div class="card-body-layout">
+              <!-- Visual Bezel / Preview Image -->
+              <div class="card-visual-frame hairline-r">
+                <div class="visual-wrapper" onclick="window.ldApp.openProjectModal('${p.id}')" title="Click para ver detalles">
+                  <img src="${p.assetPath}" alt="Captura de ${p.title}" class="project-img" loading="lazy" />
+                  <div class="visual-overlay">
+                    <span class="overlay-pill">Ver ficha ↗</span>
+                  </div>
                 </div>
-                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">4 comensales</strong>
-                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-moss);">● Abierta · $18.400</span>
-              </button>
-              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 1)">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 02</span>
-                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Terraza</span>
+              </div>
+
+              <!-- Ficha de Datos & Contenido -->
+              <div class="card-info-pane">
+                <div class="card-title-group">
+                  <h3 class="card-title">${p.title}</h3>
+                  <p class="card-subtitle">${p.subtitle}</p>
                 </div>
-                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">Ticket emitido</strong>
-                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:#0284c7;">● Cuenta pedida</span>
-              </button>
-              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 2)">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 03</span>
-                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Salón</span>
+
+                <!-- Resumen breve -->
+                <div class="card-brief">
+                  <div class="brief-item">
+                    <span class="brief-label">DESAFÍO</span>
+                    <p class="brief-text">${p.problem}</p>
+                  </div>
+                  <div class="brief-item">
+                    <span class="brief-label">SOLUCIÓN</span>
+                    <p class="brief-text">${p.solution}</p>
+                  </div>
                 </div>
-                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">Disponible</strong>
-                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">○ Libre</span>
-              </button>
-              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 3)">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 04</span>
-                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Barra</span>
+
+                <!-- Stack Técnico Únicamente -->
+                <div class="card-stack-row">
+                  ${p.stack.map(s => `<span class="stack-tag">${s}</span>`).join('')}
                 </div>
-                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">3 comensales</strong>
-                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-terracotta);">● Por cobrar · $31.200</span>
-              </button>
-            </div>
-            <div style="margin-top:0.65rem; padding:0.5rem 0.75rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:0.68rem;">
-              <span id="demoPosLog" style="color:var(--ink-primary);">🔔 Comanda Mozo QR: Mesa 02 pidió la precuenta ticket.</span>
-              <span style="color:var(--accent-moss); font-weight:600; white-space:nowrap; margin-left:0.5rem;">Sincro en vivo</span>
-            </div>
-          </div>
-        `;
 
-      case 'pastillero':
-        return `
-          <div class="micro-demo-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
-              <span>SIMULADOR PWA · TOMAS DE HOY</span>
-              <span style="color:var(--accent-terracotta);">Tocá una para marcar</span>
-            </div>
-            <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:0.5rem;">
-              <button type="button" class="btn-dose p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.toggleDose(this)">
-                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">08:00 AM</span>
-                <strong style="font-size:0.75rem; display:block; margin:0.15rem 0;">Vitamina D</strong>
-                <span class="dose-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-moss);">✓ Tomada</span>
-              </button>
-              <button type="button" class="btn-dose p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.toggleDose(this)">
-                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">02:00 PM</span>
-                <strong style="font-size:0.75rem; display:block; margin:0.15rem 0;">Omega 3</strong>
-                <span class="dose-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-terracotta);">○ Pendiente</span>
-              </button>
-              <button type="button" class="btn-dose p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.toggleDose(this)">
-                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">10:00 PM</span>
-                <strong style="font-size:0.75rem; display:block; margin:0.15rem 0;">Magnesio</strong>
-                <span class="dose-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-terracotta);">○ Pendiente</span>
-              </button>
-            </div>
-          </div>
-        `;
-
-      case 'climax':
-        return `
-          <div class="micro-demo-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
-              <span>ESTACIÓN CLIMÁTICA · TELEMETRÍA</span>
-              <button type="button" onclick="window.ldApp.cycleWeather()" style="color:var(--accent-terracotta); background:none; border:none; text-decoration:underline; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">
-                Cambiar ciudad ↻
-              </button>
-            </div>
-            <div style="padding:0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div id="demoWxCity" style="font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">${weatherSamples[0].city}</div>
-                <div id="demoWxTemp" style="font-family:var(--font-serif); font-size:2.1rem; line-height:1.1; margin:0.2rem 0;">${weatherSamples[0].temp}</div>
-                <div id="demoWxDesc" style="font-family:var(--font-mono); font-size:0.7rem; color:var(--accent-moss);">${weatherSamples[0].desc}</div>
-              </div>
-              <div id="demoWxIcon" style="font-size:2.4rem;">${weatherSamples[0].icon}</div>
-            </div>
-          </div>
-        `;
-
-      case 'pass':
-        return `
-          <div class="micro-demo-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
-              <span>GENERADOR CRIPTOGRÁFICO EN VIVO</span>
-              <button type="button" onclick="window.ldApp.generateCryptoKey()" style="color:var(--accent-terracotta); background:none; border:none; text-decoration:underline; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">
-                Generar otra ↻
-              </button>
-            </div>
-            <div style="padding:0.75rem 0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
-              <code id="demoPassCode" style="font-family:var(--font-mono); font-size:0.875rem; font-weight:600; letter-spacing:0.04em; user-select:all;">k7#mP9!vL2$qR8@x</code>
-              <span style="font-family:var(--font-mono); font-size:0.65rem; padding:0.2rem 0.5rem; border-radius:var(--radius-xs); background:var(--accent-moss); color:#FAF8F4;">128-bit</span>
-            </div>
-          </div>
-        `;
-
-      case 'tienda':
-        return `
-          <div class="micro-demo-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
-              <span>ESTADO REACTIVO DEL CARRITO</span>
-              <span id="demoCartBadge" style="font-weight:700; color:var(--accent-terracotta); font-family:var(--font-mono); font-size:0.75rem;">
-                ${demoCartQty} artículos ($${(demoCartQty * 24.5).toFixed(2)})
-              </span>
-            </div>
-            <div style="padding:0.85rem 0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center;">
-              <div>
-                <div style="font-size:0.8125rem; font-weight:600;">Cuaderno Técnico A5</div>
-                <div style="font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">$24.50 c/u · Stock en tiempo real</div>
-              </div>
-              <div style="display:flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.8rem;">
-                <button type="button" onclick="window.ldApp.updateCartDemo(-1)" style="width:26px; height:26px; border:1px solid var(--rule-color); background:var(--bg-paper); border-radius:3px; cursor:pointer;">-</button>
-                <span id="demoCartQtyDisplay" style="font-weight:700; min-width:18px; text-align:center;">${demoCartQty}</span>
-                <button type="button" onclick="window.ldApp.updateCartDemo(1)" style="width:26px; height:26px; border:1px solid var(--rule-color); background:var(--bg-paper); border-radius:3px; cursor:pointer;">+</button>
+                <!-- Acciones Directas -->
+                <div class="card-actions-row hairline-t">
+                  <a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary" title="Abrir en Vercel">
+                    <span>Probar en vivo</span>
+                    <span class="arrow-icon">↗</span>
+                  </a>
+                  <a href="${p.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-action btn-secondary" title="Ver código en GitHub">
+                    <span>Código en GitHub</span>
+                    <span class="arrow-icon">↗</span>
+                  </a>
+                  <button type="button" class="btn-action btn-ghost" onclick="window.ldApp.openProjectModal('${p.id}')" title="Ver detalles">
+                    <span>Ficha</span>
+                    <span class="arrow-icon">⚙</span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        `;
 
-      case 'pym':
-        return `
-          <div class="micro-demo-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
-              <span>MÉTRICAS DE RENDIMIENTO WEB</span>
-              <span>Lighthouse Score</span>
-            </div>
-            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.5rem;">
-              <div style="padding:0.75rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color);">
-                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">PERFORMANCE</span>
-                <span style="font-family:var(--font-serif); font-size:1.55rem; color:var(--accent-moss); font-weight:600;">99 / 100</span>
-              </div>
-              <div style="padding:0.75rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color);">
-                <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted); display:block;">CARGA INICIAL</span>
-                <span style="font-family:var(--font-serif); font-size:1.55rem; color:var(--ink-primary); font-weight:600;">0.65 seg</span>
-              </div>
-            </div>
-          </div>
-        `;
-
-      case 'news':
-      default:
-        return `
-          <div class="micro-demo-box">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
-              <span>COTIZACIONES & PRENSA EN VIVO</span>
-              <span style="color:var(--accent-moss);">DÓLAR BLUE: $1.220</span>
-            </div>
-            <div style="padding:0.85rem 0.95rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color);">
-              <span style="font-family:var(--font-mono); font-size:0.65rem; text-transform:uppercase; color:var(--accent-terracotta); font-weight:700;">[ECONOMÍA & TECNOLOGÍA]</span>
-              <p style="font-family:var(--font-serif); font-size:0.925rem; margin-top:0.25rem; line-height:1.35; color:var(--ink-primary);">
-                Lectura sin distracciones: la información económica clave al instante, sin pop-ups ni muros de suscripción molestos.
-              </p>
-            </div>
-          </div>
-        `;
-    }
-  }
-
-  // Renderizar la lista editorial de proyectos
-  function renderProjectsList() {
-    const listContainer = document.getElementById('projects-list-container');
-    if (!listContainer) return;
-
-    const filtered = currentFilter === 'all'
-      ? PROJECTS
-      : PROJECTS.filter(p => p.category === currentFilter);
-
-    if (!filtered.some(p => p.id === activeProjectId) && filtered.length > 0) {
-      activeProjectId = filtered[0].id;
-    }
-
-    listContainer.innerHTML = filtered.map(proj => {
-      const isActive = proj.id === activeProjectId;
-      return `
-        <article
-          class="project-row ${isActive ? 'active' : ''}"
-          data-project-id="${proj.id}"
-          role="button"
-          tabindex="0"
-          aria-label="Inspeccionar proyecto ${proj.title}">
-          <div>
-            <div class="project-meta-line">
-              <span class="project-idx">${proj.index}</span>
-              <span>/</span>
-              <span>${proj.categoryLabel}</span>
-              <span>·</span>
-              <span>${proj.year}</span>
-            </div>
-            <h3 class="project-row-title">${proj.title}</h3>
-            <p class="project-row-subtitle">${proj.subtitle}</p>
-          </div>
-          <div class="project-row-action">
-            ${isActive ? '● En Ficha' : 'Ver Ficha →'}
           </div>
         </article>
       `;
-    }).join('');
-
-    // Eventos de selección
-    listContainer.querySelectorAll('[data-project-id]').forEach(row => {
-      row.addEventListener('click', () => {
-        activeProjectId = row.getAttribute('data-project-id');
-        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('click');
-        renderProjectsList();
-        renderInspector();
-      });
-
-      row.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          row.click();
-        }
-      });
     });
+
+    container.innerHTML = html;
+
+    if (window.ldApp.observeRevealItems) {
+      window.ldApp.observeRevealItems();
+    }
   }
 
-  // Renderizar la ficha técnica del proyecto
-  function renderInspector() {
-    const inspectorContainer = document.getElementById('project-inspector-card');
-    if (!inspectorContainer) return;
+  // Modal de Detalles
+  const modalOverlay = document.getElementById('project-modal-overlay');
+  const modalContainer = document.getElementById('project-modal-container');
 
-    const project = PROJECTS.find(p => p.id === activeProjectId) || PROJECTS[0];
+  window.ldApp.openProjectModal = function (projectId) {
+    const project = PROJECTS.find(p => p.id === projectId);
+    if (!project || !modalOverlay || !modalContainer) return;
 
-    const visualHtml = inspectorViewMode === 'demo'
-      ? getMicroDemoMarkup(project.demoType)
-      : `
-        <div class="img-preview-box">
-          <img src="${project.assetPath}" alt="Captura de ${project.title}"
-               onerror="this.onerror=null; this.src='https://placehold.co/600x340/EDE7DC/191816?text=${encodeURIComponent(project.title)}';">
-        </div>
-      `;
-
-    inspectorContainer.innerHTML = `
-      <!-- Encabezado de la Ficha -->
-      <div class="inspector-header">
-        <span>EXPEDIENTE #${project.index} — ${project.id.toUpperCase()}</span>
-        <span class="font-mono text-xs">${project.year}</span>
-      </div>
-
-      <!-- Conmutador de Vista (Simulador vs Captura Real) -->
-      <div class="inspector-view-switch">
-        <button type="button" class="switch-btn ${inspectorViewMode === 'demo' ? 'active' : ''}" id="btnViewDemo">
-          ⚡ Simulador Interactivo
-        </button>
-        <button type="button" class="switch-btn ${inspectorViewMode === 'capture' ? 'active' : ''}" id="btnViewCapture">
-          🖼️ Captura Real (${project.assetPath})
-        </button>
-      </div>
-
-      <!-- Área Visual de la Ficha -->
-      <div class="inspector-visual-stage">
-        ${visualHtml}
-      </div>
-
-      <!-- Contenido y Análisis Técnico -->
-      <div class="inspector-content">
-        <div>
-          <h3 class="inspector-title">${project.title}</h3>
-          <p class="inspector-subtitle">${project.subtitle}</p>
-        </div>
-
-        <div class="editorial-note-box">
-          <span class="note-label" style="color:var(--accent-terracotta);">EL PROBLEMA A RESOLVER</span>
-          <p class="note-text">${project.problem}</p>
-        </div>
-
-        <div class="editorial-note-box">
-          <span class="note-label" style="color:var(--accent-moss);">SOLUCIÓN TÉCNICA IMPLEMENTADA</span>
-          <p class="note-text">${project.solution}</p>
-        </div>
-
-        <div>
-          <span class="note-label" style="display:block; font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted); text-transform:uppercase; margin-bottom:0.4rem;">
-            TECNOLOGÍAS EMPLEADAS
-          </span>
-          <div class="tech-tag-list">
-            ${project.stack.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+    modalContainer.innerHTML = `
+      <div class="modal-card hairline-box">
+        <div class="modal-header hairline-b">
+          <div>
+            <span class="meta-index">${project.index}</span>
+            <span class="meta-dot">/</span>
+            <span class="meta-category">${project.categoryLabel} · ${project.year}</span>
+            <h2 class="modal-title" style="margin-top:0.25rem;">${project.title}</h2>
           </div>
+          <button type="button" class="modal-close-btn" onclick="window.ldApp.closeProjectModal()" aria-label="Cerrar ventana">✕</button>
         </div>
 
-        <!-- Botones de Acción Directa -->
-        <div class="inspector-action-buttons">
-          <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-tactile btn-primary btn-sm">
-            <span>Visitar Aplicación en Vivo</span>
-            <span>↗</span>
-          </a>
-          <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-tactile btn-sm">
-            <span>Código en GitHub</span>
-            <span>↗</span>
-          </a>
+        <div class="modal-body">
+          <div class="modal-preview-bezel hairline-b">
+            <img src="${project.assetPath}" alt="${project.title}" class="modal-preview-img" />
+          </div>
+
+          <div class="modal-details-grid">
+            <div>
+              <h4 class="modal-section-title">DESCRIPCIÓN</h4>
+              <p class="modal-p"><strong>Desafío:</strong> ${project.problem}</p>
+              <p class="modal-p" style="margin-top:0.75rem;"><strong>Solución técnica:</strong> ${project.solution}</p>
+            </div>
+
+            <div>
+              <h4 class="modal-section-title">TECNOLOGÍAS</h4>
+              <div class="card-stack-row" style="margin-bottom:1.5rem;">
+                ${project.stack.map(s => `<span class="stack-tag">${s}</span>`).join('')}
+              </div>
+
+              <div class="modal-actions-box hairline-t" style="padding-top:1.25rem; display:flex; flex-direction:column; gap:0.625rem;">
+                <a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn-action btn-primary" style="text-align:center;">
+                  Abrir Proyecto en Vercel ↗
+                </a>
+                <a href="${project.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn-action btn-secondary" style="text-align:center;">
+                  Ver Repositorio en GitHub ↗
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     `;
 
-    // Conectar botones de conmutación de vista
-    const btnDemo = document.getElementById('btnViewDemo');
-    const btnCapture = document.getElementById('btnViewCapture');
+    modalOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  };
 
-    if (btnDemo) {
-      btnDemo.addEventListener('click', () => {
-        inspectorViewMode = 'demo';
-        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('toggle');
-        renderInspector();
-      });
-    }
+  window.ldApp.closeProjectModal = function () {
+    if (!modalOverlay) return;
+    modalOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+  };
 
-    if (btnCapture) {
-      btnCapture.addEventListener('click', () => {
-        inspectorViewMode = 'capture';
-        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('toggle');
-        renderInspector();
-      });
-    }
-  }
-
-  // Configurar filtros por categoría
-  function initFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn[data-filter]');
-    filterButtons.forEach(btn => {
-      btn.addEventListener('click', () => {
-        currentFilter = btn.getAttribute('data-filter');
-        filterButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        if (window.ldApp && window.ldApp.playSound) window.ldApp.playSound('click');
-        renderProjectsList();
-        renderInspector();
-      });
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) window.ldApp.closeProjectModal();
     });
   }
 
-  // Métodos expuestos globalmente para los micro-demos
-  window.ldApp = window.ldApp || {};
-
-  const posTableStates = [
-    { status: 'Abierta', label: '● Abierta · $18.400', color: 'var(--accent-moss)', detail: '4 comensales' },
-    { status: 'Cuenta pedida', label: '● Cuenta pedida', color: '#0284c7', detail: 'Ticket emitido' },
-    { status: 'Por cobrar', label: '● Por cobrar · $31.200', color: 'var(--accent-terracotta)', detail: '3 comensales' },
-    { status: 'Libre', label: '○ Libre', color: 'var(--ink-muted)', detail: 'Disponible' }
-  ];
-
-  window.ldApp.togglePosTable = function (btn, tableIdx) {
-    const tag = btn.querySelector('.pos-status-tag');
-    const strong = btn.querySelector('strong');
-    const log = document.getElementById('demoPosLog');
-    if (!tag || !strong) return;
-
-    let currentIdx = posTableStates.findIndex(s => tag.textContent.includes(s.status));
-    if (currentIdx === -1) currentIdx = 0;
-    let nextIdx = (currentIdx + 1) % posTableStates.length;
-    const nextState = posTableStates[nextIdx];
-
-    tag.textContent = nextState.label;
-    tag.style.color = nextState.color;
-    strong.textContent = nextState.detail;
-
-    if (log) {
-      const tableNum = String(tableIdx + 1).padStart(2, '0');
-      log.textContent = `⚡ Salón: Mesa ${tableNum} pasó a estado [${nextState.status}].`;
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalOverlay && modalOverlay.classList.contains('open')) {
+      window.ldApp.closeProjectModal();
     }
-
-    if (window.ldApp.playSound) window.ldApp.playSound('click');
-  };
-
-  window.ldApp.toggleDose = function (btn) {
-    const status = btn.querySelector('.dose-tag');
-    if (!status) return;
-    const isTaken = status.textContent.includes('Tomada');
-    if (isTaken) {
-      status.textContent = '○ Pendiente';
-      status.style.color = 'var(--accent-terracotta)';
-    } else {
-      status.textContent = '✓ Tomada';
-      status.style.color = 'var(--accent-moss)';
-    }
-    if (window.ldApp.playSound) window.ldApp.playSound('click');
-  };
-
-  window.ldApp.cycleWeather = function () {
-    weatherIdx = (weatherIdx + 1) % weatherSamples.length;
-    const w = weatherSamples[weatherIdx];
-    const cityEl = document.getElementById('demoWxCity');
-    const tempEl = document.getElementById('demoWxTemp');
-    const descEl = document.getElementById('demoWxDesc');
-    const iconEl = document.getElementById('demoWxIcon');
-    if (cityEl) cityEl.textContent = w.city;
-    if (tempEl) tempEl.textContent = w.temp;
-    if (descEl) descEl.textContent = w.desc;
-    if (iconEl) iconEl.textContent = w.icon;
-    if (window.ldApp.playSound) window.ldApp.playSound('click');
-  };
-
-  window.ldApp.generateCryptoKey = function () {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*_+-=';
-    let res = '';
-    const array = new Uint8Array(16);
-    if (window.crypto && window.crypto.getRandomValues) {
-      window.crypto.getRandomValues(array);
-      for (let i = 0; i < 16; i++) {
-        res += chars.charAt(array[i] % chars.length);
-      }
-    } else {
-      for (let i = 0; i < 16; i++) {
-        res += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-    }
-    const codeEl = document.getElementById('demoPassCode');
-    if (codeEl) codeEl.textContent = res;
-    if (window.ldApp.playSound) window.ldApp.playSound('click');
-  };
-
-  window.ldApp.updateCartDemo = function (delta) {
-    demoCartQty = Math.max(1, Math.min(9, demoCartQty + delta));
-    const qtyDisplay = document.getElementById('demoCartQtyDisplay');
-    const badgeDisplay = document.getElementById('demoCartBadge');
-    if (qtyDisplay) qtyDisplay.textContent = demoCartQty;
-    if (badgeDisplay) {
-      badgeDisplay.textContent = `${demoCartQty} artículos ($${(demoCartQty * 24.5).toFixed(2)})`;
-    }
-    if (window.ldApp.playSound) window.ldApp.playSound('click');
-  };
-
-  // Inicialización
-  document.addEventListener('DOMContentLoaded', () => {
-    initFilters();
-    renderProjectsList();
-    renderInspector();
   });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderProjectsGrid();
+  });
+
+  window.ldApp.PROJECTS = PROJECTS;
 })();

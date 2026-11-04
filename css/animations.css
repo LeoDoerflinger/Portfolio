@@ -1,116 +1,58 @@
 /* ==========================================================================
-   ANIMATIONS & KEYFRAMES — MOVIMIENTO FÍSICO & TÁCTIL
-   Portfolio - Leopoldo Doerflinger
+   ARCHITECTURAL MOTION & MICRO-INTERACTIONS
+   Portfolio — Leopoldo Doerflinger
    ========================================================================== */
 
-/* --- Tactile Button Press (Efecto Sello Físico) --- */
-.btn-press {
-  transition: transform 0.15s var(--ease-snap), box-shadow 0.15s var(--ease-snap), background-color 0.18s ease;
-}
-
-.btn-press:hover {
-  transform: translate(-1.5px, -1.5px);
-  box-shadow: var(--shadow-tactile-lg);
-}
-
-.btn-press:active {
-  transform: translate(2px, 2px);
-  box-shadow: var(--shadow-tactile-sm);
-}
-
-/* --- Pulse Sutil de Estado (Disponible) --- */
-@keyframes humanPulse {
-  0% {
-    transform: scale(0.96);
-    opacity: 0.8;
+/* Respeto estricto a accesibilidad y reducción de movimiento */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
-  50% {
-    transform: scale(1.08);
-    opacity: 1;
+}
+
+/* Indicador de pulso para status en vivo */
+@keyframes livePulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
   }
   100% {
-    transform: scale(0.96);
-    opacity: 0.8;
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
   }
 }
 
 .pulse-indicator {
-  animation: humanPulse 2.8s ease-in-out infinite;
+  animation: livePulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* --- 3D Scene & Cube Mechanics --- */
-.scene-3d {
-  width: 220px;
-  height: 220px;
-  perspective: 900px;
-  user-select: none;
-  touch-action: none;
-  margin: 0 auto;
-}
-
-.cube-3d {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform-style: preserve-3d;
-  transition: transform 0.08s linear;
-}
-
-.cube-3d.smooth-snap {
-  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.cube-face {
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  background: var(--bg-elevated);
-  border: 2px solid var(--ink-primary);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 1.25rem;
-  backface-visibility: visible;
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
-  cursor: grab;
-}
-
-.cube-face:active {
-  cursor: grabbing;
-}
-
-/* Cube Face Positioning (110px = half of 220px) */
-.face-front  { transform: rotateY(0deg) translateZ(110px); }
-.face-right  { transform: rotateY(90deg) translateZ(110px); }
-.face-back   { transform: rotateY(180deg) translateZ(110px); }
-.face-left   { transform: rotateY(-90deg) translateZ(110px); }
-.face-top    { transform: rotateX(90deg) translateZ(110px); }
-.face-bottom { transform: rotateX(-90deg) translateZ(110px); }
-
-/* --- Toast Notification (Transición limpia en main.css) --- */
-/* Las animaciones de entrada y salida del toast se gestionan vía transition en .site-toast */
-
-/* --- Tape & Stamp Imperfections --- */
-.stamp-tilt-left {
-  transform: rotate(-2.5deg);
-}
-
-.stamp-tilt-right {
-  transform: rotate(2deg);
-}
-
-.tape-tilt {
-  transform: rotate(1.2deg);
-}
-
-/* --- Scroll Reveal Sutil (Sin dramatismo exagerado) --- */
+/* Revelado suave al scroll (Scroll Reveal) */
 .reveal-item {
   opacity: 0;
   transform: translateY(14px);
-  transition: opacity 0.5s ease, transform 0.5s var(--ease-out-expo);
+  transition: opacity 0.45s var(--ease-architectural), transform 0.45s var(--ease-architectural);
+  will-change: opacity, transform;
 }
 
 .reveal-item.revealed {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* Transición para hover en tarjetas */
+.card-hover-fx {
+  transition: transform var(--trans-fast), border-color var(--trans-fast), box-shadow var(--trans-fast);
+}
+
+.card-hover-fx:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-card);
 }

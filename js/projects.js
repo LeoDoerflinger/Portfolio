@@ -9,8 +9,24 @@
   // 1. REGISTRO DE PROYECTOS REALES
   const PROJECTS = [
     {
-      id: 'pastillero-pwa',
+      id: 'gastropos-saas',
       index: '01',
+      title: 'GastroPOS — Gestión Gastronómica',
+      subtitle: 'Plataforma SaaS multi-local, comanda QR para mozos, arqueos y cuentas corrientes',
+      category: 'comercio',
+      categoryLabel: 'E-Commerce & Gestión',
+      year: '2026',
+      assetPath: 'assets/gastropos.png',
+      liveUrl: 'https://gastro-pos-ld.vercel.app/',
+      githubUrl: 'https://github.com/LeoDoerflinger/gastro-pos',
+      problem: 'En gastronomía, un software lento o desarticulado te frena el despacho en pleno horario pico. Mozos con comandas en papel que se traspapelan, mesas que piden la cuenta y quedan colgadas, o arqueos de caja donde nunca cierra la plata por falta de trazabilidad en los turnos, adelantos de sueldos y cuentas corrientes.',
+      solution: 'Desarrollé una plataforma integral multi-local con comanda táctil PWA para mozos (vía QR), salón interactivo en tiempo real con alertas sonoras, arqueo ciego multicanal (efectivo, tarjetas, QR y cuenta corriente), directorio de proveedores y módulo financiero para sueldos, consumos y escandallo estandarizado.',
+      stack: ['Node.js', 'Express', 'Vite / JS', 'PWA / QR', 'Cuentas Corrientes', 'Arqueo de Caja', 'Vercel'],
+      demoType: 'gastropos'
+    },
+    {
+      id: 'pastillero-pwa',
+      index: '02',
       title: 'Mi Pastillero Virtual',
       subtitle: 'PWA asistiva & organizador de tomas con lupa integrada',
       category: 'utilidad',
@@ -26,7 +42,7 @@
     },
     {
       id: 'climax-weather',
-      index: '02',
+      index: '03',
       title: 'ClimaX — Weather App',
       subtitle: 'Estación climática reactiva & telemetría sin publicidad',
       category: 'datos',
@@ -42,7 +58,7 @@
     },
     {
       id: 'news-dashboard',
-      index: '03',
+      index: '04',
       title: 'Panel de Noticias & Divisas',
       subtitle: 'Monitor financiero en vivo, cotizaciones y prensa limpia',
       category: 'datos',
@@ -58,7 +74,7 @@
     },
     {
       id: 'mitienda-ecommerce',
-      index: '04',
+      index: '05',
       title: 'MiTienda — E-Commerce',
       subtitle: 'Catálogo dinámico, filtrado instantáneo & carrito reactivo',
       category: 'comercio',
@@ -74,7 +90,7 @@
     },
     {
       id: 'pixel-y-mate',
-      index: '05',
+      index: '06',
       title: 'Pixel y Mate — Agencia',
       subtitle: 'Portal corporativo, arquitectura UI/UX & captación directa',
       category: 'comercio',
@@ -90,7 +106,7 @@
     },
     {
       id: 'password-generator',
-      index: '06',
+      index: '07',
       title: 'Pass — Bóveda & Generador',
       subtitle: 'Generador criptográfico con Web Crypto API & auditor de entropía',
       category: 'utilidad',
@@ -124,6 +140,54 @@
   // Helper para generar micro-simuladores
   function getMicroDemoMarkup(demoType) {
     switch (demoType) {
+      case 'gastropos':
+        return `
+          <div class="micro-demo-box">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-muted);">
+              <span>SIMULADOR DE SALÓN EN VIVO · PUESTO DE CONTROL</span>
+              <span style="color:var(--accent-terracotta);">Tocá una mesa para operar</span>
+            </div>
+            <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:0.5rem;" id="demoPosTablesGrid">
+              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 0)">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 01</span>
+                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Salón</span>
+                </div>
+                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">4 comensales</strong>
+                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-moss);">● Abierta · $18.400</span>
+              </button>
+              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 1)">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 02</span>
+                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Terraza</span>
+                </div>
+                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">Ticket emitido</strong>
+                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:#0284c7;">● Cuenta pedida</span>
+              </button>
+              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 2)">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 03</span>
+                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Salón</span>
+                </div>
+                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">Disponible</strong>
+                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-muted);">○ Libre</span>
+              </button>
+              <button type="button" class="btn-pos-table p-2.5 rounded hairline-box" style="background:var(--bg-elevated); text-align:left; cursor:pointer;" onclick="window.ldApp.togglePosTable(this, 3)">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <span style="font-family:var(--font-mono); font-size:0.625rem; color:var(--ink-muted);">MESA 04</span>
+                  <span class="pos-pin-tag" style="font-family:var(--font-mono); font-size:0.6rem; color:var(--ink-muted);">Barra</span>
+                </div>
+                <strong style="font-size:0.75rem; display:block; margin:0.2rem 0;">3 comensales</strong>
+                <span class="pos-status-tag" style="font-family:var(--font-mono); font-size:0.65rem; color:var(--accent-terracotta);">● Por cobrar · $31.200</span>
+              </button>
+            </div>
+            <div style="margin-top:0.65rem; padding:0.5rem 0.75rem; border-radius:var(--radius-xs); background:var(--bg-elevated); border:1px solid var(--rule-color); display:flex; justify-content:space-between; align-items:center; font-family:var(--font-mono); font-size:0.68rem;">
+              <span id="demoPosLog" style="color:var(--ink-primary);">🔔 Comanda Mozo QR: Mesa 02 pidió la precuenta ticket.</span>
+              <span style="color:var(--accent-moss); font-weight:600; white-space:nowrap; margin-left:0.5rem;">Sincro en vivo</span>
+            </div>
+          </div>
+        `;
+
       case 'pastillero':
         return `
           <div class="micro-demo-box">
@@ -423,6 +487,36 @@
 
   // Métodos expuestos globalmente para los micro-demos
   window.ldApp = window.ldApp || {};
+
+  const posTableStates = [
+    { status: 'Abierta', label: '● Abierta · $18.400', color: 'var(--accent-moss)', detail: '4 comensales' },
+    { status: 'Cuenta pedida', label: '● Cuenta pedida', color: '#0284c7', detail: 'Ticket emitido' },
+    { status: 'Por cobrar', label: '● Por cobrar · $31.200', color: 'var(--accent-terracotta)', detail: '3 comensales' },
+    { status: 'Libre', label: '○ Libre', color: 'var(--ink-muted)', detail: 'Disponible' }
+  ];
+
+  window.ldApp.togglePosTable = function (btn, tableIdx) {
+    const tag = btn.querySelector('.pos-status-tag');
+    const strong = btn.querySelector('strong');
+    const log = document.getElementById('demoPosLog');
+    if (!tag || !strong) return;
+
+    let currentIdx = posTableStates.findIndex(s => tag.textContent.includes(s.status));
+    if (currentIdx === -1) currentIdx = 0;
+    let nextIdx = (currentIdx + 1) % posTableStates.length;
+    const nextState = posTableStates[nextIdx];
+
+    tag.textContent = nextState.label;
+    tag.style.color = nextState.color;
+    strong.textContent = nextState.detail;
+
+    if (log) {
+      const tableNum = String(tableIdx + 1).padStart(2, '0');
+      log.textContent = `⚡ Salón: Mesa ${tableNum} pasó a estado [${nextState.status}].`;
+    }
+
+    if (window.ldApp.playSound) window.ldApp.playSound('click');
+  };
 
   window.ldApp.toggleDose = function (btn) {
     const status = btn.querySelector('.dose-tag');

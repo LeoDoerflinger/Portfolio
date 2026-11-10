@@ -157,29 +157,37 @@
 
         <div class="section-header-bar split reveal-item">
           <div>
-            <h2 class="section-title">Proyectos</h2>
+            <h2 class="section-title">Proyectos Destacados</h2>
             <p class="section-desc">
-              Explorá cada sistema en el visor interactivo o deslizá horizontalmente el carrusel de entregas en producción.
+              Seleccioná uno de los tres sistemas principales (GastroPOS, MiTienda o Agora) y desplazate verticalmente para inspeccionar su interfaz, módulos y porcentaje de tecnologías al estilo GitHub.
             </p>
           </div>
         </div>
 
-        <!-- Visor Interactivo de Proyecto (Estilo Graphite Lattice) -->
-        <div class="graphite-stage-shell reveal-item" id="graphite-project-stage">
-          <div class="stage-selector-bar" id="stage-tabs-container" role="tablist" aria-label="Selector de proyectos">
-            <!-- Renderizado por js/projects.js -->
-          </div>
+        <!-- Visor Guiado por Scroll Vertical (Estilo Graphite Accordion + GitHub Languages Bar) -->
+        <div class="scroll-stage-track" id="scroll-stage-track">
+          <div class="graphite-stage-shell" id="graphite-project-stage">
+            <div class="stage-top-bar">
+              <div class="stage-selector-bar" id="stage-tabs-container" role="tablist" aria-label="Proyectos destacados">
+                <!-- Renderizado por js/projects.js -->
+              </div>
+              <div class="stage-scroll-indicator">
+                <span>Deslizá o hacé clic en cada etapa</span>
+                <span class="stage-scroll-step-badge" id="stage-step-counter">01 / 04</span>
+              </div>
+            </div>
 
-          <div class="stage-workspace-grid" id="stage-workspace-content">
-            <!-- Renderizado por js/projects.js -->
+            <div class="stage-workspace-grid" id="stage-workspace-content">
+              <!-- Renderizado por js/projects.js -->
+            </div>
           </div>
         </div>
 
-        <!-- Carrusel Horizontal de Proyectos con Transición de Scroll -->
+        <!-- Carrusel Horizontal Completo de Proyectos -->
         <div class="reveal-item">
           <div class="rail-section-header">
-            <h3 class="rail-subtitle">Catálogo en desplazamiento horizontal</h3>
-            <span class="rail-hint">Arrastrá o usá las flechas para recorrer los proyectos</span>
+            <h3 class="rail-subtitle">Catálogo completo en desplazamiento horizontal</h3>
+            <span class="rail-hint">Arrastrá o usá las flechas para recorrer todos los proyectos</span>
           </div>
 
           <div class="horizontal-rail-viewport" id="projects-horizontal-rail" tabindex="0" aria-label="Carrusel horizontal de proyectos">
@@ -207,81 +215,149 @@
           <div>
             <h2 class="section-title">Habilidades</h2>
             <p class="section-desc">
-              Tecnologías y herramientas trabajadas en proyectos reales.
+              Tecnologías y herramientas trabajadas en producción, organizadas por capas de arquitectura con transición progresiva durante el scroll.
             </p>
           </div>
 
           <div class="stack-filter-tabs" role="tablist" aria-label="Filtrar tecnologías por área">
-            <button type="button" class="stack-filter-btn active" data-stack-group="all">Todas</button>
-            <button type="button" class="stack-filter-btn" data-stack-group="frontend">Frontend</button>
-            <button type="button" class="stack-filter-btn" data-stack-group="apis">Estado & APIs</button>
-            <button type="button" class="stack-filter-btn" data-stack-group="backend">Backend & Deploy</button>
-            <button type="button" class="stack-filter-btn" data-stack-group="design">Diseño & Calidad</button>
+            <button type="button" class="stack-filter-btn active" data-stack-group="all">Todas las capas</button>
+            <button type="button" class="stack-filter-btn" data-stack-group="frontend">01 · Frontend</button>
+            <button type="button" class="stack-filter-btn" data-stack-group="apis">02 · Estado & APIs</button>
+            <button type="button" class="stack-filter-btn" data-stack-group="backend">03 · Backend & Deploy</button>
+            <button type="button" class="stack-filter-btn" data-stack-group="design">04 · Diseño & Calidad</button>
           </div>
         </div>
 
-        <div class="stack-spec-grid">
-          <div class="stack-spec-card hairline-box reveal-item" data-stack-card="frontend">
+        <div class="stack-vanish-layout" id="stack-vanish-stage">
+
+          <!-- Columna Izquierda Sticky: Capas Arquitectónicas Sincronizadas al Scroll -->
+          <aside class="iso-stack-sticky reveal-item" aria-label="Diagrama de capas de arquitectura">
             <span class="corner-cross tl" aria-hidden="true">+</span>
             <span class="corner-cross tr" aria-hidden="true">+</span>
-            <div class="spec-category-header hairline-b">FRONTEND</div>
-            <ul class="spec-list">
-              <li class="spec-item"><span class="spec-item-name">HTML5 Semántico</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">CSS3 / Flexbox / Grid</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">JavaScript ES6+</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">TypeScript</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">React.js</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Tailwind CSS</span><span class="spec-item-dot"></span></li>
-            </ul>
+            <span class="corner-cross bl" aria-hidden="true">+</span>
+            <span class="corner-cross br" aria-hidden="true">+</span>
+
+            <div class="iso-visor-header">
+              <span class="iso-visor-kicker">ARQUITECTURA EN CAPAS</span>
+              <span class="iso-visor-active-tag" id="iso-active-layer-label">CAPA 01 ACTIVA</span>
+            </div>
+
+            <div class="iso-layers-stage" id="iso-layers-container">
+              <button type="button" class="iso-plate active-layer" data-iso-layer="frontend">
+                <div class="iso-plate-left">
+                  <span class="iso-plate-idx">01</span>
+                  <span class="iso-plate-name">Frontend & UI</span>
+                </div>
+                <span class="iso-plate-meta">6 tecnologías</span>
+              </button>
+
+              <button type="button" class="iso-plate" data-iso-layer="apis">
+                <div class="iso-plate-left">
+                  <span class="iso-plate-idx">02</span>
+                  <span class="iso-plate-name">Estado & APIs</span>
+                </div>
+                <span class="iso-plate-meta">6 tecnologías</span>
+              </button>
+
+              <button type="button" class="iso-plate" data-iso-layer="backend">
+                <div class="iso-plate-left">
+                  <span class="iso-plate-idx">03</span>
+                  <span class="iso-plate-name">Backend & Deploy</span>
+                </div>
+                <span class="iso-plate-meta">6 tecnologías</span>
+              </button>
+
+              <button type="button" class="iso-plate" data-iso-layer="design">
+                <div class="iso-plate-left">
+                  <span class="iso-plate-idx">04</span>
+                  <span class="iso-plate-name">Diseño & Calidad</span>
+                </div>
+                <span class="iso-plate-meta">6 tecnologías</span>
+              </button>
+            </div>
+
+            <div class="iso-visor-footer" id="iso-active-layer-desc">
+              Interfaces reactivas, maquetación semántica y componentes reutilizables optimizados para cualquier pantalla.
+            </div>
+          </aside>
+
+          <!-- Columna Derecha: Bloques con Scroll-Vanishing Progresivo -->
+          <div class="vanish-cards-column" id="vanish-cards-column">
+            <div class="stack-spec-card in-focus" data-stack-card="frontend" data-layer-desc="Interfaces reactivas, maquetación semántica y componentes reutilizables optimizados para cualquier pantalla.">
+              <span class="corner-cross tl" aria-hidden="true">+</span>
+              <span class="corner-cross tr" aria-hidden="true">+</span>
+              <div class="spec-category-header hairline-b">
+                <span>FRONTEND & INTERFAZ</span>
+                <span class="spec-category-idx">CAPA 01</span>
+              </div>
+              <ul class="spec-list">
+                <li class="spec-item"><span class="spec-item-name">HTML5 Semántico</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">CSS3 / Flexbox / Grid</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">JavaScript ES6+</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">TypeScript</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">React.js</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Tailwind CSS</span><span class="spec-item-dot"></span></li>
+              </ul>
+            </div>
+
+            <div class="stack-spec-card" data-stack-card="apis" data-layer-desc="Sincronización de estado en tiempo real, almacenamiento local, consumo de endpoints REST y funcionamiento offline.">
+              <span class="corner-cross tl" aria-hidden="true">+</span>
+              <span class="corner-cross tr" aria-hidden="true">+</span>
+              <div class="spec-category-header hairline-b">
+                <span>ESTADO & APIS</span>
+                <span class="spec-category-idx">CAPA 02</span>
+              </div>
+              <ul class="spec-list">
+                <li class="spec-item"><span class="spec-item-name">Context API</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">PWA / Service Workers</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Web APIs Nativas</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">REST APIs / Fetch</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Web Crypto API</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">LocalStorage / Persistencia</span><span class="spec-item-dot"></span></li>
+              </ul>
+            </div>
+
+            <div class="stack-spec-card" data-stack-card="backend" data-layer-desc="Servicios en Node.js y Express, control de versiones en Git y despliegue continuo en producción con Vercel.">
+              <span class="corner-cross tl" aria-hidden="true">+</span>
+              <span class="corner-cross tr" aria-hidden="true">+</span>
+              <div class="spec-category-header hairline-b">
+                <span>BACKEND & DEPLOY</span>
+                <span class="spec-category-idx">CAPA 03</span>
+              </div>
+              <ul class="spec-list">
+                <li class="spec-item"><span class="spec-item-name">Node.js</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Express.js</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Git & GitHub</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Vercel Deploy</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Vite / Build Tools</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Firebase BaaS</span><span class="spec-item-dot"></span></li>
+              </ul>
+            </div>
+
+            <div class="stack-spec-card" data-stack-card="design" data-layer-desc="Diseño de sistemas en Figma, contraste accesible WCAG, tiempos de carga rápidos y estructura mobile-first.">
+              <span class="corner-cross tl" aria-hidden="true">+</span>
+              <span class="corner-cross tr" aria-hidden="true">+</span>
+              <div class="spec-category-header hairline-b">
+                <span>DISEÑO & CALIDAD</span>
+                <span class="spec-category-idx">CAPA 04</span>
+              </div>
+              <ul class="spec-list">
+                <li class="spec-item"><span class="spec-item-name">Diseño UI (Figma)</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Accesibilidad WCAG</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Core Web Vitals</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Layout Mobile-First</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">SEO On-Page</span><span class="spec-item-dot"></span></li>
+                <li class="spec-item"><span class="spec-item-name">Testing Manual</span><span class="spec-item-dot"></span></li>
+              </ul>
+            </div>
           </div>
 
-          <div class="stack-spec-card hairline-box reveal-item" data-stack-card="apis">
-            <span class="corner-cross tl" aria-hidden="true">+</span>
-            <span class="corner-cross tr" aria-hidden="true">+</span>
-            <div class="spec-category-header hairline-b">ESTADO & APIS</div>
-            <ul class="spec-list">
-              <li class="spec-item"><span class="spec-item-name">Context API</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">PWA / Service Workers</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Web APIs Nativas</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">REST APIs / Fetch</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Web Crypto API</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">LocalStorage / Persistencia</span><span class="spec-item-dot"></span></li>
-            </ul>
-          </div>
-
-          <div class="stack-spec-card hairline-box reveal-item" data-stack-card="backend">
-            <span class="corner-cross tl" aria-hidden="true">+</span>
-            <span class="corner-cross tr" aria-hidden="true">+</span>
-            <div class="spec-category-header hairline-b">BACKEND & DEPLOY</div>
-            <ul class="spec-list">
-              <li class="spec-item"><span class="spec-item-name">Node.js</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Express.js</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Git & GitHub</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Vercel Deploy</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Vite / Build Tools</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Firebase BaaS</span><span class="spec-item-dot"></span></li>
-            </ul>
-          </div>
-
-          <div class="stack-spec-card hairline-box reveal-item" data-stack-card="design">
-            <span class="corner-cross tl" aria-hidden="true">+</span>
-            <span class="corner-cross tr" aria-hidden="true">+</span>
-            <div class="spec-category-header hairline-b">DISEÑO & CALIDAD</div>
-            <ul class="spec-list">
-              <li class="spec-item"><span class="spec-item-name">Diseño UI (Figma)</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Accesibilidad WCAG</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Core Web Vitals</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Layout Mobile-First</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">SEO On-Page</span><span class="spec-item-dot"></span></li>
-              <li class="spec-item"><span class="spec-item-name">Testing Manual</span><span class="spec-item-dot"></span></li>
-            </ul>
-          </div>
         </div>
 
       </div>
     </section>
 
-    <!-- Sección Puente hacia Planes y Cotizador (Fusión Pixel y Mate) -->
+    <!-- Sección Puente hacia Planes y Cotizador -->
     <section class="section-wrapper hairline-b">
       <div class="max-w-layout">
         <div class="quote-bridge-banner reveal-item">
@@ -291,10 +367,10 @@
           <span class="corner-cross br" aria-hidden="true">+</span>
 
           <div>
-            <span class="hero-kicker" style="margin-bottom:0.4rem;">Propuestas pre-armadas · Estudio Pixel y Mate</span>
+            <span class="hero-kicker" style="margin-bottom:0.4rem;">Programas Pre-armados · Desarrollo Web & Sistemas a Medida</span>
             <h2 class="section-title" style="margin-bottom:0.5rem;">¿Querés cotizar el desarrollo de tu proyecto web?</h2>
             <p class="section-desc">
-              Armé una sección dedicada con programas claros (desde una landing page inicial hasta una tienda con CRM o sistema a medida) y una calculadora interactiva para estimar presupuesto al instante.
+              Armé una sección dedicada con programas claros (desde una landing page profesional hasta una tienda con CRM o sistema SaaS a medida) y una calculadora interactiva para estimar tu presupuesto al instante.
             </p>
           </div>
 

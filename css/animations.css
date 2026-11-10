@@ -24,7 +24,7 @@
 @keyframes stageCrossfade {
   from {
     opacity: 0;
-    transform: translateY(8px) scale(0.99);
+    transform: translateY(10px) scale(0.985);
   }
   to {
     opacity: 1;
@@ -33,7 +33,22 @@
 }
 
 .stage-animate {
-  animation: stageCrossfade 0.35s var(--ease-architectural) forwards;
+  animation: stageCrossfade 0.36s var(--ease-architectural) forwards;
+}
+
+@keyframes visorPanelEnter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.visor-step-panel {
+  animation: visorPanelEnter 0.32s var(--ease-architectural) forwards;
 }
 
 .card-hover-fx {

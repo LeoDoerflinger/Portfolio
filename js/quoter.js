@@ -1,4 +1,4 @@
-/* Interactive Project Quoter (Pixel y Mate integration) */
+/* Interactive Project Quoter & Program Configurator */
 
 (function () {
   'use strict';
@@ -8,30 +8,38 @@
   const ARS_RATE = 1200;
 
   const BASE_PLANS = {
-    cebado: {
-      id: 'cebado',
-      name: 'Cebado Inicial (Landing Page)',
+    landing: {
+      id: 'landing',
+      name: 'Landing Page Profesional',
+      defaultBadge: 'LANDING PAGE',
+      btnLabel: 'Seleccionar Landing Page',
       priceUsd: 180,
       baseWeeksMin: 1,
       baseWeeksMax: 2
     },
-    presencia: {
-      id: 'presencia',
-      name: 'Presencia Activa (Web Multipágina)',
+    institucional: {
+      id: 'institucional',
+      name: 'Web Institucional Multipágina',
+      defaultBadge: 'MULTIPÁGINA',
+      btnLabel: 'Seleccionar Web Institucional',
       priceUsd: 340,
       baseWeeksMin: 2,
       baseWeeksMax: 3
     },
-    tienda: {
-      id: 'tienda',
-      name: 'Tienda & Catálogo CRM (E-Commerce)',
+    ecommerce: {
+      id: 'ecommerce',
+      name: 'E-Commerce & Panel CRM',
+      defaultBadge: 'TIENDA + CRM',
+      btnLabel: 'Seleccionar E-Commerce & CRM',
       priceUsd: 560,
       baseWeeksMin: 3,
       baseWeeksMax: 4
     },
-    ronda: {
-      id: 'ronda',
-      name: 'Ronda Completa (Sistema SaaS / POS)',
+    saas: {
+      id: 'saas',
+      name: 'Sistema Web & Plataforma SaaS',
+      defaultBadge: 'SISTEMA / SAAS',
+      btnLabel: 'Seleccionar Sistema / SaaS',
       priceUsd: 890,
       baseWeeksMin: 4,
       baseWeeksMax: 6
@@ -50,8 +58,8 @@
 
   function getQuoteState() {
     const selectedPlanInput = document.querySelector('input[name="base-plan"]:checked');
-    const planKey = selectedPlanInput ? selectedPlanInput.value : 'presencia';
-    const plan = BASE_PLANS[planKey] || BASE_PLANS.presencia;
+    const planKey = selectedPlanInput ? selectedPlanInput.value : 'institucional';
+    const plan = BASE_PLANS[planKey] || BASE_PLANS.institucional;
 
     const checkedAddons = Array.from(document.querySelectorAll('input[name="quote-addon"]:checked')).map(input => ({
       id: input.value,
@@ -98,6 +106,30 @@
     };
   }
 
+  function syncTopProgramCards(activePlanKey) {
+    document.querySelectorAll('[data-program-card]').forEach(card => {
+      const key = card.getAttribute('data-program-card');
+      const isSelected = key === activePlanKey;
+      const planMeta = BASE_PLANS[key];
+
+      card.classList.toggle('is-selected', isSelected);
+
+      const badge = card.querySelector('[data-program-badge]');
+      if (badge && planMeta) {
+        badge.textContent = isSelected ? 'SELECCIONADO' : planMeta.defaultBadge;
+      }
+
+      const btn = card.querySelector('[data-select-plan]');
+      if (btn && planMeta) {
+        btn.classList.toggle('btn-primary', isSelected);
+        btn.classList.toggle('btn-secondary', !isSelected);
+        btn.innerHTML = isSelected
+          ? '<span>✓ Seleccionado en cotizador</span>'
+          : `<span>${planMeta.btnLabel}</span>`;
+      }
+    });
+  }
+
   function renderQuoteSummary() {
     const state = getQuoteState();
     const listEl = document.getElementById('summary-breakdown-list');
@@ -109,7 +141,17 @@
       currBtn.textContent = `Moneda: ${currency}`;
     }
 
-    // Update price labels on cards when currency toggles
+    syncTopProgramCards(state.plan.id);
+
+    // Update price labels on top cards & quoter radio cards when currency toggles
+    document.querySelectorAll('[data-program-price]').forEach(priceEl => {
+      const key = priceEl.getAttribute('data-program-price');
+      const p = BASE_PLANS[key];
+      if (p) {
+        priceEl.textContent = formatMoney(p.priceUsd);
+      }
+    });
+
     document.querySelectorAll('[data-plan-card]').forEach(card => {
       const key = card.getAttribute('data-plan-card');
       const p = BASE_PLANS[key];
@@ -179,7 +221,7 @@
   function buildPlainTextQuote() {
     const state = getQuoteState();
     const lines = [
-      'Hola Leo! Armé esta cotización en tu web (Pixel y Mate):',
+      'Hola Leo! Armé esta cotización de proyecto en tu portfolio web:',
       '',
       `• Programa base: ${state.plan.name} (${formatMoney(state.plan.priceUsd)})`
     ];
@@ -197,7 +239,7 @@
     lines.push(`• Inversión estimada: ${formatMoney(state.finalTotalUsd)}`);
     lines.push(`• Tiempo estimado: ${state.timelineText}`);
 
-    if (state.clientName) lines.push(`• Nombre / Marca: ${state.clientName}`);
+    if (state.clientName) lines.push(`• Nombre / Empresa: ${state.clientName}`);
     if (state.clientContact) lines.push(`• Contacto: ${state.clientContact}`);
     if (state.clientNotes) lines.push(`• Comentarios: ${state.clientNotes}`);
 
@@ -220,21 +262,30 @@
       }
       if (window.ldApp && window.ldApp.showToast) {
         const p = BASE_PLANS[planKey];
-        if (p) window.ldApp.showToast(`Programa cargado: ${p.name}`);
+        if (p) window.ldApp.showToast(`Programa seleccionado: ${p.name}`);
       }
     }
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    // 1. Top program card buttons
+    // 1. Top program card buttons & cards
     document.querySelectorAll('[data-select-plan]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const planKey = btn.getAttribute('data-select-plan');
         selectBasePlan(planKey, true);
       });
     });
 
-    // 2. Base plan radio cards
+    document.querySelectorAll('[data-program-card]').forEach(card => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('button, a')) return;
+        const planKey = card.getAttribute('data-program-card');
+        selectBasePlan(planKey, false);
+      });
+    });
+
+    // 2. Base plan radio cards in Step 1
     document.querySelectorAll('input[name="base-plan"]').forEach(radio => {
       radio.addEventListener('change', () => {
         selectBasePlan(radio.value, false);

@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Planes y Cotizador de Proyectos · Pixel y Mate | Leo Doerflinger</title>
+
+  <meta name="title" content="Planes y Cotizador de Proyectos · Pixel y Mate | Leo Doerflinger" />
+  <meta name="description" content="Consultá los programas pre-armados de desarrollo web y calculá la cotización de tu proyecto en tiempo real desde Córdoba, Argentina." />
+  <meta name="author" content="Leopoldo Doerflinger" />
+  <meta name="theme-color" content="#0A0A0A" />
+
+  <link rel="icon" type="image/png" href="assets/icono.png" />
+  <link rel="apple-touch-icon" href="assets/icono.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/variables.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+
+  <div id="site-toast" class="site-toast" role="status" aria-live="polite"></div>
+
+  <header class="site-header hairline-b">
+    <div class="max-w-layout header-inner">
+
+      <a href="index.html" class="brand-badge" aria-label="Volver al inicio del portfolio">
+        <span class="brand-title-main">Leo Doerflinger</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Secciones principales">
+        <a href="index.html#proyectos" class="nav-link">Proyectos</a>
+        <a href="index.html#stack" class="nav-link">Habilidades</a>
+        <a href="planes.html" class="nav-link nav-link-quote active">Planes y Cotizador</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+
+      <div class="header-controls">
+        <button id="theme-toggle-btn" type="button" class="icon-toggle-btn" title="Alternar tema" aria-label="Alternar modo noche y blanco">
+          <span id="theme-icon" aria-hidden="true">◐</span>
+          <span id="theme-label">Noche</span>
+        </button>
+
+        <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="header-cv-btn" title="Abrir CV Interactivo">
+          <span>Ver CV</span>
+        </a>
+
+        <button id="mobile-menu-toggle" type="button" class="icon-toggle-btn mobile-menu-btn" aria-label="Abrir menú de navegación">
+          <span aria-hidden="true">☰</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <aside id="mobile-drawer" class="mobile-drawer" aria-label="Menú de navegación móvil" aria-hidden="true">
+    <div class="drawer-panel">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="brand-title-main">Leo Doerflinger</span>
+          <button id="drawer-close-btn" type="button" class="icon-toggle-btn" aria-label="Cerrar menú móvil">✕</button>
+        </div>
+        <div class="drawer-links">
+          <a href="index.html#proyectos" class="drawer-link">Proyectos</a>
+          <a href="index.html#stack" class="drawer-link">Habilidades</a>
+          <a href="planes.html" class="drawer-link active">Planes y Cotizador</a>
+          <a href="#contacto" class="drawer-link">Contacto</a>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:0.65rem;">
+        <a href="index.html" class="btn-hero btn-hero-secondary" style="width:100%; justify-content:center;">
+          Volver al Portfolio
+        </a>
+        <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-primary" style="width:100%; justify-content:center;">
+          Abrir CV Interactivo
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <main id="inicio-planes">
+
+    <!-- HERO DE PLANES Y COTIZADOR -->
+    <section class="hero-direct-section hairline-b">
+      <div class="max-w-layout hero-grid-layout">
+
+        <div>
+          <span class="hero-kicker reveal-item">Pixel y Mate · Desarrollo Web & Soluciones Digitales</span>
+
+          <h1 class="hero-title reveal-item">
+            Programas pre-armados y cotizador de proyectos a medida.
+          </h1>
+
+          <p class="hero-lead-text reveal-item">
+            Elegí uno de los cuatro programas base según la etapa de tu marca o configurá una cotización personalizada sumando módulos específicos. Alcance claro, entregas pautadas y trato directo desde Córdoba.
+          </p>
+
+          <div class="hero-actions-bar reveal-item">
+            <a href="#cotizador" class="btn-hero btn-hero-primary">
+              <span>Ir al Cotizador Interactivo</span>
+            </a>
+            <a href="#programas" class="btn-hero btn-hero-secondary">
+              <span>Ver los 4 Programas</span>
+            </a>
+            <a href="index.html#proyectos" class="btn-hero btn-hero-secondary">
+              <span>Ver trabajos realizados</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-lattice-card reveal-item">
+          <span class="corner-cross tl" aria-hidden="true">+</span>
+          <span class="corner-cross tr" aria-hidden="true">+</span>
+          <span class="corner-cross bl" aria-hidden="true">+</span>
+          <span class="corner-cross br" aria-hidden="true">+</span>
+
+          <div class="lattice-card-header">Cómo trabajamos</div>
+          <div class="lattice-spec-rows">
+            <div class="lattice-spec-row">
+              <span class="lattice-spec-key">01. Diagnóstico</span>
+              <span class="lattice-spec-val">Definición de objetivos y alcance</span>
+            </div>
+            <div class="lattice-spec-row">
+              <span class="lattice-spec-key">02. Diseño & Código</span>
+              <span class="lattice-spec-val">Avances visibles en enlace de prueba</span>
+            </div>
+            <div class="lattice-spec-row">
+              <span class="lattice-spec-key">03. Optimización</span>
+              <span class="lattice-spec-val">Diseño responsivo y velocidad real</span>
+            </div>
+            <div class="lattice-spec-row">
+              <span class="lattice-spec-key">04. Publicación</span>
+              <span class="lattice-spec-val">Dominio propio, SSL y capacitación</span>
+            </div>
+          </div>
+
+          <a href="#cotizador" class="lattice-cta-link">
+            <span>Armar presupuesto en menos de 1 minuto</span>
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 1: LOS 4 PROGRAMAS PRE-ARMADOS (PIXEL Y MATE) -->
+    <section id="programas" class="section-wrapper hairline-b">
+      <div class="max-w-layout">
+
+        <div class="section-header-bar split reveal-item">
+          <div>
+            <h2 class="section-title">Programas Pre-armados</h2>
+            <p class="section-desc">
+              Cuatro estructuras pensadas para distintas necesidades comerciales. Podés cargar cualquiera en el cotizador inferior y sumarle módulos.
+            </p>
+          </div>
+        </div>
+
+        <div class="plans-grid">
+
+          <!-- Plan 01 -->
+          <article class="plan-lattice-card reveal-item">
+            <div>
+              <div class="plan-index-row">
+                <span>PROGRAMA 01</span>
+                <span>LANDING PAGE</span>
+              </div>
+              <h3 class="plan-name">Cebado Inicial</h3>
+              <p class="plan-summary">
+                Presencia directa y profesional para presentar tu servicio y recibir consultas calificadas por WhatsApp.
+              </p>
+              <div class="plan-price-box">
+                <span class="plan-price-amount">USD 180</span>
+                <span class="plan-price-time">1 a 2 semanas</span>
+              </div>
+              <ul class="plan-deliverables">
+                <li><span class="plan-check">✓</span><span>Diagnóstico visual y estructura comercial</span></li>
+                <li><span class="plan-check">✓</span><span>Landing page rápida adaptada a celulares</span></li>
+                <li><span class="plan-check">✓</span><span>Botón y formulario directo a WhatsApp</span></li>
+                <li><span class="plan-check">✓</span><span>Configuración de dominio, certificado SSL y alta</span></li>
+              </ul>
+            </div>
+            <button type="button" class="btn-action btn-secondary" style="width:100%;" data-select-plan="cebado">
+              <span>Cotizar con Cebado Inicial</span>
+            </button>
+          </article>
+
+          <!-- Plan 02 -->
+          <article class="plan-lattice-card highlighted reveal-item">
+            <div>
+              <div class="plan-index-row">
+                <span>PROGRAMA 02</span>
+                <span class="plan-tag-recommended">RECOMENDADO PYMES</span>
+              </div>
+              <h3 class="plan-name">Presencia Activa</h3>
+              <p class="plan-summary">
+                Sitio web multipágina completo con identidad visual cuidada, optimización en buscadores y secciones dedicadas.
+              </p>
+              <div class="plan-price-box">
+                <span class="plan-price-amount">USD 340</span>
+                <span class="plan-price-time">2 a 3 semanas</span>
+              </div>
+              <ul class="plan-deliverables">
+                <li><span class="plan-check">✓</span><span>Web a medida de hasta 5 secciones o páginas</span></li>
+                <li><span class="plan-check">✓</span><span>Definición de paleta, tipografía y estilo propio</span></li>
+                <li><span class="plan-check">✓</span><span>Optimización SEO técnico on-page y velocidad</span></li>
+                <li><span class="plan-check">✓</span><span>Galería de proyectos, servicios o catálogo base</span></li>
+              </ul>
+            </div>
+            <button type="button" class="btn-action btn-primary" style="width:100%;" data-select-plan="presencia">
+              <span>Cotizar con Presencia Activa</span>
+            </button>
+          </article>
+
+          <!-- Plan 03 -->
+          <article class="plan-lattice-card reveal-item">
+            <div>
+              <div class="plan-index-row">
+                <span>PROGRAMA 03</span>
+                <span>E-COMMERCE & CRM</span>
+              </div>
+              <h3 class="plan-name">Tienda & Catálogo CRM</h3>
+              <p class="plan-summary">
+                Tienda online autogestionable con carrito de compras, filtros instantáneos y panel administrativo de pedidos.
+              </p>
+              <div class="plan-price-box">
+                <span class="plan-price-amount">USD 560</span>
+                <span class="plan-price-time">3 a 4 semanas</span>
+              </div>
+              <ul class="plan-deliverables">
+                <li><span class="plan-check">✓</span><span>Catálogo de productos con buscador y filtros</span></li>
+                <li><span class="plan-check">✓</span><span>Carrito reactivo, cupones de descuento y envíos</span></li>
+                <li><span class="plan-check">✓</span><span>Panel CRM para gestionar pedidos, stock y clientes</span></li>
+                <li><span class="plan-check">✓</span><span>Emisión de comprobantes y cierre por WhatsApp</span></li>
+              </ul>
+            </div>
+            <button type="button" class="btn-action btn-secondary" style="width:100%;" data-select-plan="tienda">
+              <span>Cotizar con Tienda & CRM</span>
+            </button>
+          </article>
+
+          <!-- Plan 04 -->
+          <article class="plan-lattice-card reveal-item">
+            <div>
+              <div class="plan-index-row">
+                <span>PROGRAMA 04</span>
+                <span>SISTEMA / SAAS</span>
+              </div>
+              <h3 class="plan-name">Ronda Completa</h3>
+              <p class="plan-summary">
+                Desarrollo integral de aplicaciones web, sistemas operativos gastronómicos o comerciales y plataformas a medida.
+              </p>
+              <div class="plan-price-box">
+                <span class="plan-price-amount">USD 890</span>
+                <span class="plan-price-time">4 a 6 semanas</span>
+              </div>
+              <ul class="plan-deliverables">
+                <li><span class="plan-check">✓</span><span>Aplicación web progresiva (PWA) o sistema POS</span></li>
+                <li><span class="plan-check">✓</span><span>Paneles interactivos en tiempo real y arqueos</span></li>
+                <li><span class="plan-check">✓</span><span>Integración con APIs, base de datos y reportes</span></li>
+                <li><span class="plan-check">✓</span><span>Soporte técnico prioritario y mejoras evolutivas</span></li>
+              </ul>
+            </div>
+            <button type="button" class="btn-action btn-secondary" style="width:100%;" data-select-plan="ronda">
+              <span>Cotizar con Ronda Completa</span>
+            </button>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN 2: COTIZADOR INTERACTIVO DE PROYECTO -->
+    <section id="cotizador" class="section-wrapper hairline-b">
+      <div class="max-w-layout">
+
+        <div class="section-header-bar split reveal-item">
+          <div>
+            <h2 class="section-title">Cotizador de Proyecto</h2>
+            <p class="section-desc">
+              Seleccioná el programa base, sumá los módulos adicionales que necesites y obtené una estimación inmediata para enviarme por WhatsApp o correo.
+            </p>
+          </div>
+        </div>
+
+        <div class="quoter-workspace">
+
+          <!-- Columna Izquierda: Configurador en 4 Pasos -->
+          <div class="quoter-steps-column">
+
+            <!-- Paso 1: Programa Base -->
+            <div class="quoter-step-block reveal-item">
+              <div class="quoter-step-header">
+                <h3 class="quoter-step-title">1. Elegí el programa base</h3>
+                <span class="quoter-step-num">PASO 01 / 04</span>
+              </div>
+
+              <div class="quoter-radio-grid" id="quoter-base-programs" role="radiogroup" aria-label="Programa base">
+                <label class="quoter-option-card" data-plan-card="cebado">
+                  <input type="radio" name="base-plan" value="cebado" />
+                  <div class="quoter-opt-top">
+                    <span class="quoter-opt-name">Cebado Inicial</span>
+                    <span class="quoter-opt-price">USD 180</span>
+                  </div>
+                  <p class="quoter-opt-desc">Landing page de alta conversión, contacto a WhatsApp y puesta online.</p>
+                </label>
+
+                <label class="quoter-option-card selected" data-plan-card="presencia">
+                  <input type="radio" name="base-plan" value="presencia" checked />
+                  <div class="quoter-opt-top">
+                    <span class="quoter-opt-name">Presencia Activa</span>
+                    <span class="quoter-opt-price">USD 340</span>
+                  </div>
+                  <p class="quoter-opt-desc">Sitio web multipágina completo, identidad visual y optimización SEO.</p>
+                </label>
+
+                <label class="quoter-option-card" data-plan-card="tienda">
+                  <input type="radio" name="base-plan" value="tienda" />
+                  <div class="quoter-opt-top">
+                    <span class="quoter-opt-name">Tienda & Catálogo CRM</span>
+                    <span class="quoter-opt-price">USD 560</span>
+                  </div>
+                  <p class="quoter-opt-desc">E-Commerce con carrito reactivo y panel administrativo de pedidos y stock.</p>
+                </label>
+
+                <label class="quoter-option-card" data-plan-card="ronda">
+                  <input type="radio" name="base-plan" value="ronda" />
+                  <div class="quoter-opt-top">
+                    <span class="quoter-opt-name">Ronda Completa (SaaS / POS)</span>
+                    <span class="quoter-opt-price">USD 890</span>
+                  </div>
+                  <p class="quoter-opt-desc">Sistema web a medida, aplicación PWA operativa y arquitectura escalable.</p>
+                </label>
+              </div>
+            </div>
+
+            <!-- Paso 2: Módulos Adicionales -->
+            <div class="quoter-step-block reveal-item">
+              <div class="quoter-step-header">
+                <h3 class="quoter-step-title">2. Sumá módulos adicionales (opcional)</h3>
+                <span class="quoter-step-num">PASO 02 / 04</span>
+              </div>
+
+              <div class="quoter-addons-list" id="quoter-addons-container">
+                <label class="addon-check-card">
+                  <input type="checkbox" name="quote-addon" value="branding" data-price="120" data-weeks="1" data-label="Branding & Manual de Marca" />
+                  <div class="addon-info">
+                    <div class="addon-title-row">
+                      <span>Branding & Manual de Marca</span>
+                      <span class="addon-cost">+USD 120</span>
+                    </div>
+                    <p class="addon-sub">Diseño de emblema, paleta cromática y guía tipográfica.</p>
+                  </div>
+                </label>
+
+                <label class="addon-check-card">
+                  <input type="checkbox" name="quote-addon" value="crm" data-price="180" data-weeks="1.5" data-label="Panel Administrativo / CRM" />
+                  <div class="addon-info">
+                    <div class="addon-title-row">
+                      <span>Panel Administrativo / CRM</span>
+                      <span class="addon-cost">+USD 180</span>
+                    </div>
+                    <p class="addon-sub">Tablero de control para administrar clientes, métricas o catálogo.</p>
+                  </div>
+                </label>
+
+                <label class="addon-check-card">
+                  <input type="checkbox" name="quote-addon" value="pwa" data-price="110" data-weeks="1" data-label="Modo Offline / PWA Instalable" />
+                  <div class="addon-info">
+                    <div class="addon-title-row">
+                      <span>Modo Offline / PWA Instalable</span>
+                      <span class="addon-cost">+USD 110</span>
+                    </div>
+                    <p class="addon-sub">Instalación en celulares y funcionamiento sin conexión.</p>
+                  </div>
+                </label>
+
+                <label class="addon-check-card">
+                  <input type="checkbox" name="quote-addon" value="api" data-price="95" data-weeks="1" data-label="Integración con APIs Externas" />
+                  <div class="addon-info">
+                    <div class="addon-title-row">
+                      <span>Integración con APIs Externas</span>
+                      <span class="addon-cost">+USD 95</span>
+                    </div>
+                    <p class="addon-sub">Conexión con divisas en vivo, clima, mapas o servicios externos.</p>
+                  </div>
+                </label>
+
+                <label class="addon-check-card">
+                  <input type="checkbox" name="quote-addon" value="seo" data-price="75" data-weeks="0.5" data-label="Copywriting & SEO Avanzado" />
+                  <div class="addon-info">
+                    <div class="addon-title-row">
+                      <span>Copywriting & SEO Avanzado</span>
+                      <span class="addon-cost">+USD 75</span>
+                    </div>
+                    <p class="addon-sub">Redacción persuasiva de textos y metadatos estructurados.</p>
+                  </div>
+                </label>
+
+                <label class="addon-check-card">
+                  <input type="checkbox" name="quote-addon" value="soporte" data-price="65" data-weeks="0" data-label="Mantenimiento Evolutivo Inicial" />
+                  <div class="addon-info">
+                    <div class="addon-title-row">
+                      <span>Mantenimiento Evolutivo Inicial</span>
+                      <span class="addon-cost">+USD 65</span>
+                    </div>
+                    <p class="addon-sub">Actualizaciones mensuales, copias de seguridad y ajustes continuos.</p>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Paso 3: Plazo y Modalidad -->
+            <div class="quoter-step-block reveal-item">
+              <div class="quoter-step-header">
+                <h3 class="quoter-step-title">3. Modalidad y ritmo de entrega</h3>
+                <span class="quoter-step-num">PASO 03 / 04</span>
+              </div>
+
+              <div class="urgency-pills-row" id="quoter-urgency-container" role="radiogroup" aria-label="Plazo de entrega">
+                <label class="quoter-option-card selected" data-urgency-card="standard">
+                  <input type="radio" name="quote-urgency" value="standard" data-multiplier="1" data-label="Ritmo Estándar" checked />
+                  <div class="quoter-opt-top">
+                    <span class="quoter-opt-name">Ritmo Estándar</span>
+                    <span class="quoter-opt-price">Base</span>
+                  </div>
+                  <p class="quoter-opt-desc">Planificación equilibrada con entregas semanales.</p>
+                </label>
+
+                <label class="quoter-option-card" data-urgency-card="priority">
+                  <input type="radio" name="quote-urgency" value="priority" data-multiplier="1.2" data-label="Sprint Prioritario (+20%)" />
+                  <div class="quoter-opt-top">
+                    <span class="quoter-opt-name">Sprint Prioritario</span>
+                    <span class="quoter-opt-price">+20%</span>
+                  </div>
+                  <p class="quoter-opt-desc">Dedicación intensiva para acortar un 30% los tiempos.</p>
+                </label>
+
+                <label class="quoter-option-card" data-urgency-card="mvp">
+                  <input type="radio" name="quote-urgency" value="mvp" data-multiplier="0.9" data-label="Lanzamiento por Etapas (-10%)" />
+                  <div class="quoter-opt-top">
+                    <span class="quoter-opt-name">Por Etapas (MVP)</span>
+                    <span class="quoter-opt-price">-10%</span>
+                  </div>
+                  <p class="quoter-opt-desc">Primera entrega esencial y expansión progresiva.</p>
+                </label>
+              </div>
+            </div>
+
+            <!-- Paso 4: Datos del Proyecto -->
+            <div class="quoter-step-block reveal-item">
+              <div class="quoter-step-header">
+                <h3 class="quoter-step-title">4. Datos de tu proyecto (opcional)</h3>
+                <span class="quoter-step-num">PASO 04 / 04</span>
+              </div>
+
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:1rem; margin-bottom:1rem;">
+                <div>
+                  <label for="quote-client-name" class="form-label">TU NOMBRE O MARCA</label>
+                  <input type="text" id="quote-client-name" class="form-input" placeholder="Ej: Estudio Norte" />
+                </div>
+                <div>
+                  <label for="quote-client-contact" class="form-label">TU CORREO O WHATSAPP</label>
+                  <input type="text" id="quote-client-contact" class="form-input" placeholder="tu@correo.com o celular" />
+                </div>
+              </div>
+
+              <div>
+                <label for="quote-client-notes" class="form-label">COMENTARIOS O OBJETIVO DEL PROYECTO</label>
+                <textarea id="quote-client-notes" class="form-textarea" placeholder="Contame brevemente de qué trata tu negocio o qué funciones tenés en mente..."></textarea>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Columna Derecha: Resumen en Vivo Sticky (Estilo Graphite) -->
+          <aside class="quoter-summary-card reveal-item" id="quoter-summary" aria-label="Resumen de cotización en vivo">
+            <span class="corner-cross tl" aria-hidden="true">+</span>
+            <span class="corner-cross tr" aria-hidden="true">+</span>
+            <span class="corner-cross bl" aria-hidden="true">+</span>
+            <span class="corner-cross br" aria-hidden="true">+</span>
+
+            <div class="summary-header-row">
+              <span class="summary-title">Resumen de Cotización</span>
+              <button type="button" id="toggle-currency-btn" class="currency-switch-btn" title="Alternar entre USD y Pesos Argentinos referenciales">
+                Moneda: USD
+              </button>
+            </div>
+
+            <div class="summary-breakdown" id="summary-breakdown-list">
+              <!-- Actualizado en tiempo real por js/quoter.js -->
+            </div>
+
+            <div class="summary-total-block">
+              <div class="summary-total-row">
+                <span class="summary-total-label">Inversión estimada</span>
+                <span class="summary-total-price" id="summary-total-display">USD 340</span>
+              </div>
+              <div class="summary-timeline-row">
+                <span>Tiempo estimado de entrega</span>
+                <strong id="summary-weeks-display">2 a 3 semanas</strong>
+              </div>
+            </div>
+
+            <div class="summary-actions-stack">
+              <button type="button" id="btn-send-quote-wa" class="btn-hero btn-hero-primary" style="width:100%;">
+                <span>Consultar esta cotización por WhatsApp</span>
+              </button>
+              <button type="button" id="btn-send-quote-mail" class="btn-hero btn-hero-secondary" style="width:100%;">
+                <span>Enviar presupuesto por Correo</span>
+              </button>
+              <button type="button" id="btn-copy-quote" class="btn-action btn-ghost" style="width:100%;">
+                <span>Copiar desglose al portapapeles</span>
+              </button>
+            </div>
+          </aside>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN CONTACTO DIRECTO -->
+    <section id="contacto" class="section-wrapper">
+      <div class="max-w-layout">
+
+        <div class="section-header-bar reveal-item">
+          <div>
+            <h2 class="section-title">¿Preferís charlar directo?</h2>
+            <p class="section-desc" style="margin-top:0.35rem;">
+              Si tu proyecto tiene requerimientos particulares o querés que lo revisemos juntos, escribime directo:
+            </p>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-quick-cards reveal-item">
+            <button type="button" class="contact-tile hairline-box" data-action="open-whatsapp" title="Abrir WhatsApp">
+              <div class="contact-tile-info">
+                <span class="contact-tile-label">WHATSAPP DIRECTO</span>
+                <span class="contact-tile-val">Te dejo mi número (+54 351 261 9874)</span>
+              </div>
+              <span class="contact-tile-action">Abrir chat</span>
+            </button>
+
+            <button type="button" class="contact-tile hairline-box" data-action="copy-email" title="Copiar correo al portapapeles">
+              <div class="contact-tile-info">
+                <span class="contact-tile-label">CORREO ELECTRÓNICO</span>
+                <span class="contact-tile-val">leodoercba@gmail.com</span>
+              </div>
+              <span class="contact-tile-action">Copiar correo</span>
+            </button>
+          </div>
+
+          <div class="contact-quick-cards reveal-item">
+            <a href="index.html#proyectos" class="contact-tile hairline-box" title="Ver proyectos en producción">
+              <div class="contact-tile-info">
+                <span class="contact-tile-label">PORTFOLIO DE PROYECTOS</span>
+                <span class="contact-tile-val">Explorar sistemas y demos en vivo</span>
+              </div>
+              <span class="contact-tile-action">Ir al Portfolio</span>
+            </a>
+
+            <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="contact-tile hairline-box" title="Abrir CV Interactivo">
+              <div class="contact-tile-info">
+                <span class="contact-tile-label">CURRÍCULUM VITAE</span>
+                <span class="contact-tile-val">curriculumvitae-leo.vercel.app</span>
+              </div>
+              <span class="contact-tile-action">Ver online</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer hairline-t">
+    <div class="max-w-layout footer-inner">
+      <div class="footer-colophon">
+        © 2026 Leopoldo Doerflinger · Pixel y Mate · Córdoba, Argentina.
+      </div>
+      <div class="footer-links">
+        <a href="index.html" class="footer-link">Portfolio Principal</a>
+        <a href="#inicio-planes" class="footer-link">Subir</a>
+        <a href="https://github.com/LeoDoerflinger" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="https://curriculumvitae-leo.vercel.app/" target="_blank" rel="noopener noreferrer" class="footer-link">CV Interactivo</a>
+      </div>
+    </div>
+  </footer>
+
+  <script defer src="js/main.js"></script>
+  <script defer src="js/contact.js"></script>
+  <script defer src="js/quoter.js"></script>
+</body>
+</html>

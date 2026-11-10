@@ -1,9 +1,5 @@
-/* ==========================================================================
-   ARCHITECTURAL MOTION & MICRO-INTERACTIONS
-   Portfolio — Leopoldo Doerflinger
-   ========================================================================== */
+/* Motion and transitions: respects prefers-reduced-motion */
 
-/* Respeto estricto a accesibilidad y reducción de movimiento */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -13,27 +9,6 @@
   }
 }
 
-/* Indicador de pulso para status en vivo */
-@keyframes livePulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
-  }
-}
-
-.pulse-indicator {
-  animation: livePulse 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
-
-/* Revelado suave al scroll (Scroll Reveal) */
 .reveal-item {
   opacity: 0;
   transform: translateY(14px);
@@ -46,13 +21,27 @@
   transform: translateY(0);
 }
 
-/* Transición para hover en tarjetas */
+@keyframes stageCrossfade {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.stage-animate {
+  animation: stageCrossfade 0.35s var(--ease-architectural) forwards;
+}
+
 .card-hover-fx {
   transition: transform var(--trans-fast), border-color var(--trans-fast), box-shadow var(--trans-fast);
 }
 
 .card-hover-fx:hover {
   transform: translateY(-2px);
-  border-color: var(--border-medium);
+  border-color: var(--border-strong);
   box-shadow: var(--shadow-card);
 }

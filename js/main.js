@@ -1,14 +1,10 @@
-/* ==========================================================================
-   MAIN APPLICATION ORCHESTRATOR
-   Portfolio — Leopoldo Doerflinger (Frontend & UI Developer · Córdoba, AR)
-   ========================================================================== */
+/* Theme controller, navigation scrollspy, mobile drawer, and scroll reveal */
 
 (function () {
   'use strict';
 
   window.ldApp = window.ldApp || {};
 
-  // 1. GESTIÓN DE TEMA (MODO NOCHE POR DEFECTO + TOGGLE A MODO BLANCO)
   const themeToggleBtn = document.getElementById('theme-toggle-btn');
   const themeIcon = document.getElementById('theme-icon');
   const themeLabel = document.getElementById('theme-label');
@@ -27,7 +23,6 @@
     localStorage.setItem('ld-theme', theme);
   }
 
-  // Por defecto: Modo Noche de estudio, a menos que se indique ?theme=light o se guarde 'light'
   const urlParams = new URLSearchParams(window.location.search);
   const urlTheme = urlParams.get('theme');
   if (urlTheme === 'light' || urlTheme === 'dark') {
@@ -46,7 +41,6 @@
     });
   }
 
-  // 2. TOAST NOTIFICATION SLIP (Desaparece siempre en 3.2s)
   const toastEl = document.getElementById('site-toast');
   let toastTimer = null;
 
@@ -65,11 +59,11 @@
     }, duration);
   };
 
-  // 3. SCROLLSPY & NAVEGACIÓN ACTIVA
   const sections = document.querySelectorAll('section[id]');
-  const navLinks = document.querySelectorAll('.desktop-nav .nav-link');
+  const navLinks = document.querySelectorAll('.desktop-nav .nav-link[href^="#"]');
 
   function handleScrollSpy() {
+    if (!navLinks.length) return;
     const scrollPos = window.scrollY + 120;
     sections.forEach(sec => {
       const top = sec.offsetTop;
@@ -86,7 +80,6 @@
   }
   window.addEventListener('scroll', handleScrollSpy, { passive: true });
 
-  // 4. MENÚ MÓVIL (DRAWER LATERAL)
   const mobileToggle = document.getElementById('mobile-menu-toggle');
   const mobileDrawer = document.getElementById('mobile-drawer');
   const drawerClose = document.getElementById('drawer-close-btn');
@@ -116,7 +109,12 @@
     });
   }
 
-  // 5. SCROLL REVEAL SUAVE
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileDrawer && mobileDrawer.classList.contains('open')) {
+      closeDrawer();
+    }
+  });
+
   let revealObserver = null;
   window.ldApp.observeRevealItems = function () {
     if (!('IntersectionObserver' in window)) {

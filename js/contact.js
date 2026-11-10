@@ -1,7 +1,4 @@
-/* ==========================================================================
-   CONTACT ACTIONS, CLIPBOARD & WHATSAPP
-   Portfolio — Leopoldo Doerflinger
-   ========================================================================== */
+/* Contact actions, clipboard, and WhatsApp integration */
 
 (function () {
   'use strict';
@@ -9,7 +6,6 @@
   const EMAIL_ADDRESS = 'leodoercba@gmail.com';
   const WHATSAPP_PHONE = '543512619874';
 
-  // Helper Copiar al Portapapeles
   async function copyText(text, successMessage) {
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -30,22 +26,19 @@
     }
   }
 
-  // Copiar Email en 1 clic
   document.querySelectorAll('[data-action="copy-email"]').forEach(btn => {
     btn.addEventListener('click', () => {
       copyText(EMAIL_ADDRESS, `✓ Correo copiado: ${EMAIL_ADDRESS}`);
     });
   });
 
-  // Abrir WhatsApp Directo ("Te dejo mi número")
   document.querySelectorAll('[data-action="open-whatsapp"]').forEach(btn => {
     btn.addEventListener('click', () => {
-      const msg = encodeURIComponent('¡Hola Leo! Vi tu portfolio y me gustaría ponerme en contacto con vos.');
+      const msg = encodeURIComponent('Hola Leo! Vi tu portfolio y me gustaría ponerme en contacto con vos.');
       window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${msg}`, '_blank', 'noopener,noreferrer');
     });
   });
 
-  // Formulario Directo por Mailto
   const form = document.getElementById('architectural-contact-form');
   const alertEl = document.getElementById('form-feedback');
 
@@ -74,10 +67,10 @@
       }
 
       const subject = encodeURIComponent(`[Portfolio] Consulta de ${name}`);
-      const body = encodeURIComponent(`Hola Leo,\n\nSoy ${name} (${email}).\n\nMensaje:\n${message}\n\n— Enviado desde tu portfolio web.`);
+      const body = encodeURIComponent(`Hola Leo,\n\nSoy ${name} (${email}).\n\nMensaje:\n${message}\n\nEnviado desde tu portfolio web.`);
 
       if (alertEl) {
-        alertEl.textContent = `✓ Preparado. Abriendo cliente de correo...`;
+        alertEl.textContent = '✓ Preparado. Abriendo cliente de correo...';
         alertEl.className = 'form-alert success';
       }
 
